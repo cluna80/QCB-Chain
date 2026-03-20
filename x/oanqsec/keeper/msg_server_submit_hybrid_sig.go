@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanqsec/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SubmitHybridSig(goCtx context.Context, msg *types.MsgSubmitHybridSig) (*types.MsgSubmitHybridSigResponse, error) {

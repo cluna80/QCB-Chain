@@ -55,17 +55,22 @@ import (
 
 	agentmodulev1 "oan/api/oan/agent/module"
 	oanagentmodulev1 "oan/api/oan/oanagent/module"
+	oanbridgemodulev1 "oan/api/oan/oanbridge/module"
 	oancomputemodulev1 "oan/api/oan/oancompute/module"
 	oandaomodulev1 "oan/api/oan/oandao/module"
 	oaneconomymodulev1 "oan/api/oan/oaneconomy/module"
 	oanguardianmodulev1 "oan/api/oan/oanguardian/module"
 	oanidentitymodulev1 "oan/api/oan/oanidentity/module"
 	oanmarketmodulev1 "oan/api/oan/oanmarket/module"
+	oanmediamodulev1 "oan/api/oan/oanmedia/module"
 	oanqsecmodulev1 "oan/api/oan/oanqsec/module"
+	oansportsmodulev1 "oan/api/oan/oansports/module"
 	_ "oan/x/agent/module" // import for side-effects
 	agentmoduletypes "oan/x/agent/types"
 	_ "oan/x/oanagent/module" // import for side-effects
 	oanagentmoduletypes "oan/x/oanagent/types"
+	_ "oan/x/oanbridge/module" // import for side-effects
+	oanbridgemoduletypes "oan/x/oanbridge/types"
 	_ "oan/x/oancompute/module" // import for side-effects
 	oancomputemoduletypes "oan/x/oancompute/types"
 	_ "oan/x/oandao/module" // import for side-effects
@@ -78,8 +83,12 @@ import (
 	oanidentitymoduletypes "oan/x/oanidentity/types"
 	_ "oan/x/oanmarket/module" // import for side-effects
 	oanmarketmoduletypes "oan/x/oanmarket/types"
+	_ "oan/x/oanmedia/module" // import for side-effects
+	oanmediamoduletypes "oan/x/oanmedia/types"
 	_ "oan/x/oanqsec/module" // import for side-effects
 	oanqsecmoduletypes "oan/x/oanqsec/types"
+	_ "oan/x/oansports/module" // import for side-effects
+	oansportsmoduletypes "oan/x/oansports/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -126,6 +135,9 @@ var (
 		oanmarketmoduletypes.ModuleName,
 		oanguardianmoduletypes.ModuleName,
 		oanqsecmoduletypes.ModuleName,
+		oanmediamoduletypes.ModuleName,
+		oansportsmoduletypes.ModuleName,
+		oanbridgemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -159,6 +171,9 @@ var (
 		oanmarketmoduletypes.ModuleName,
 		oanguardianmoduletypes.ModuleName,
 		oanqsecmoduletypes.ModuleName,
+		oanmediamoduletypes.ModuleName,
+		oansportsmoduletypes.ModuleName,
+		oanbridgemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -186,6 +201,9 @@ var (
 		oanmarketmoduletypes.ModuleName,
 		oanguardianmoduletypes.ModuleName,
 		oanqsecmoduletypes.ModuleName,
+		oanmediamoduletypes.ModuleName,
+		oansportsmoduletypes.ModuleName,
+		oanbridgemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -376,6 +394,18 @@ var (
 			{
 				Name:   oanqsecmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&oanqsecmodulev1.Module{}),
+			},
+			{
+				Name:   oanmediamoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oanmediamodulev1.Module{}),
+			},
+			{
+				Name:   oansportsmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oansportsmodulev1.Module{}),
+			},
+			{
+				Name:   oanbridgemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oanbridgemodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

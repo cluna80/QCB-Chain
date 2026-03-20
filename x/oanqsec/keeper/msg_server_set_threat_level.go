@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanqsec/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SetThreatLevel(goCtx context.Context, msg *types.MsgSetThreatLevel) (*types.MsgSetThreatLevelResponse, error) {

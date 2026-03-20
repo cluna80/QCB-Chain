@@ -1,0 +1,18 @@
+syntax = "proto3";
+package oan.oanbridge;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "oan/x/oanbridge/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "oan/x/oanbridge/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 bridgeFee = 1 [(gogoproto.moretags) = "yaml:\"bridge_fee\""];
+  uint64 maxPacketSize = 2 [(gogoproto.moretags) = "yaml:\"max_packet_size\""];
+  uint64 timeoutBlocks = 3 [(gogoproto.moretags) = "yaml:\"timeout_blocks\""];
+}

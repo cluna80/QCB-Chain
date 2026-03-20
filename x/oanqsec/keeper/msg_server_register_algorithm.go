@@ -3,17 +3,18 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanqsec/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RegisterAlgorithm(goCtx context.Context, msg *types.MsgRegisterAlgorithm) (*types.MsgRegisterAlgorithmResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	validTypes := map[string]bool{
-		"signature":     true,
-		"key-exchange":  true,
-		"hash":          true,
-		"hybrid":        true,
+		"signature":    true,
+		"key-exchange": true,
+		"hash":         true,
+		"hybrid":       true,
 	}
 	if !validTypes[msg.AlgorithmType] {
 		return nil, fmt.Errorf("algorithmType must be signature, key-exchange, hash, or hybrid")

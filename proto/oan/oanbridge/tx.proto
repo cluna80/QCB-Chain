@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package oan.oanbridge;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "oan/oanbridge/params.proto";
+
+option go_package = "oan/x/oanbridge/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams        (MsgUpdateParams       ) returns (MsgUpdateParamsResponse       );
+  rpc SendIbcAgent        (MsgSendIbcAgent       ) returns (MsgSendIbcAgentResponse       );
+  rpc BroadcastAgentState (MsgBroadcastAgentState) returns (MsgBroadcastAgentStateResponse);
+  rpc PostStateRoot       (MsgPostStateRoot      ) returns (MsgPostStateRootResponse      );
+  rpc RegisterChain       (MsgRegisterChain      ) returns (MsgRegisterChainResponse      );
+  rpc TokenizeOutput      (MsgTokenizeOutput     ) returns (MsgTokenizeOutputResponse     );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                       "authority";
+  option           (amino.name) = "oan/x/oanbridge/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgSendIbcAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string agentId   = 2;
+  string destChain = 3;
+  string destAddr  = 4;
+}
+
+message MsgSendIbcAgentResponse {
+  string packetId  = 1;
+  string destChain = 2;
+  string status    = 3;
+}
+
+message MsgBroadcastAgentState {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string agentId      = 2;
+  string stateHash    = 3;
+  string targetChains = 4;
+}
+
+message MsgBroadcastAgentStateResponse {
+  string broadcastId = 1;
+  uint64 chainCount  = 2;
+}
+
+message MsgPostStateRoot {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string stateRoot   = 2;
+  int32  blockHeight = 3;
+  string anchorChain = 4;
+  string proof       = 5;
+}
+
+message MsgPostStateRootResponse {
+  string anchorId  = 1;
+  string stateRoot = 2;
+  bool   anchored  = 3;
+}
+
+message MsgRegisterChain {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string chainId    = 2;
+  string chainName  = 3;
+  string bridgeType = 4;
+  string endpoint   = 5;
+}
+
+message MsgRegisterChainResponse {
+  string chainId    = 1;
+  bool   registered = 2;
+}
+
+message MsgTokenizeOutput {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string agentId     = 2;
+  string outputType  = 3;
+  string contentHash = 4;
+  uint64 value       = 5;
+}
+
+message MsgTokenizeOutputResponse {
+  string tokenId     = 1;
+  string contentHash = 2;
+  uint64 value       = 3;
+}
+
