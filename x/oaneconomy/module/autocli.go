@@ -51,6 +51,36 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a complete-task tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "taskId"}, {ProtoField: "resultHash"}},
 				},
+				{
+					RpcMethod:      "AcceptTask",
+					Use:            "accept-task [task-id]",
+					Short:          "Send a accept-task tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "taskId"}},
+				},
+				{
+					RpcMethod:      "DisputeTask",
+					Use:            "dispute-task [task-id] [reason]",
+					Short:          "Send a dispute-task tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "taskId"}, {ProtoField: "reason"}},
+				},
+				{
+					RpcMethod:      "ClaimUbi",
+					Use:            "claim-ubi",
+					Short:          "Send a claim-ubi tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+				},
+				{
+					RpcMethod:      "StakeTokens",
+					Use:            "stake-tokens [amount] [lock-period]",
+					Short:          "Send a stake-tokens tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "amount"}, {ProtoField: "lockPeriod"}},
+				},
+				{
+					RpcMethod:      "DistributeRewards",
+					Use:            "distribute-rewards [epoch]",
+					Short:          "Send a distribute-rewards tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "epoch"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

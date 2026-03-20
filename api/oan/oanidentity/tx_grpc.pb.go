@@ -21,6 +21,9 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Msg_UpdateParams_FullMethodName     = "/oan.oanidentity.Msg/UpdateParams"
 	Msg_RegisterIdentity_FullMethodName = "/oan.oanidentity.Msg/RegisterIdentity"
+	Msg_VerifyIdentity_FullMethodName   = "/oan.oanidentity.Msg/VerifyIdentity"
+	Msg_UpdateReputation_FullMethodName = "/oan.oanidentity.Msg/UpdateReputation"
+	Msg_LinkWallet_FullMethodName       = "/oan.oanidentity.Msg/LinkWallet"
 )
 
 // MsgClient is the client API for Msg service.
@@ -31,6 +34,9 @@ type MsgClient interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	RegisterIdentity(ctx context.Context, in *MsgRegisterIdentity, opts ...grpc.CallOption) (*MsgRegisterIdentityResponse, error)
+	VerifyIdentity(ctx context.Context, in *MsgVerifyIdentity, opts ...grpc.CallOption) (*MsgVerifyIdentityResponse, error)
+	UpdateReputation(ctx context.Context, in *MsgUpdateReputation, opts ...grpc.CallOption) (*MsgUpdateReputationResponse, error)
+	LinkWallet(ctx context.Context, in *MsgLinkWallet, opts ...grpc.CallOption) (*MsgLinkWalletResponse, error)
 }
 
 type msgClient struct {
@@ -59,6 +65,33 @@ func (c *msgClient) RegisterIdentity(ctx context.Context, in *MsgRegisterIdentit
 	return out, nil
 }
 
+func (c *msgClient) VerifyIdentity(ctx context.Context, in *MsgVerifyIdentity, opts ...grpc.CallOption) (*MsgVerifyIdentityResponse, error) {
+	out := new(MsgVerifyIdentityResponse)
+	err := c.cc.Invoke(ctx, Msg_VerifyIdentity_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateReputation(ctx context.Context, in *MsgUpdateReputation, opts ...grpc.CallOption) (*MsgUpdateReputationResponse, error) {
+	out := new(MsgUpdateReputationResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateReputation_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) LinkWallet(ctx context.Context, in *MsgLinkWallet, opts ...grpc.CallOption) (*MsgLinkWalletResponse, error) {
+	out := new(MsgLinkWalletResponse)
+	err := c.cc.Invoke(ctx, Msg_LinkWallet_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -67,6 +100,9 @@ type MsgServer interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	RegisterIdentity(context.Context, *MsgRegisterIdentity) (*MsgRegisterIdentityResponse, error)
+	VerifyIdentity(context.Context, *MsgVerifyIdentity) (*MsgVerifyIdentityResponse, error)
+	UpdateReputation(context.Context, *MsgUpdateReputation) (*MsgUpdateReputationResponse, error)
+	LinkWallet(context.Context, *MsgLinkWallet) (*MsgLinkWalletResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -79,6 +115,15 @@ func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*
 }
 func (UnimplementedMsgServer) RegisterIdentity(context.Context, *MsgRegisterIdentity) (*MsgRegisterIdentityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterIdentity not implemented")
+}
+func (UnimplementedMsgServer) VerifyIdentity(context.Context, *MsgVerifyIdentity) (*MsgVerifyIdentityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyIdentity not implemented")
+}
+func (UnimplementedMsgServer) UpdateReputation(context.Context, *MsgUpdateReputation) (*MsgUpdateReputationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateReputation not implemented")
+}
+func (UnimplementedMsgServer) LinkWallet(context.Context, *MsgLinkWallet) (*MsgLinkWalletResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LinkWallet not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -129,6 +174,60 @@ func _Msg_RegisterIdentity_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_VerifyIdentity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgVerifyIdentity)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).VerifyIdentity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_VerifyIdentity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).VerifyIdentity(ctx, req.(*MsgVerifyIdentity))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateReputation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateReputation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateReputation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateReputation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateReputation(ctx, req.(*MsgUpdateReputation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_LinkWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgLinkWallet)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).LinkWallet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_LinkWallet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).LinkWallet(ctx, req.(*MsgLinkWallet))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -143,6 +242,18 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterIdentity",
 			Handler:    _Msg_RegisterIdentity_Handler,
+		},
+		{
+			MethodName: "VerifyIdentity",
+			Handler:    _Msg_VerifyIdentity_Handler,
+		},
+		{
+			MethodName: "UpdateReputation",
+			Handler:    _Msg_UpdateReputation_Handler,
+		},
+		{
+			MethodName: "LinkWallet",
+			Handler:    _Msg_LinkWallet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

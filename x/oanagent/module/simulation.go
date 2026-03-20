@@ -35,6 +35,14 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgBreedAgent int = 100
 
+	opWeightMsgChallengeAgent = "op_weight_msg_challenge_agent"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgChallengeAgent int = 100
+
+	opWeightMsgRetireAgent = "op_weight_msg_retire_agent"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgRetireAgent int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -91,6 +99,28 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		oanagentsimulation.SimulateMsgBreedAgent(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgChallengeAgent int
+	simState.AppParams.GetOrGenerate(opWeightMsgChallengeAgent, &weightMsgChallengeAgent, nil,
+		func(_ *rand.Rand) {
+			weightMsgChallengeAgent = defaultWeightMsgChallengeAgent
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgChallengeAgent,
+		oanagentsimulation.SimulateMsgChallengeAgent(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgRetireAgent int
+	simState.AppParams.GetOrGenerate(opWeightMsgRetireAgent, &weightMsgRetireAgent, nil,
+		func(_ *rand.Rand) {
+			weightMsgRetireAgent = defaultWeightMsgRetireAgent
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgRetireAgent,
+		oanagentsimulation.SimulateMsgRetireAgent(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -120,6 +150,22 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgBreedAgent,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				oanagentsimulation.SimulateMsgBreedAgent(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgChallengeAgent,
+			defaultWeightMsgChallengeAgent,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oanagentsimulation.SimulateMsgChallengeAgent(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgRetireAgent,
+			defaultWeightMsgRetireAgent,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oanagentsimulation.SimulateMsgRetireAgent(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

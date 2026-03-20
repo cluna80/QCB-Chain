@@ -16,10 +16,12 @@ service Msg {
   
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams  (MsgUpdateParams ) returns (MsgUpdateParamsResponse );
-  rpc RegisterAgent (MsgRegisterAgent) returns (MsgRegisterAgentResponse);
-  rpc RecordTrade   (MsgRecordTrade  ) returns (MsgRecordTradeResponse  );
-  rpc BreedAgent    (MsgBreedAgent   ) returns (MsgBreedAgentResponse   );
+  rpc UpdateParams   (MsgUpdateParams  ) returns (MsgUpdateParamsResponse  );
+  rpc RegisterAgent  (MsgRegisterAgent ) returns (MsgRegisterAgentResponse );
+  rpc RecordTrade    (MsgRecordTrade   ) returns (MsgRecordTradeResponse   );
+  rpc BreedAgent     (MsgBreedAgent    ) returns (MsgBreedAgentResponse    );
+  rpc ChallengeAgent (MsgChallengeAgent) returns (MsgChallengeAgentResponse);
+  rpc RetireAgent    (MsgRetireAgent   ) returns (MsgRetireAgentResponse   );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -80,5 +82,29 @@ message MsgBreedAgentResponse {
   string childId     = 1;
   string dnaHash     = 2;
   int32  genomeScore = 3;
+}
+
+message MsgChallengeAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator  = 1;
+  string targetId = 2;
+  uint64 stake    = 3;
+}
+
+message MsgChallengeAgentResponse {
+  string challengeId = 1;
+  string status      = 2;
+}
+
+message MsgRetireAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string nodeId  = 2;
+  string reason  = 3;
+}
+
+message MsgRetireAgentResponse {
+  bool  success    = 1;
+  int32 finalScore = 2;
 }
 

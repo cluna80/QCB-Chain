@@ -45,6 +45,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a register-identity tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "did"}, {ProtoField: "displayName"}, {ProtoField: "identityType"}},
 				},
+				{
+					RpcMethod:      "VerifyIdentity",
+					Use:            "verify-identity [did] [proof-type] [proof-data]",
+					Short:          "Send a verify-identity tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "did"}, {ProtoField: "proofType"}, {ProtoField: "proofData"}},
+				},
+				{
+					RpcMethod:      "UpdateReputation",
+					Use:            "update-reputation [did] [delta] [reason]",
+					Short:          "Send a update-reputation tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "did"}, {ProtoField: "delta"}, {ProtoField: "reason"}},
+				},
+				{
+					RpcMethod:      "LinkWallet",
+					Use:            "link-wallet [did] [wallet-address]",
+					Short:          "Send a link-wallet tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "did"}, {ProtoField: "walletAddress"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

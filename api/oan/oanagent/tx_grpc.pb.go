@@ -19,10 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName  = "/oan.oanagent.Msg/UpdateParams"
-	Msg_RegisterAgent_FullMethodName = "/oan.oanagent.Msg/RegisterAgent"
-	Msg_RecordTrade_FullMethodName   = "/oan.oanagent.Msg/RecordTrade"
-	Msg_BreedAgent_FullMethodName    = "/oan.oanagent.Msg/BreedAgent"
+	Msg_UpdateParams_FullMethodName   = "/oan.oanagent.Msg/UpdateParams"
+	Msg_RegisterAgent_FullMethodName  = "/oan.oanagent.Msg/RegisterAgent"
+	Msg_RecordTrade_FullMethodName    = "/oan.oanagent.Msg/RecordTrade"
+	Msg_BreedAgent_FullMethodName     = "/oan.oanagent.Msg/BreedAgent"
+	Msg_ChallengeAgent_FullMethodName = "/oan.oanagent.Msg/ChallengeAgent"
+	Msg_RetireAgent_FullMethodName    = "/oan.oanagent.Msg/RetireAgent"
 )
 
 // MsgClient is the client API for Msg service.
@@ -35,6 +37,8 @@ type MsgClient interface {
 	RegisterAgent(ctx context.Context, in *MsgRegisterAgent, opts ...grpc.CallOption) (*MsgRegisterAgentResponse, error)
 	RecordTrade(ctx context.Context, in *MsgRecordTrade, opts ...grpc.CallOption) (*MsgRecordTradeResponse, error)
 	BreedAgent(ctx context.Context, in *MsgBreedAgent, opts ...grpc.CallOption) (*MsgBreedAgentResponse, error)
+	ChallengeAgent(ctx context.Context, in *MsgChallengeAgent, opts ...grpc.CallOption) (*MsgChallengeAgentResponse, error)
+	RetireAgent(ctx context.Context, in *MsgRetireAgent, opts ...grpc.CallOption) (*MsgRetireAgentResponse, error)
 }
 
 type msgClient struct {
@@ -81,6 +85,24 @@ func (c *msgClient) BreedAgent(ctx context.Context, in *MsgBreedAgent, opts ...g
 	return out, nil
 }
 
+func (c *msgClient) ChallengeAgent(ctx context.Context, in *MsgChallengeAgent, opts ...grpc.CallOption) (*MsgChallengeAgentResponse, error) {
+	out := new(MsgChallengeAgentResponse)
+	err := c.cc.Invoke(ctx, Msg_ChallengeAgent_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) RetireAgent(ctx context.Context, in *MsgRetireAgent, opts ...grpc.CallOption) (*MsgRetireAgentResponse, error) {
+	out := new(MsgRetireAgentResponse)
+	err := c.cc.Invoke(ctx, Msg_RetireAgent_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -91,6 +113,8 @@ type MsgServer interface {
 	RegisterAgent(context.Context, *MsgRegisterAgent) (*MsgRegisterAgentResponse, error)
 	RecordTrade(context.Context, *MsgRecordTrade) (*MsgRecordTradeResponse, error)
 	BreedAgent(context.Context, *MsgBreedAgent) (*MsgBreedAgentResponse, error)
+	ChallengeAgent(context.Context, *MsgChallengeAgent) (*MsgChallengeAgentResponse, error)
+	RetireAgent(context.Context, *MsgRetireAgent) (*MsgRetireAgentResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -109,6 +133,12 @@ func (UnimplementedMsgServer) RecordTrade(context.Context, *MsgRecordTrade) (*Ms
 }
 func (UnimplementedMsgServer) BreedAgent(context.Context, *MsgBreedAgent) (*MsgBreedAgentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BreedAgent not implemented")
+}
+func (UnimplementedMsgServer) ChallengeAgent(context.Context, *MsgChallengeAgent) (*MsgChallengeAgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChallengeAgent not implemented")
+}
+func (UnimplementedMsgServer) RetireAgent(context.Context, *MsgRetireAgent) (*MsgRetireAgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RetireAgent not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -195,6 +225,42 @@ func _Msg_BreedAgent_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_ChallengeAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgChallengeAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).ChallengeAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_ChallengeAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).ChallengeAgent(ctx, req.(*MsgChallengeAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_RetireAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRetireAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RetireAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_RetireAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RetireAgent(ctx, req.(*MsgRetireAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -217,6 +283,14 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BreedAgent",
 			Handler:    _Msg_BreedAgent_Handler,
+		},
+		{
+			MethodName: "ChallengeAgent",
+			Handler:    _Msg_ChallengeAgent_Handler,
+		},
+		{
+			MethodName: "RetireAgent",
+			Handler:    _Msg_RetireAgent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

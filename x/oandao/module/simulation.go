@@ -31,6 +31,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgVoteProposal int = 100
 
+	opWeightMsgExecuteProposal = "op_weight_msg_execute_proposal"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgExecuteProposal int = 100
+
+	opWeightMsgVetoProposal = "op_weight_msg_veto_proposal"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgVetoProposal int = 100
+
+	opWeightMsgDelegateVote = "op_weight_msg_delegate_vote"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDelegateVote int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -76,6 +88,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		oandaosimulation.SimulateMsgVoteProposal(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgExecuteProposal int
+	simState.AppParams.GetOrGenerate(opWeightMsgExecuteProposal, &weightMsgExecuteProposal, nil,
+		func(_ *rand.Rand) {
+			weightMsgExecuteProposal = defaultWeightMsgExecuteProposal
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgExecuteProposal,
+		oandaosimulation.SimulateMsgExecuteProposal(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgVetoProposal int
+	simState.AppParams.GetOrGenerate(opWeightMsgVetoProposal, &weightMsgVetoProposal, nil,
+		func(_ *rand.Rand) {
+			weightMsgVetoProposal = defaultWeightMsgVetoProposal
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgVetoProposal,
+		oandaosimulation.SimulateMsgVetoProposal(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDelegateVote int
+	simState.AppParams.GetOrGenerate(opWeightMsgDelegateVote, &weightMsgDelegateVote, nil,
+		func(_ *rand.Rand) {
+			weightMsgDelegateVote = defaultWeightMsgDelegateVote
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDelegateVote,
+		oandaosimulation.SimulateMsgDelegateVote(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -97,6 +142,30 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgVoteProposal,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				oandaosimulation.SimulateMsgVoteProposal(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgExecuteProposal,
+			defaultWeightMsgExecuteProposal,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oandaosimulation.SimulateMsgExecuteProposal(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgVetoProposal,
+			defaultWeightMsgVetoProposal,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oandaosimulation.SimulateMsgVetoProposal(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgDelegateVote,
+			defaultWeightMsgDelegateVote,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oandaosimulation.SimulateMsgDelegateVote(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

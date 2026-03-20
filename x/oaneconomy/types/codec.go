@@ -14,6 +14,21 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCompleteTask{},
 	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgAcceptTask{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgDisputeTask{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgClaimUbi{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgStakeTokens{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgDistributeRewards{},
+	)
 	// this line is used by starport scaffolding # 3
 
 	registry.RegisterImplementations((*sdk.Msg)(nil),

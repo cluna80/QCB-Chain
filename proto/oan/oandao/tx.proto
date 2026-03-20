@@ -16,9 +16,12 @@ service Msg {
   
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams   (MsgUpdateParams  ) returns (MsgUpdateParamsResponse  );
-  rpc SubmitProposal (MsgSubmitProposal) returns (MsgSubmitProposalResponse);
-  rpc VoteProposal   (MsgVoteProposal  ) returns (MsgVoteProposalResponse  );
+  rpc UpdateParams    (MsgUpdateParams   ) returns (MsgUpdateParamsResponse   );
+  rpc SubmitProposal  (MsgSubmitProposal ) returns (MsgSubmitProposalResponse );
+  rpc VoteProposal    (MsgVoteProposal   ) returns (MsgVoteProposalResponse   );
+  rpc ExecuteProposal (MsgExecuteProposal) returns (MsgExecuteProposalResponse);
+  rpc VetoProposal    (MsgVetoProposal   ) returns (MsgVetoProposalResponse   );
+  rpc DelegateVote    (MsgDelegateVote   ) returns (MsgDelegateVoteResponse   );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -61,5 +64,39 @@ message MsgVoteProposalResponse {
   bool   success  = 1;
   uint64 votesYes = 2;
   uint64 votesNo  = 3;
+}
+
+message MsgExecuteProposal {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string proposalId = 2;
+}
+
+message MsgExecuteProposalResponse {
+  bool  success    = 1;
+  int32 executedAt = 2;
+}
+
+message MsgVetoProposal {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string proposalId = 2;
+  string reason     = 3;
+}
+
+message MsgVetoProposalResponse {
+  bool success = 1;
+}
+
+message MsgDelegateVote {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string delegateTo = 2;
+  uint64 power      = 3;
+}
+
+message MsgDelegateVoteResponse {
+  bool   success        = 1;
+  uint64 delegatedPower = 2;
 }
 

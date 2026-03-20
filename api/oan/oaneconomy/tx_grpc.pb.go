@@ -19,9 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName = "/oan.oaneconomy.Msg/UpdateParams"
-	Msg_CreateTask_FullMethodName   = "/oan.oaneconomy.Msg/CreateTask"
-	Msg_CompleteTask_FullMethodName = "/oan.oaneconomy.Msg/CompleteTask"
+	Msg_UpdateParams_FullMethodName      = "/oan.oaneconomy.Msg/UpdateParams"
+	Msg_CreateTask_FullMethodName        = "/oan.oaneconomy.Msg/CreateTask"
+	Msg_CompleteTask_FullMethodName      = "/oan.oaneconomy.Msg/CompleteTask"
+	Msg_AcceptTask_FullMethodName        = "/oan.oaneconomy.Msg/AcceptTask"
+	Msg_DisputeTask_FullMethodName       = "/oan.oaneconomy.Msg/DisputeTask"
+	Msg_ClaimUbi_FullMethodName          = "/oan.oaneconomy.Msg/ClaimUbi"
+	Msg_StakeTokens_FullMethodName       = "/oan.oaneconomy.Msg/StakeTokens"
+	Msg_DistributeRewards_FullMethodName = "/oan.oaneconomy.Msg/DistributeRewards"
 )
 
 // MsgClient is the client API for Msg service.
@@ -33,6 +38,11 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateTask(ctx context.Context, in *MsgCreateTask, opts ...grpc.CallOption) (*MsgCreateTaskResponse, error)
 	CompleteTask(ctx context.Context, in *MsgCompleteTask, opts ...grpc.CallOption) (*MsgCompleteTaskResponse, error)
+	AcceptTask(ctx context.Context, in *MsgAcceptTask, opts ...grpc.CallOption) (*MsgAcceptTaskResponse, error)
+	DisputeTask(ctx context.Context, in *MsgDisputeTask, opts ...grpc.CallOption) (*MsgDisputeTaskResponse, error)
+	ClaimUbi(ctx context.Context, in *MsgClaimUbi, opts ...grpc.CallOption) (*MsgClaimUbiResponse, error)
+	StakeTokens(ctx context.Context, in *MsgStakeTokens, opts ...grpc.CallOption) (*MsgStakeTokensResponse, error)
+	DistributeRewards(ctx context.Context, in *MsgDistributeRewards, opts ...grpc.CallOption) (*MsgDistributeRewardsResponse, error)
 }
 
 type msgClient struct {
@@ -70,6 +80,51 @@ func (c *msgClient) CompleteTask(ctx context.Context, in *MsgCompleteTask, opts 
 	return out, nil
 }
 
+func (c *msgClient) AcceptTask(ctx context.Context, in *MsgAcceptTask, opts ...grpc.CallOption) (*MsgAcceptTaskResponse, error) {
+	out := new(MsgAcceptTaskResponse)
+	err := c.cc.Invoke(ctx, Msg_AcceptTask_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DisputeTask(ctx context.Context, in *MsgDisputeTask, opts ...grpc.CallOption) (*MsgDisputeTaskResponse, error) {
+	out := new(MsgDisputeTaskResponse)
+	err := c.cc.Invoke(ctx, Msg_DisputeTask_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) ClaimUbi(ctx context.Context, in *MsgClaimUbi, opts ...grpc.CallOption) (*MsgClaimUbiResponse, error) {
+	out := new(MsgClaimUbiResponse)
+	err := c.cc.Invoke(ctx, Msg_ClaimUbi_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) StakeTokens(ctx context.Context, in *MsgStakeTokens, opts ...grpc.CallOption) (*MsgStakeTokensResponse, error) {
+	out := new(MsgStakeTokensResponse)
+	err := c.cc.Invoke(ctx, Msg_StakeTokens_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DistributeRewards(ctx context.Context, in *MsgDistributeRewards, opts ...grpc.CallOption) (*MsgDistributeRewardsResponse, error) {
+	out := new(MsgDistributeRewardsResponse)
+	err := c.cc.Invoke(ctx, Msg_DistributeRewards_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -79,6 +134,11 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateTask(context.Context, *MsgCreateTask) (*MsgCreateTaskResponse, error)
 	CompleteTask(context.Context, *MsgCompleteTask) (*MsgCompleteTaskResponse, error)
+	AcceptTask(context.Context, *MsgAcceptTask) (*MsgAcceptTaskResponse, error)
+	DisputeTask(context.Context, *MsgDisputeTask) (*MsgDisputeTaskResponse, error)
+	ClaimUbi(context.Context, *MsgClaimUbi) (*MsgClaimUbiResponse, error)
+	StakeTokens(context.Context, *MsgStakeTokens) (*MsgStakeTokensResponse, error)
+	DistributeRewards(context.Context, *MsgDistributeRewards) (*MsgDistributeRewardsResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -94,6 +154,21 @@ func (UnimplementedMsgServer) CreateTask(context.Context, *MsgCreateTask) (*MsgC
 }
 func (UnimplementedMsgServer) CompleteTask(context.Context, *MsgCompleteTask) (*MsgCompleteTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CompleteTask not implemented")
+}
+func (UnimplementedMsgServer) AcceptTask(context.Context, *MsgAcceptTask) (*MsgAcceptTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptTask not implemented")
+}
+func (UnimplementedMsgServer) DisputeTask(context.Context, *MsgDisputeTask) (*MsgDisputeTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DisputeTask not implemented")
+}
+func (UnimplementedMsgServer) ClaimUbi(context.Context, *MsgClaimUbi) (*MsgClaimUbiResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClaimUbi not implemented")
+}
+func (UnimplementedMsgServer) StakeTokens(context.Context, *MsgStakeTokens) (*MsgStakeTokensResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StakeTokens not implemented")
+}
+func (UnimplementedMsgServer) DistributeRewards(context.Context, *MsgDistributeRewards) (*MsgDistributeRewardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DistributeRewards not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -162,6 +237,96 @@ func _Msg_CompleteTask_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_AcceptTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgAcceptTask)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).AcceptTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_AcceptTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).AcceptTask(ctx, req.(*MsgAcceptTask))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DisputeTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDisputeTask)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DisputeTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DisputeTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DisputeTask(ctx, req.(*MsgDisputeTask))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_ClaimUbi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgClaimUbi)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).ClaimUbi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_ClaimUbi_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).ClaimUbi(ctx, req.(*MsgClaimUbi))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_StakeTokens_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgStakeTokens)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).StakeTokens(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_StakeTokens_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).StakeTokens(ctx, req.(*MsgStakeTokens))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DistributeRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDistributeRewards)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DistributeRewards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DistributeRewards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DistributeRewards(ctx, req.(*MsgDistributeRewards))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -180,6 +345,26 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CompleteTask",
 			Handler:    _Msg_CompleteTask_Handler,
+		},
+		{
+			MethodName: "AcceptTask",
+			Handler:    _Msg_AcceptTask_Handler,
+		},
+		{
+			MethodName: "DisputeTask",
+			Handler:    _Msg_DisputeTask_Handler,
+		},
+		{
+			MethodName: "ClaimUbi",
+			Handler:    _Msg_ClaimUbi_Handler,
+		},
+		{
+			MethodName: "StakeTokens",
+			Handler:    _Msg_StakeTokens_Handler,
+		},
+		{
+			MethodName: "DistributeRewards",
+			Handler:    _Msg_DistributeRewards_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

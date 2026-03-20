@@ -16,9 +16,14 @@ service Msg {
   
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams (MsgUpdateParams) returns (MsgUpdateParamsResponse);
-  rpc CreateTask   (MsgCreateTask  ) returns (MsgCreateTaskResponse  );
-  rpc CompleteTask (MsgCompleteTask) returns (MsgCompleteTaskResponse);
+  rpc UpdateParams      (MsgUpdateParams     ) returns (MsgUpdateParamsResponse     );
+  rpc CreateTask        (MsgCreateTask       ) returns (MsgCreateTaskResponse       );
+  rpc CompleteTask      (MsgCompleteTask     ) returns (MsgCompleteTaskResponse     );
+  rpc AcceptTask        (MsgAcceptTask       ) returns (MsgAcceptTaskResponse       );
+  rpc DisputeTask       (MsgDisputeTask      ) returns (MsgDisputeTaskResponse      );
+  rpc ClaimUbi          (MsgClaimUbi         ) returns (MsgClaimUbiResponse         );
+  rpc StakeTokens       (MsgStakeTokens      ) returns (MsgStakeTokensResponse      );
+  rpc DistributeRewards (MsgDistributeRewards) returns (MsgDistributeRewardsResponse);
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -62,5 +67,62 @@ message MsgCompleteTask {
 message MsgCompleteTaskResponse {
   bool   success = 1;
   uint64 reward  = 2;
+}
+
+message MsgAcceptTask {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string taskId  = 2;
+}
+
+message MsgAcceptTaskResponse {
+  string taskId   = 1;
+  string assignee = 2;
+}
+
+message MsgDisputeTask {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string taskId  = 2;
+  string reason  = 3;
+}
+
+message MsgDisputeTaskResponse {
+  string disputeId = 1;
+  string status    = 2;
+}
+
+message MsgClaimUbi {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+}
+
+message MsgClaimUbiResponse {
+  uint64 amount    = 1;
+  int32  claimedAt = 2;
+}
+
+message MsgStakeTokens {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  uint64 amount     = 2;
+  int32  lockPeriod = 3;
+}
+
+message MsgStakeTokensResponse {
+  string stakeId     = 1;
+  uint64 amount      = 2;
+  int32  unlockBlock = 3;
+}
+
+message MsgDistributeRewards {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  int32  epoch   = 2;
+}
+
+message MsgDistributeRewardsResponse {
+  uint64 totalDistributed = 1;
+  int32  recipients       = 2;
 }
 

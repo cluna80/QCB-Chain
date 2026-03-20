@@ -57,6 +57,18 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a breed-agent tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "parentA"}, {ProtoField: "parentB"}, {ProtoField: "childId"}, {ProtoField: "childName"}},
 				},
+				{
+					RpcMethod:      "ChallengeAgent",
+					Use:            "challenge-agent [target-id] [stake]",
+					Short:          "Send a challenge-agent tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "targetId"}, {ProtoField: "stake"}},
+				},
+				{
+					RpcMethod:      "RetireAgent",
+					Use:            "retire-agent [node-id] [reason]",
+					Short:          "Send a retire-agent tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "nodeId"}, {ProtoField: "reason"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

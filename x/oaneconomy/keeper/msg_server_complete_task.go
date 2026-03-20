@@ -4,8 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oaneconomy/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) CompleteTask(goCtx context.Context, msg *types.MsgCompleteTask) (*types.MsgCompleteTaskResponse, error) {
@@ -14,10 +15,10 @@ func (k msgServer) CompleteTask(goCtx context.Context, msg *types.MsgCompleteTas
 	if !found {
 		return nil, fmt.Errorf("task %s not found", msg.TaskId)
 	}
-	task.Completed  = true
-	task.Status     = "completed"
+	task.Completed = true
+	task.Status = "completed"
 	task.ResultHash = msg.ResultHash
-	task.Assignee   = msg.Creator
+	task.Assignee = msg.Creator
 	k.SetTask(ctx, task)
 	ctx.EventManager().EmitEvent(sdk.NewEvent("task_completed",
 		sdk.NewAttribute("task_id", msg.TaskId),

@@ -19,9 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName   = "/oan.oandao.Msg/UpdateParams"
-	Msg_SubmitProposal_FullMethodName = "/oan.oandao.Msg/SubmitProposal"
-	Msg_VoteProposal_FullMethodName   = "/oan.oandao.Msg/VoteProposal"
+	Msg_UpdateParams_FullMethodName    = "/oan.oandao.Msg/UpdateParams"
+	Msg_SubmitProposal_FullMethodName  = "/oan.oandao.Msg/SubmitProposal"
+	Msg_VoteProposal_FullMethodName    = "/oan.oandao.Msg/VoteProposal"
+	Msg_ExecuteProposal_FullMethodName = "/oan.oandao.Msg/ExecuteProposal"
+	Msg_VetoProposal_FullMethodName    = "/oan.oandao.Msg/VetoProposal"
+	Msg_DelegateVote_FullMethodName    = "/oan.oandao.Msg/DelegateVote"
 )
 
 // MsgClient is the client API for Msg service.
@@ -33,6 +36,9 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	SubmitProposal(ctx context.Context, in *MsgSubmitProposal, opts ...grpc.CallOption) (*MsgSubmitProposalResponse, error)
 	VoteProposal(ctx context.Context, in *MsgVoteProposal, opts ...grpc.CallOption) (*MsgVoteProposalResponse, error)
+	ExecuteProposal(ctx context.Context, in *MsgExecuteProposal, opts ...grpc.CallOption) (*MsgExecuteProposalResponse, error)
+	VetoProposal(ctx context.Context, in *MsgVetoProposal, opts ...grpc.CallOption) (*MsgVetoProposalResponse, error)
+	DelegateVote(ctx context.Context, in *MsgDelegateVote, opts ...grpc.CallOption) (*MsgDelegateVoteResponse, error)
 }
 
 type msgClient struct {
@@ -70,6 +76,33 @@ func (c *msgClient) VoteProposal(ctx context.Context, in *MsgVoteProposal, opts 
 	return out, nil
 }
 
+func (c *msgClient) ExecuteProposal(ctx context.Context, in *MsgExecuteProposal, opts ...grpc.CallOption) (*MsgExecuteProposalResponse, error) {
+	out := new(MsgExecuteProposalResponse)
+	err := c.cc.Invoke(ctx, Msg_ExecuteProposal_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) VetoProposal(ctx context.Context, in *MsgVetoProposal, opts ...grpc.CallOption) (*MsgVetoProposalResponse, error) {
+	out := new(MsgVetoProposalResponse)
+	err := c.cc.Invoke(ctx, Msg_VetoProposal_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DelegateVote(ctx context.Context, in *MsgDelegateVote, opts ...grpc.CallOption) (*MsgDelegateVoteResponse, error) {
+	out := new(MsgDelegateVoteResponse)
+	err := c.cc.Invoke(ctx, Msg_DelegateVote_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -79,6 +112,9 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	SubmitProposal(context.Context, *MsgSubmitProposal) (*MsgSubmitProposalResponse, error)
 	VoteProposal(context.Context, *MsgVoteProposal) (*MsgVoteProposalResponse, error)
+	ExecuteProposal(context.Context, *MsgExecuteProposal) (*MsgExecuteProposalResponse, error)
+	VetoProposal(context.Context, *MsgVetoProposal) (*MsgVetoProposalResponse, error)
+	DelegateVote(context.Context, *MsgDelegateVote) (*MsgDelegateVoteResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -94,6 +130,15 @@ func (UnimplementedMsgServer) SubmitProposal(context.Context, *MsgSubmitProposal
 }
 func (UnimplementedMsgServer) VoteProposal(context.Context, *MsgVoteProposal) (*MsgVoteProposalResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VoteProposal not implemented")
+}
+func (UnimplementedMsgServer) ExecuteProposal(context.Context, *MsgExecuteProposal) (*MsgExecuteProposalResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecuteProposal not implemented")
+}
+func (UnimplementedMsgServer) VetoProposal(context.Context, *MsgVetoProposal) (*MsgVetoProposalResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VetoProposal not implemented")
+}
+func (UnimplementedMsgServer) DelegateVote(context.Context, *MsgDelegateVote) (*MsgDelegateVoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelegateVote not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -162,6 +207,60 @@ func _Msg_VoteProposal_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_ExecuteProposal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgExecuteProposal)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).ExecuteProposal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_ExecuteProposal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).ExecuteProposal(ctx, req.(*MsgExecuteProposal))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_VetoProposal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgVetoProposal)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).VetoProposal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_VetoProposal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).VetoProposal(ctx, req.(*MsgVetoProposal))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DelegateVote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDelegateVote)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DelegateVote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DelegateVote_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DelegateVote(ctx, req.(*MsgDelegateVote))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -180,6 +279,18 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VoteProposal",
 			Handler:    _Msg_VoteProposal_Handler,
+		},
+		{
+			MethodName: "ExecuteProposal",
+			Handler:    _Msg_ExecuteProposal_Handler,
+		},
+		{
+			MethodName: "VetoProposal",
+			Handler:    _Msg_VetoProposal_Handler,
+		},
+		{
+			MethodName: "DelegateVote",
+			Handler:    _Msg_DelegateVote_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

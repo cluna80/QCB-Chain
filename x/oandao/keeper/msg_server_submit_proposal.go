@@ -4,15 +4,16 @@ import (
 	"context"
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oandao/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SubmitProposal(goCtx context.Context, msg *types.MsgSubmitProposal) (*types.MsgSubmitProposalResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	proposalId := fmt.Sprintf("prop-%d", ctx.BlockHeight())
-	start    := int32(ctx.BlockTime().Unix())
-	end      := start + int32(k.GetParams(ctx).VotingPeriod)
+	start := int32(ctx.BlockTime().Unix())
+	end := start + int32(k.GetParams(ctx).VotingPeriod)
 	timelock := end + 172800
 	proposal := types.Proposal{
 		Index: proposalId, Title: msg.Title, Description: msg.Description,

@@ -7,8 +7,9 @@ import (
 	"fmt"
 	"math/rand"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanagent/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RegisterAgent(goCtx context.Context, msg *types.MsgRegisterAgent) (*types.MsgRegisterAgentResponse, error) {
@@ -17,14 +18,16 @@ func (k msgServer) RegisterAgent(goCtx context.Context, msg *types.MsgRegisterAg
 		return nil, fmt.Errorf("agent %s already registered", msg.NodeId)
 	}
 	seed := int64(0)
-	for _, c := range msg.NodeId { seed += int64(c) }
+	for _, c := range msg.NodeId {
+		seed += int64(c)
+	}
 	rng := rand.New(rand.NewSource(seed + ctx.BlockHeight()))
-	s  := uint64(50 + rng.Intn(50))
-	a  := uint64(50 + rng.Intn(50))
+	s := uint64(50 + rng.Intn(50))
+	a := uint64(50 + rng.Intn(50))
 	st := uint64(50 + rng.Intn(50))
 	sk := uint64(50 + rng.Intn(50))
-	raw     := fmt.Sprintf("%s:%s:%d:%d:%d:%d:1", msg.NodeId, msg.AgentType, s, a, st, sk)
-	hash    := sha256.Sum256([]byte(raw))
+	raw := fmt.Sprintf("%s:%s:%d:%d:%d:%d:1", msg.NodeId, msg.AgentType, s, a, st, sk)
+	hash := sha256.Sum256([]byte(raw))
 	dnaHash := hex.EncodeToString(hash[:])
 	agent := types.Agent{
 		Index: msg.NodeId, NodeId: msg.NodeId, Name: msg.Name,

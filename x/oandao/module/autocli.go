@@ -51,6 +51,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a vote-proposal tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proposalId"}, {ProtoField: "vote"}},
 				},
+				{
+					RpcMethod:      "ExecuteProposal",
+					Use:            "execute-proposal [proposal-id]",
+					Short:          "Send a execute-proposal tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proposalId"}},
+				},
+				{
+					RpcMethod:      "VetoProposal",
+					Use:            "veto-proposal [proposal-id] [reason]",
+					Short:          "Send a veto-proposal tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "proposalId"}, {ProtoField: "reason"}},
+				},
+				{
+					RpcMethod:      "DelegateVote",
+					Use:            "delegate-vote [delegate-to] [power]",
+					Short:          "Send a delegate-vote tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "delegateTo"}, {ProtoField: "power"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

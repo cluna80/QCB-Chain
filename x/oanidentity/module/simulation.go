@@ -27,6 +27,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgRegisterIdentity int = 100
 
+	opWeightMsgVerifyIdentity = "op_weight_msg_verify_identity"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgVerifyIdentity int = 100
+
+	opWeightMsgUpdateReputation = "op_weight_msg_update_reputation"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateReputation int = 100
+
+	opWeightMsgLinkWallet = "op_weight_msg_link_wallet"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgLinkWallet int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -61,6 +73,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		oanidentitysimulation.SimulateMsgRegisterIdentity(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgVerifyIdentity int
+	simState.AppParams.GetOrGenerate(opWeightMsgVerifyIdentity, &weightMsgVerifyIdentity, nil,
+		func(_ *rand.Rand) {
+			weightMsgVerifyIdentity = defaultWeightMsgVerifyIdentity
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgVerifyIdentity,
+		oanidentitysimulation.SimulateMsgVerifyIdentity(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateReputation int
+	simState.AppParams.GetOrGenerate(opWeightMsgUpdateReputation, &weightMsgUpdateReputation, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateReputation = defaultWeightMsgUpdateReputation
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateReputation,
+		oanidentitysimulation.SimulateMsgUpdateReputation(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgLinkWallet int
+	simState.AppParams.GetOrGenerate(opWeightMsgLinkWallet, &weightMsgLinkWallet, nil,
+		func(_ *rand.Rand) {
+			weightMsgLinkWallet = defaultWeightMsgLinkWallet
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgLinkWallet,
+		oanidentitysimulation.SimulateMsgLinkWallet(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -74,6 +119,30 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgRegisterIdentity,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				oanidentitysimulation.SimulateMsgRegisterIdentity(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgVerifyIdentity,
+			defaultWeightMsgVerifyIdentity,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oanidentitysimulation.SimulateMsgVerifyIdentity(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateReputation,
+			defaultWeightMsgUpdateReputation,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oanidentitysimulation.SimulateMsgUpdateReputation(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgLinkWallet,
+			defaultWeightMsgLinkWallet,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oanidentitysimulation.SimulateMsgLinkWallet(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

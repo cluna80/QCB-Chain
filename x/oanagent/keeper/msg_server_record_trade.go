@@ -4,8 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanagent/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RecordTrade(goCtx context.Context, msg *types.MsgRecordTrade) (*types.MsgRecordTradeResponse, error) {
@@ -15,7 +16,9 @@ func (k msgServer) RecordTrade(goCtx context.Context, msg *types.MsgRecordTrade)
 		return nil, fmt.Errorf("agent %s not found", msg.AgentId)
 	}
 	agent.TotalTrades++
-	if msg.Result == "win" { agent.Wins++ }
+	if msg.Result == "win" {
+		agent.Wins++
+	}
 	agent.Experience++
 	if agent.TotalTrades > 0 {
 		agent.WinRateBps = (agent.Wins * 10000) / agent.TotalTrades
