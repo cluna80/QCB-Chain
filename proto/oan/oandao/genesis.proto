@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package oan.oandao;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "oan/oandao/params.proto";
+import "oan/oandao/proposal.proto";
+
+option go_package = "oan/x/oandao/types";
+
+// GenesisState defines the oandao module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params   params       = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Proposal proposalList = 2 [(gogoproto.nullable) = false] ;
+}
+

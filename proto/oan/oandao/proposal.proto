@@ -1,0 +1,20 @@
+syntax = "proto3";
+package oan.oandao;
+
+option go_package = "oan/x/oandao/types";
+
+message Proposal {
+  string index = 1; 
+  string title = 2; 
+  string description = 3; 
+  string proposer = 4; 
+  uint64 votesYes = 5; 
+  uint64 votesNo = 6; 
+  string status = 7; 
+  int32 startTime = 8; 
+  int32 endTime = 9; 
+  bool executed = 10; 
+  int32 timelockExpiry = 11; 
+  
+}
+

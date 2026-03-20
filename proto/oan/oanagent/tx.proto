@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package oan.oanagent;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "oan/oanagent/params.proto";
+
+option go_package = "oan/x/oanagent/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams  (MsgUpdateParams ) returns (MsgUpdateParamsResponse );
+  rpc RegisterAgent (MsgRegisterAgent) returns (MsgRegisterAgentResponse);
+  rpc RecordTrade   (MsgRecordTrade  ) returns (MsgRecordTradeResponse  );
+  rpc BreedAgent    (MsgBreedAgent   ) returns (MsgBreedAgentResponse   );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                      "authority";
+  option           (amino.name) = "oan/x/oanagent/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string nodeId    = 2;
+  string name      = 3;
+  string agentType = 4;
+}
+
+message MsgRegisterAgentResponse {
+  string nodeId  = 1;
+  string dnaHash = 2;
+}
+
+message MsgRecordTrade {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string agentId = 2;
+  string action  = 3;
+  int32  amount  = 4;
+  string result  = 5;
+}
+
+message MsgRecordTradeResponse {
+  bool  success     = 1;
+  int32 totalTrades = 2;
+  int32 winRateBps  = 3;
+}
+
+message MsgBreedAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string parentA   = 2;
+  string parentB   = 3;
+  string childId   = 4;
+  string childName = 5;
+}
+
+message MsgBreedAgentResponse {
+  string childId     = 1;
+  string dnaHash     = 2;
+  int32  genomeScore = 3;
+}
+

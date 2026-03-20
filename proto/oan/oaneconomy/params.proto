@@ -1,0 +1,18 @@
+syntax = "proto3";
+package oan.oaneconomy;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "oan/x/oaneconomy/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "oan/x/oaneconomy/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 taskFee = 1 [(gogoproto.moretags) = "yaml:\"task_fee\""];
+  uint64 ubiRate = 2 [(gogoproto.moretags) = "yaml:\"ubi_rate\""];
+  uint64 maxTasks = 3 [(gogoproto.moretags) = "yaml:\"max_tasks\""];
+}

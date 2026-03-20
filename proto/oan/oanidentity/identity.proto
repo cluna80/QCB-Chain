@@ -1,0 +1,18 @@
+syntax = "proto3";
+package oan.oanidentity;
+
+option go_package = "oan/x/oanidentity/types";
+
+message Identity {
+  string index = 1; 
+  string did = 2; 
+  string owner = 3; 
+  string displayName = 4; 
+  string identityType = 5; 
+  uint64 reputationScore = 6; 
+  bool verified = 7; 
+  int32 createdAt = 8; 
+  int32 lastActive = 9; 
+  
+}
+

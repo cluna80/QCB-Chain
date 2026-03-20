@@ -1,0 +1,18 @@
+syntax = "proto3";
+package oan.oandao;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "oan/x/oandao/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "oan/x/oandao/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 votingPeriod = 1 [(gogoproto.moretags) = "yaml:\"voting_period\""];
+  uint64 quorum = 2 [(gogoproto.moretags) = "yaml:\"quorum\""];
+  uint64 timelockSeconds = 3 [(gogoproto.moretags) = "yaml:\"timelock_seconds\""];
+}
