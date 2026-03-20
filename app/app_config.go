@@ -58,6 +58,7 @@ import (
 	oancomputemodulev1 "oan/api/oan/oancompute/module"
 	oandaomodulev1 "oan/api/oan/oandao/module"
 	oaneconomymodulev1 "oan/api/oan/oaneconomy/module"
+	oanguardianmodulev1 "oan/api/oan/oanguardian/module"
 	oanidentitymodulev1 "oan/api/oan/oanidentity/module"
 	oanmarketmodulev1 "oan/api/oan/oanmarket/module"
 	_ "oan/x/agent/module" // import for side-effects
@@ -70,6 +71,8 @@ import (
 	oandaomoduletypes "oan/x/oandao/types"
 	_ "oan/x/oaneconomy/module" // import for side-effects
 	oaneconomymoduletypes "oan/x/oaneconomy/types"
+	_ "oan/x/oanguardian/module" // import for side-effects
+	oanguardianmoduletypes "oan/x/oanguardian/types"
 	_ "oan/x/oanidentity/module" // import for side-effects
 	oanidentitymoduletypes "oan/x/oanidentity/types"
 	_ "oan/x/oanmarket/module" // import for side-effects
@@ -118,6 +121,7 @@ var (
 		oaneconomymoduletypes.ModuleName,
 		oancomputemoduletypes.ModuleName,
 		oanmarketmoduletypes.ModuleName,
+		oanguardianmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -149,6 +153,7 @@ var (
 		oaneconomymoduletypes.ModuleName,
 		oancomputemoduletypes.ModuleName,
 		oanmarketmoduletypes.ModuleName,
+		oanguardianmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -174,6 +179,7 @@ var (
 		oaneconomymoduletypes.ModuleName,
 		oancomputemoduletypes.ModuleName,
 		oanmarketmoduletypes.ModuleName,
+		oanguardianmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -356,6 +362,10 @@ var (
 			{
 				Name:   oanmarketmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&oanmarketmodulev1.Module{}),
+			},
+			{
+				Name:   oanguardianmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oanguardianmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},
