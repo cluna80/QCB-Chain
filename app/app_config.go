@@ -55,19 +55,25 @@ import (
 
 	agentmodulev1 "oan/api/oan/agent/module"
 	oanagentmodulev1 "oan/api/oan/oanagent/module"
+	oancomputemodulev1 "oan/api/oan/oancompute/module"
 	oandaomodulev1 "oan/api/oan/oandao/module"
 	oaneconomymodulev1 "oan/api/oan/oaneconomy/module"
 	oanidentitymodulev1 "oan/api/oan/oanidentity/module"
+	oanmarketmodulev1 "oan/api/oan/oanmarket/module"
 	_ "oan/x/agent/module" // import for side-effects
 	agentmoduletypes "oan/x/agent/types"
 	_ "oan/x/oanagent/module" // import for side-effects
 	oanagentmoduletypes "oan/x/oanagent/types"
+	_ "oan/x/oancompute/module" // import for side-effects
+	oancomputemoduletypes "oan/x/oancompute/types"
 	_ "oan/x/oandao/module" // import for side-effects
 	oandaomoduletypes "oan/x/oandao/types"
 	_ "oan/x/oaneconomy/module" // import for side-effects
 	oaneconomymoduletypes "oan/x/oaneconomy/types"
 	_ "oan/x/oanidentity/module" // import for side-effects
 	oanidentitymoduletypes "oan/x/oanidentity/types"
+	_ "oan/x/oanmarket/module" // import for side-effects
+	oanmarketmoduletypes "oan/x/oanmarket/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -110,6 +116,8 @@ var (
 		oanidentitymoduletypes.ModuleName,
 		oandaomoduletypes.ModuleName,
 		oaneconomymoduletypes.ModuleName,
+		oancomputemoduletypes.ModuleName,
+		oanmarketmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -139,6 +147,8 @@ var (
 		oanidentitymoduletypes.ModuleName,
 		oandaomoduletypes.ModuleName,
 		oaneconomymoduletypes.ModuleName,
+		oancomputemoduletypes.ModuleName,
+		oanmarketmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -162,6 +172,8 @@ var (
 		oanidentitymoduletypes.ModuleName,
 		oandaomoduletypes.ModuleName,
 		oaneconomymoduletypes.ModuleName,
+		oancomputemoduletypes.ModuleName,
+		oanmarketmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -336,6 +348,14 @@ var (
 			{
 				Name:   oaneconomymoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&oaneconomymodulev1.Module{}),
+			},
+			{
+				Name:   oancomputemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oancomputemodulev1.Module{}),
+			},
+			{
+				Name:   oanmarketmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oanmarketmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

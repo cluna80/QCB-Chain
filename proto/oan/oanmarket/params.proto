@@ -1,0 +1,17 @@
+syntax = "proto3";
+package oan.oanmarket;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "oan/x/oanmarket/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "oan/x/oanmarket/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 marketFee = 1 [(gogoproto.moretags) = "yaml:\"market_fee\""];
+  uint64 listingDuration = 2 [(gogoproto.moretags) = "yaml:\"listing_duration\""];
+}

@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanagent/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) ChallengeAgent(goCtx context.Context, msg *types.MsgChallengeAgent) (*types.MsgChallengeAgentResponse, error) {

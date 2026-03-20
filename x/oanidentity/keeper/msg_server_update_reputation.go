@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanidentity/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) UpdateReputation(goCtx context.Context, msg *types.MsgUpdateReputation) (*types.MsgUpdateReputationResponse, error) {
@@ -14,8 +15,12 @@ func (k msgServer) UpdateReputation(goCtx context.Context, msg *types.MsgUpdateR
 		return nil, fmt.Errorf("identity %s not found", msg.Did)
 	}
 	newScore := int64(identity.ReputationScore) + int64(msg.Delta)
-	if newScore < 0 { newScore = 0 }
-	if newScore > 1000 { newScore = 1000 }
+	if newScore < 0 {
+		newScore = 0
+	}
+	if newScore > 1000 {
+		newScore = 1000
+	}
 	identity.ReputationScore = uint64(newScore)
 	identity.LastActive = int32(ctx.BlockTime().Unix())
 	k.SetIdentity(ctx, identity)
