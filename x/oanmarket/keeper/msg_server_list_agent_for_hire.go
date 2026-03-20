@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanmarket/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) ListAgentForHire(goCtx context.Context, msg *types.MsgListAgentForHire) (*types.MsgListAgentForHireResponse, error) {

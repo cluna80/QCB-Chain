@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oandao/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SubmitProposal(goCtx context.Context, msg *types.MsgSubmitProposal) (*types.MsgSubmitProposalResponse, error) {
@@ -41,9 +42,9 @@ func (k msgServer) SubmitProposal(goCtx context.Context, msg *types.MsgSubmitPro
 		heightBytes[i] = byte(h >> (8 * i))
 	}
 	store.Set([]byte(spamKey), heightBytes)
-	propId   := fmt.Sprintf("prop-%d", ctx.BlockHeight())
-	start    := int32(ctx.BlockTime().Unix())
-	end      := start + int32(k.GetParams(ctx).VotingPeriod)
+	propId := fmt.Sprintf("prop-%d", ctx.BlockHeight())
+	start := int32(ctx.BlockTime().Unix())
+	end := start + int32(k.GetParams(ctx).VotingPeriod)
 	timelock := end + 172800
 	proposal := types.Proposal{
 		Index: propId, Title: msg.Title, Description: msg.Description,

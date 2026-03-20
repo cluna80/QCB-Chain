@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanguardian/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) ApproveModel(goCtx context.Context, msg *types.MsgApproveModel) (*types.MsgApproveModelResponse, error) {

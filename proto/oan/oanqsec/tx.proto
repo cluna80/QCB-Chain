@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+package oan.oanqsec;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "oan/oanqsec/params.proto";
+
+option go_package = "oan/x/oanqsec/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams        (MsgUpdateParams       ) returns (MsgUpdateParamsResponse       );
+  rpc RegisterQsKey       (MsgRegisterQsKey      ) returns (MsgRegisterQsKeyResponse      );
+  rpc RotateQsKey         (MsgRotateQsKey        ) returns (MsgRotateQsKeyResponse        );
+  rpc SubmitHybridSig     (MsgSubmitHybridSig    ) returns (MsgSubmitHybridSigResponse    );
+  rpc SetThreatLevel      (MsgSetThreatLevel     ) returns (MsgSetThreatLevelResponse     );
+  rpc RegisterAlgorithm   (MsgRegisterAlgorithm  ) returns (MsgRegisterAlgorithmResponse  );
+  rpc DeprecateAlgorithm  (MsgDeprecateAlgorithm ) returns (MsgDeprecateAlgorithmResponse );
+  rpc VerifyQsSignature   (MsgVerifyQsSignature  ) returns (MsgVerifyQsSignatureResponse  );
+  rpc EmergencyCryptoSwap (MsgEmergencyCryptoSwap) returns (MsgEmergencyCryptoSwapResponse);
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                     "authority";
+  option           (amino.name) = "oan/x/oanqsec/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterQsKey {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string walletAddr    = 2;
+  string keyType       = 3;
+  string publicKeyHash = 4;
+  string algorithm     = 5;
+}
+
+message MsgRegisterQsKeyResponse {
+  string keyId      = 1;
+  bool   registered = 2;
+  string algorithm  = 3;
+}
+
+message MsgRotateQsKey {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator          = 1;
+  string oldKeyId         = 2;
+  string newPublicKeyHash = 3;
+  string reason           = 4;
+}
+
+message MsgRotateQsKeyResponse {
+  string newKeyId  = 1;
+  int32  rotatedAt = 2;
+}
+
+message MsgSubmitHybridSig {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string txHash       = 2;
+  string classicalSig = 3;
+  string qsSig        = 4;
+  string keyId        = 5;
+}
+
+message MsgSubmitHybridSigResponse {
+  bool   valid  = 1;
+  string txHash = 2;
+}
+
+message MsgSetThreatLevel {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  uint64 level         = 2;
+  string evidence      = 3;
+  string justification = 4;
+}
+
+message MsgSetThreatLevelResponse {
+  uint64 level     = 1;
+  int32  appliedAt = 2;
+}
+
+message MsgRegisterAlgorithm {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string algorithmId   = 2;
+  string algorithmType = 3;
+  uint64 securityLevel = 4;
+  string specification = 5;
+}
+
+message MsgRegisterAlgorithmResponse {
+  string algorithmId = 1;
+  bool   registered  = 2;
+}
+
+message MsgDeprecateAlgorithm {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string algorithmId   = 2;
+  string reason        = 3;
+  string replacementId = 4;
+}
+
+message MsgDeprecateAlgorithmResponse {
+  bool  success      = 1;
+  int32 deprecatedAt = 2;
+}
+
+message MsgVerifyQsSignature {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string txHash  = 2;
+  string qsSig   = 3;
+  string keyId   = 4;
+}
+
+message MsgVerifyQsSignatureResponse {
+  bool   valid     = 1;
+  string algorithm = 2;
+}
+
+message MsgEmergencyCryptoSwap {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string fromAlgorithm = 2;
+  string toAlgorithm   = 3;
+  string evidence      = 4;
+  string urgency       = 5;
+}
+
+message MsgEmergencyCryptoSwapResponse {
+  bool   success      = 1;
+  int32  activatedAt  = 2;
+  string newAlgorithm = 3;
+}
+

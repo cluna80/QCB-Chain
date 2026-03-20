@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanguardian/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) AddGuardian(goCtx context.Context, msg *types.MsgAddGuardian) (*types.MsgAddGuardianResponse, error) {

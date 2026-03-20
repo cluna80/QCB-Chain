@@ -85,6 +85,8 @@ import (
 	oanmarketmodulekeeper "oan/x/oanmarket/keeper"
 
 	oanguardianmodulekeeper "oan/x/oanguardian/keeper"
+	oanqsecmodulekeeper "oan/x/oanqsec/keeper"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"oan/docs"
@@ -158,6 +160,7 @@ type App struct {
 	OancomputeKeeper  oancomputemodulekeeper.Keeper
 	OanmarketKeeper   oanmarketmodulekeeper.Keeper
 	OanguardianKeeper oanguardianmodulekeeper.Keeper
+	OanqsecKeeper     oanqsecmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -269,6 +272,7 @@ func New(
 		&app.OancomputeKeeper,
 		&app.OanmarketKeeper,
 		&app.OanguardianKeeper,
+		&app.OanqsecKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)
