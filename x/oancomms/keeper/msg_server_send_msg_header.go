@@ -12,21 +12,34 @@ func (k msgServer) SendMsgHeader(goCtx context.Context, msg *types.MsgSendMsgHea
 	store := k.storeService.OpenKVStore(ctx)
 	params := k.GetParams(ctx)
 
-	// Validate sender has a registered msg key
-	senderHasKey := false
+	// Validate sender has an active non-revoked msg key
+	senderHasActiveKey := false
 	for _, kt := range []string{"dilithium3", "sphincs-plus", "falcon-1024", "ed25519", "secp256k1"} {
 		keyStoreKey := fmt.Sprintf("msgkey-%s-%s", msg.Creator, kt)
 		existing, _ := store.Get([]byte(keyStoreKey))
 		if existing != nil {
-			senderHasKey = true
-			break
+			// Check not revoked — revoked keys have status "revoked" in value
+			val := string(existing)
+			if len(val) >= 7 && val[len(val)-7:] != "revoked" {
+				// Also check via keyid store
+				senderHasActiveKey = true
+				break
+			}
 		}
 	}
-	if !senderHasKey {
-		return nil, fmt.Errorf("sender must register a msg key before sending — use register-msg-key")
+
+	// Also check via enc key ID lookup — if revoked the keyid value starts with "revoked"
+	keyIdVal, _ := store.Get([]byte(fmt.Sprintf("msgkeyid-%s", msg.EncKeyId)))
+	if keyIdVal != nil {
+		val := string(keyIdVal)
+		if len(val) >= 7 && val[:7] == "revoked" {
+			return nil, fmt.Errorf("msg key %s has been revoked — register a new key first", msg.EncKeyId)
+		}
 	}
 
-	// Validate payload hash not empty
+	if !senderHasActiveKey {
+		return nil, fmt.Errorf("sender must register an active msg key before sending — use register-msg-key")
+	}
 	if msg.PayloadHash == "" {
 		return nil, fmt.Errorf("payloadHash cannot be empty — payload lives off-chain, only hash on-chain")
 	}
@@ -34,11 +47,6 @@ func (k msgServer) SendMsgHeader(goCtx context.Context, msg *types.MsgSendMsgHea
 		return nil, fmt.Errorf("toAddr cannot be empty")
 	}
 
-	// Check msg size limit
-	maxSize := params.MaxMsgSize
-	if maxSize == 0 { maxSize = 65536 }
-
-	// Check TTL
 	ttl := params.MsgTtlBlocks
 	if ttl == 0 { ttl = 1000 }
 	expiresAt := int64(ctx.BlockHeight()) + int64(ttl)
@@ -50,7 +58,6 @@ func (k msgServer) SendMsgHeader(goCtx context.Context, msg *types.MsgSendMsgHea
 		return nil, fmt.Errorf("recipient has blocked this sender")
 	}
 
-	// Store msg header only — NO payload on chain
 	msgKey := fmt.Sprintf("msgheader-%s", msg.MsgId)
 	existing, _ := store.Get([]byte(msgKey))
 	if existing != nil {
@@ -61,7 +68,6 @@ func (k msgServer) SendMsgHeader(goCtx context.Context, msg *types.MsgSendMsgHea
 			msg.MsgId, msg.Creator, msg.ToAddr,
 			msg.PayloadHash, msg.MsgType, expiresAt)))
 
-	// Relay hint — suggest nearest relay
 	relayHint := fmt.Sprintf("relay-%s-region-1", msg.ToAddr[:8])
 
 	ctx.EventManager().EmitEvent(sdk.NewEvent("msg_header_sent",
