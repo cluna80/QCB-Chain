@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanmedia/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RecordView(goCtx context.Context, msg *types.MsgRecordView) (*types.MsgRecordViewResponse, error) {
@@ -20,7 +21,9 @@ func (k msgServer) RecordView(goCtx context.Context, msg *types.MsgRecordView) (
 	}
 	params := k.GetParams(ctx)
 	royaltyRate := params.RoyaltyRate
-	if royaltyRate == 0 { royaltyRate = 10 }
+	if royaltyRate == 0 {
+		royaltyRate = 10
+	}
 	creatorEarned := msg.PaymentAmount * royaltyRate / 100
 	viewKey := fmt.Sprintf("views-%s", msg.NftId)
 	viewBytes, _ := store.Get([]byte(viewKey))

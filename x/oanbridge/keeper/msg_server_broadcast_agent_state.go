@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanbridge/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) BroadcastAgentState(goCtx context.Context, msg *types.MsgBroadcastAgentState) (*types.MsgBroadcastAgentStateResponse, error) {
@@ -18,7 +19,9 @@ func (k msgServer) BroadcastAgentState(goCtx context.Context, msg *types.MsgBroa
 	broadcastId := fmt.Sprintf("broadcast-%d-%s", ctx.BlockHeight(), msg.AgentId)
 	chainCount := uint64(1)
 	for _, c := range msg.TargetChains {
-		if c == ',' { chainCount++ }
+		if c == ',' {
+			chainCount++
+		}
 	}
 	store := k.storeService.OpenKVStore(ctx)
 	store.Set([]byte(fmt.Sprintf("broadcast-%s-latest", msg.AgentId)),

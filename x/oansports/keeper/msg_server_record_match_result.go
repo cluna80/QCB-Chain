@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oansports/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RecordMatchResult(goCtx context.Context, msg *types.MsgRecordMatchResult) (*types.MsgRecordMatchResultResponse, error) {
@@ -27,7 +28,9 @@ func (k msgServer) RecordMatchResult(goCtx context.Context, msg *types.MsgRecord
 	winnerKey := fmt.Sprintf("athlete-wins-%s", msg.Winner)
 	winsBytes, _ := store.Get([]byte(winnerKey))
 	wins := uint64(0)
-	if winsBytes != nil { fmt.Sscanf(string(winsBytes), "%d", &wins) }
+	if winsBytes != nil {
+		fmt.Sscanf(string(winsBytes), "%d", &wins)
+	}
 	wins++
 	store.Set([]byte(winnerKey), []byte(fmt.Sprintf("%d", wins)))
 	ctx.EventManager().EmitEvent(sdk.NewEvent("match_result_recorded",

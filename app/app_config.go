@@ -63,6 +63,7 @@ import (
 	oanidentitymodulev1 "oan/api/oan/oanidentity/module"
 	oanmarketmodulev1 "oan/api/oan/oanmarket/module"
 	oanmediamodulev1 "oan/api/oan/oanmedia/module"
+	oannodemodulev1 "oan/api/oan/oannode/module"
 	oanqsecmodulev1 "oan/api/oan/oanqsec/module"
 	oansportsmodulev1 "oan/api/oan/oansports/module"
 	_ "oan/x/agent/module" // import for side-effects
@@ -85,6 +86,8 @@ import (
 	oanmarketmoduletypes "oan/x/oanmarket/types"
 	_ "oan/x/oanmedia/module" // import for side-effects
 	oanmediamoduletypes "oan/x/oanmedia/types"
+	_ "oan/x/oannode/module" // import for side-effects
+	oannodemoduletypes "oan/x/oannode/types"
 	_ "oan/x/oanqsec/module" // import for side-effects
 	oanqsecmoduletypes "oan/x/oanqsec/types"
 	_ "oan/x/oansports/module" // import for side-effects
@@ -138,6 +141,7 @@ var (
 		oanmediamoduletypes.ModuleName,
 		oansportsmoduletypes.ModuleName,
 		oanbridgemoduletypes.ModuleName,
+		oannodemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -174,6 +178,7 @@ var (
 		oanmediamoduletypes.ModuleName,
 		oansportsmoduletypes.ModuleName,
 		oanbridgemoduletypes.ModuleName,
+		oannodemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -204,6 +209,7 @@ var (
 		oanmediamoduletypes.ModuleName,
 		oansportsmoduletypes.ModuleName,
 		oanbridgemoduletypes.ModuleName,
+		oannodemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -406,6 +412,10 @@ var (
 			{
 				Name:   oanbridgemoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&oanbridgemodulev1.Module{}),
+			},
+			{
+				Name:   oannodemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oannodemodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

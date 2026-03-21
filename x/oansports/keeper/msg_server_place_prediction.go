@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oansports/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) PlacePrediction(goCtx context.Context, msg *types.MsgPlacePrediction) (*types.MsgPlacePredictionResponse, error) {

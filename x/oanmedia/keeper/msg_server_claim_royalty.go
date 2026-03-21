@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanmedia/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) ClaimRoyalty(goCtx context.Context, msg *types.MsgClaimRoyalty) (*types.MsgClaimRoyaltyResponse, error) {

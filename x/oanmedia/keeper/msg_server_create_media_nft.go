@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanmedia/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) CreateMediaNft(goCtx context.Context, msg *types.MsgCreateMediaNft) (*types.MsgCreateMediaNftResponse, error) {
@@ -21,7 +22,9 @@ func (k msgServer) CreateMediaNft(goCtx context.Context, msg *types.MsgCreateMed
 	}
 	params := k.GetParams(ctx)
 	royaltyRate := params.RoyaltyRate
-	if royaltyRate == 0 { royaltyRate = 10 }
+	if royaltyRate == 0 {
+		royaltyRate = 10
+	}
 	nftId := fmt.Sprintf("media-%d-%s", ctx.BlockHeight(), msg.Creator[:8])
 	store := k.storeService.OpenKVStore(ctx)
 	nftKey := fmt.Sprintf("nft-%s", nftId)

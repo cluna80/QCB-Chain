@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanmedia/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) LicenseContent(goCtx context.Context, msg *types.MsgLicenseContent) (*types.MsgLicenseContentResponse, error) {
@@ -28,7 +29,9 @@ func (k msgServer) LicenseContent(goCtx context.Context, msg *types.MsgLicenseCo
 	licenseId := fmt.Sprintf("license-%d-%s", ctx.BlockHeight(), msg.NftId)
 	now := int32(ctx.BlockTime().Unix())
 	expiresAt := now + msg.Duration
-	if msg.LicenseType == "perpetual" { expiresAt = 0 }
+	if msg.LicenseType == "perpetual" {
+		expiresAt = 0
+	}
 	store.Set([]byte(fmt.Sprintf("license-%s", licenseId)),
 		[]byte(fmt.Sprintf("%s|%s|%s|%d|%d", msg.NftId, msg.LicenseeAddr, msg.LicenseType, msg.Fee, expiresAt)))
 	ctx.EventManager().EmitEvent(sdk.NewEvent("content_licensed",

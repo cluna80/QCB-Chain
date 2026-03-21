@@ -91,6 +91,8 @@ import (
 	oansportsmodulekeeper "oan/x/oansports/keeper"
 
 	oanbridgemodulekeeper "oan/x/oanbridge/keeper"
+	oannodemodulekeeper "oan/x/oannode/keeper"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"oan/docs"
@@ -168,6 +170,7 @@ type App struct {
 	OanmediaKeeper    oanmediamodulekeeper.Keeper
 	OansportsKeeper   oansportsmodulekeeper.Keeper
 	OanbridgeKeeper   oanbridgemodulekeeper.Keeper
+	OannodeKeeper     oannodemodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -283,6 +286,7 @@ func New(
 		&app.OanmediaKeeper,
 		&app.OansportsKeeper,
 		&app.OanbridgeKeeper,
+		&app.OannodeKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

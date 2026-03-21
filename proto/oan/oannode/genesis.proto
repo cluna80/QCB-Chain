@@ -1,0 +1,17 @@
+syntax = "proto3";
+package oan.oannode;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "oan/oannode/params.proto";
+
+option go_package = "oan/x/oannode/types";
+
+// GenesisState defines the oannode module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

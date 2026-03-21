@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanbridge/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SendIbcAgent(goCtx context.Context, msg *types.MsgSendIbcAgent) (*types.MsgSendIbcAgentResponse, error) {
