@@ -22,6 +22,7 @@ service Msg {
   rpc BreedAgent     (MsgBreedAgent    ) returns (MsgBreedAgentResponse    );
   rpc ChallengeAgent (MsgChallengeAgent) returns (MsgChallengeAgentResponse);
   rpc RetireAgent    (MsgRetireAgent   ) returns (MsgRetireAgentResponse   );
+  rpc SpawnAgent     (MsgSpawnAgent    ) returns (MsgSpawnAgentResponse    );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -106,5 +107,21 @@ message MsgRetireAgent {
 message MsgRetireAgentResponse {
   bool  success    = 1;
   int32 finalScore = 2;
+}
+
+message MsgSpawnAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string parentId  = 2;
+  string childId   = 3;
+  string childName = 4;
+  string childType = 5;
+}
+
+message MsgSpawnAgentResponse {
+  string childId     = 1;
+  string dnaHash     = 2;
+  int32  generation  = 3;
+  int32  genomeScore = 4;
 }
 

@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oannode/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) DeregisterNode(goCtx context.Context, msg *types.MsgDeregisterNode) (*types.MsgDeregisterNodeResponse, error) {
@@ -28,7 +29,9 @@ func (k msgServer) DeregisterNode(goCtx context.Context, msg *types.MsgDeregiste
 	// FAILSAFE — 21 day unbonding period
 	params := k.GetParams(ctx)
 	unbondingBlocks := int64(params.UnbondingBlocks)
-	if unbondingBlocks == 0 { unbondingBlocks = 302400 } // ~21 days at 6s blocks
+	if unbondingBlocks == 0 {
+		unbondingBlocks = 302400
+	} // ~21 days at 6s blocks
 
 	unbondingEndsAt := int32(ctx.BlockHeight()) + int32(unbondingBlocks)
 

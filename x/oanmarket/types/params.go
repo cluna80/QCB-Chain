@@ -6,7 +6,7 @@ var _ paramtypes.ParamSet = (*Params)(nil)
 
 func NewParams() Params {
 	return Params{
-		MarketFee:       20,   // 2% marketplace fee (basis points x10)
+		MarketFee:       20,     // 2% marketplace fee (basis points x10)
 		ListingDuration: 604800, // 7 days listing duration
 	}
 }

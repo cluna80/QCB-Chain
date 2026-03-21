@@ -6363,6 +6363,1262 @@ func (x *fastReflection_MsgRetireAgentResponse) ProtoMethods() *protoiface.Metho
 	}
 }
 
+var (
+	md_MsgSpawnAgent           protoreflect.MessageDescriptor
+	fd_MsgSpawnAgent_creator   protoreflect.FieldDescriptor
+	fd_MsgSpawnAgent_parentId  protoreflect.FieldDescriptor
+	fd_MsgSpawnAgent_childId   protoreflect.FieldDescriptor
+	fd_MsgSpawnAgent_childName protoreflect.FieldDescriptor
+	fd_MsgSpawnAgent_childType protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_oan_oanagent_tx_proto_init()
+	md_MsgSpawnAgent = File_oan_oanagent_tx_proto.Messages().ByName("MsgSpawnAgent")
+	fd_MsgSpawnAgent_creator = md_MsgSpawnAgent.Fields().ByName("creator")
+	fd_MsgSpawnAgent_parentId = md_MsgSpawnAgent.Fields().ByName("parentId")
+	fd_MsgSpawnAgent_childId = md_MsgSpawnAgent.Fields().ByName("childId")
+	fd_MsgSpawnAgent_childName = md_MsgSpawnAgent.Fields().ByName("childName")
+	fd_MsgSpawnAgent_childType = md_MsgSpawnAgent.Fields().ByName("childType")
+}
+
+var _ protoreflect.Message = (*fastReflection_MsgSpawnAgent)(nil)
+
+type fastReflection_MsgSpawnAgent MsgSpawnAgent
+
+func (x *MsgSpawnAgent) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgSpawnAgent)(x)
+}
+
+func (x *MsgSpawnAgent) slowProtoReflect() protoreflect.Message {
+	mi := &file_oan_oanagent_tx_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_MsgSpawnAgent_messageType fastReflection_MsgSpawnAgent_messageType
+var _ protoreflect.MessageType = fastReflection_MsgSpawnAgent_messageType{}
+
+type fastReflection_MsgSpawnAgent_messageType struct{}
+
+func (x fastReflection_MsgSpawnAgent_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgSpawnAgent)(nil)
+}
+func (x fastReflection_MsgSpawnAgent_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgSpawnAgent)
+}
+func (x fastReflection_MsgSpawnAgent_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSpawnAgent
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_MsgSpawnAgent) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSpawnAgent
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_MsgSpawnAgent) Type() protoreflect.MessageType {
+	return _fastReflection_MsgSpawnAgent_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_MsgSpawnAgent) New() protoreflect.Message {
+	return new(fastReflection_MsgSpawnAgent)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_MsgSpawnAgent) Interface() protoreflect.ProtoMessage {
+	return (*MsgSpawnAgent)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_MsgSpawnAgent) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Creator != "" {
+		value := protoreflect.ValueOfString(x.Creator)
+		if !f(fd_MsgSpawnAgent_creator, value) {
+			return
+		}
+	}
+	if x.ParentId != "" {
+		value := protoreflect.ValueOfString(x.ParentId)
+		if !f(fd_MsgSpawnAgent_parentId, value) {
+			return
+		}
+	}
+	if x.ChildId != "" {
+		value := protoreflect.ValueOfString(x.ChildId)
+		if !f(fd_MsgSpawnAgent_childId, value) {
+			return
+		}
+	}
+	if x.ChildName != "" {
+		value := protoreflect.ValueOfString(x.ChildName)
+		if !f(fd_MsgSpawnAgent_childName, value) {
+			return
+		}
+	}
+	if x.ChildType != "" {
+		value := protoreflect.ValueOfString(x.ChildType)
+		if !f(fd_MsgSpawnAgent_childType, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_MsgSpawnAgent) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgent.creator":
+		return x.Creator != ""
+	case "oan.oanagent.MsgSpawnAgent.parentId":
+		return x.ParentId != ""
+	case "oan.oanagent.MsgSpawnAgent.childId":
+		return x.ChildId != ""
+	case "oan.oanagent.MsgSpawnAgent.childName":
+		return x.ChildName != ""
+	case "oan.oanagent.MsgSpawnAgent.childType":
+		return x.ChildType != ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgent"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgent does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgent) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgent.creator":
+		x.Creator = ""
+	case "oan.oanagent.MsgSpawnAgent.parentId":
+		x.ParentId = ""
+	case "oan.oanagent.MsgSpawnAgent.childId":
+		x.ChildId = ""
+	case "oan.oanagent.MsgSpawnAgent.childName":
+		x.ChildName = ""
+	case "oan.oanagent.MsgSpawnAgent.childType":
+		x.ChildType = ""
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgent"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgent does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_MsgSpawnAgent) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "oan.oanagent.MsgSpawnAgent.creator":
+		value := x.Creator
+		return protoreflect.ValueOfString(value)
+	case "oan.oanagent.MsgSpawnAgent.parentId":
+		value := x.ParentId
+		return protoreflect.ValueOfString(value)
+	case "oan.oanagent.MsgSpawnAgent.childId":
+		value := x.ChildId
+		return protoreflect.ValueOfString(value)
+	case "oan.oanagent.MsgSpawnAgent.childName":
+		value := x.ChildName
+		return protoreflect.ValueOfString(value)
+	case "oan.oanagent.MsgSpawnAgent.childType":
+		value := x.ChildType
+		return protoreflect.ValueOfString(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgent"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgent does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgent) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgent.creator":
+		x.Creator = value.Interface().(string)
+	case "oan.oanagent.MsgSpawnAgent.parentId":
+		x.ParentId = value.Interface().(string)
+	case "oan.oanagent.MsgSpawnAgent.childId":
+		x.ChildId = value.Interface().(string)
+	case "oan.oanagent.MsgSpawnAgent.childName":
+		x.ChildName = value.Interface().(string)
+	case "oan.oanagent.MsgSpawnAgent.childType":
+		x.ChildType = value.Interface().(string)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgent"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgent does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgent) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgent.creator":
+		panic(fmt.Errorf("field creator of message oan.oanagent.MsgSpawnAgent is not mutable"))
+	case "oan.oanagent.MsgSpawnAgent.parentId":
+		panic(fmt.Errorf("field parentId of message oan.oanagent.MsgSpawnAgent is not mutable"))
+	case "oan.oanagent.MsgSpawnAgent.childId":
+		panic(fmt.Errorf("field childId of message oan.oanagent.MsgSpawnAgent is not mutable"))
+	case "oan.oanagent.MsgSpawnAgent.childName":
+		panic(fmt.Errorf("field childName of message oan.oanagent.MsgSpawnAgent is not mutable"))
+	case "oan.oanagent.MsgSpawnAgent.childType":
+		panic(fmt.Errorf("field childType of message oan.oanagent.MsgSpawnAgent is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgent"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgent does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_MsgSpawnAgent) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgent.creator":
+		return protoreflect.ValueOfString("")
+	case "oan.oanagent.MsgSpawnAgent.parentId":
+		return protoreflect.ValueOfString("")
+	case "oan.oanagent.MsgSpawnAgent.childId":
+		return protoreflect.ValueOfString("")
+	case "oan.oanagent.MsgSpawnAgent.childName":
+		return protoreflect.ValueOfString("")
+	case "oan.oanagent.MsgSpawnAgent.childType":
+		return protoreflect.ValueOfString("")
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgent"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgent does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_MsgSpawnAgent) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in oan.oanagent.MsgSpawnAgent", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_MsgSpawnAgent) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgent) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_MsgSpawnAgent) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_MsgSpawnAgent) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*MsgSpawnAgent)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.Creator)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.ParentId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.ChildId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.ChildName)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.ChildType)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*MsgSpawnAgent)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.ChildType) > 0 {
+			i -= len(x.ChildType)
+			copy(dAtA[i:], x.ChildType)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ChildType)))
+			i--
+			dAtA[i] = 0x2a
+		}
+		if len(x.ChildName) > 0 {
+			i -= len(x.ChildName)
+			copy(dAtA[i:], x.ChildName)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ChildName)))
+			i--
+			dAtA[i] = 0x22
+		}
+		if len(x.ChildId) > 0 {
+			i -= len(x.ChildId)
+			copy(dAtA[i:], x.ChildId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ChildId)))
+			i--
+			dAtA[i] = 0x1a
+		}
+		if len(x.ParentId) > 0 {
+			i -= len(x.ParentId)
+			copy(dAtA[i:], x.ParentId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ParentId)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Creator) > 0 {
+			i -= len(x.Creator)
+			copy(dAtA[i:], x.Creator)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Creator)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*MsgSpawnAgent)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSpawnAgent: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSpawnAgent: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Creator = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ParentId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ParentId = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChildId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ChildId = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChildName", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ChildName = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 5:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChildType", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ChildType = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
+var (
+	md_MsgSpawnAgentResponse             protoreflect.MessageDescriptor
+	fd_MsgSpawnAgentResponse_childId     protoreflect.FieldDescriptor
+	fd_MsgSpawnAgentResponse_dnaHash     protoreflect.FieldDescriptor
+	fd_MsgSpawnAgentResponse_generation  protoreflect.FieldDescriptor
+	fd_MsgSpawnAgentResponse_genomeScore protoreflect.FieldDescriptor
+)
+
+func init() {
+	file_oan_oanagent_tx_proto_init()
+	md_MsgSpawnAgentResponse = File_oan_oanagent_tx_proto.Messages().ByName("MsgSpawnAgentResponse")
+	fd_MsgSpawnAgentResponse_childId = md_MsgSpawnAgentResponse.Fields().ByName("childId")
+	fd_MsgSpawnAgentResponse_dnaHash = md_MsgSpawnAgentResponse.Fields().ByName("dnaHash")
+	fd_MsgSpawnAgentResponse_generation = md_MsgSpawnAgentResponse.Fields().ByName("generation")
+	fd_MsgSpawnAgentResponse_genomeScore = md_MsgSpawnAgentResponse.Fields().ByName("genomeScore")
+}
+
+var _ protoreflect.Message = (*fastReflection_MsgSpawnAgentResponse)(nil)
+
+type fastReflection_MsgSpawnAgentResponse MsgSpawnAgentResponse
+
+func (x *MsgSpawnAgentResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_MsgSpawnAgentResponse)(x)
+}
+
+func (x *MsgSpawnAgentResponse) slowProtoReflect() protoreflect.Message {
+	mi := &file_oan_oanagent_tx_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+var _fastReflection_MsgSpawnAgentResponse_messageType fastReflection_MsgSpawnAgentResponse_messageType
+var _ protoreflect.MessageType = fastReflection_MsgSpawnAgentResponse_messageType{}
+
+type fastReflection_MsgSpawnAgentResponse_messageType struct{}
+
+func (x fastReflection_MsgSpawnAgentResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_MsgSpawnAgentResponse)(nil)
+}
+func (x fastReflection_MsgSpawnAgentResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_MsgSpawnAgentResponse)
+}
+func (x fastReflection_MsgSpawnAgentResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSpawnAgentResponse
+}
+
+// Descriptor returns message descriptor, which contains only the protobuf
+// type information for the message.
+func (x *fastReflection_MsgSpawnAgentResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_MsgSpawnAgentResponse
+}
+
+// Type returns the message type, which encapsulates both Go and protobuf
+// type information. If the Go type information is not needed,
+// it is recommended that the message descriptor be used instead.
+func (x *fastReflection_MsgSpawnAgentResponse) Type() protoreflect.MessageType {
+	return _fastReflection_MsgSpawnAgentResponse_messageType
+}
+
+// New returns a newly allocated and mutable empty message.
+func (x *fastReflection_MsgSpawnAgentResponse) New() protoreflect.Message {
+	return new(fastReflection_MsgSpawnAgentResponse)
+}
+
+// Interface unwraps the message reflection interface and
+// returns the underlying ProtoMessage interface.
+func (x *fastReflection_MsgSpawnAgentResponse) Interface() protoreflect.ProtoMessage {
+	return (*MsgSpawnAgentResponse)(x)
+}
+
+// Range iterates over every populated field in an undefined order,
+// calling f for each field descriptor and value encountered.
+// Range returns immediately if f returns false.
+// While iterating, mutating operations may only be performed
+// on the current field descriptor.
+func (x *fastReflection_MsgSpawnAgentResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.ChildId != "" {
+		value := protoreflect.ValueOfString(x.ChildId)
+		if !f(fd_MsgSpawnAgentResponse_childId, value) {
+			return
+		}
+	}
+	if x.DnaHash != "" {
+		value := protoreflect.ValueOfString(x.DnaHash)
+		if !f(fd_MsgSpawnAgentResponse_dnaHash, value) {
+			return
+		}
+	}
+	if x.Generation != int32(0) {
+		value := protoreflect.ValueOfInt32(x.Generation)
+		if !f(fd_MsgSpawnAgentResponse_generation, value) {
+			return
+		}
+	}
+	if x.GenomeScore != int32(0) {
+		value := protoreflect.ValueOfInt32(x.GenomeScore)
+		if !f(fd_MsgSpawnAgentResponse_genomeScore, value) {
+			return
+		}
+	}
+}
+
+// Has reports whether a field is populated.
+//
+// Some fields have the property of nullability where it is possible to
+// distinguish between the default value of a field and whether the field
+// was explicitly populated with the default value. Singular message fields,
+// member fields of a oneof, and proto2 scalar fields are nullable. Such
+// fields are populated only if explicitly set.
+//
+// In other cases (aside from the nullable cases above),
+// a proto3 scalar field is populated if it contains a non-zero value, and
+// a repeated field is populated if it is non-empty.
+func (x *fastReflection_MsgSpawnAgentResponse) Has(fd protoreflect.FieldDescriptor) bool {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgentResponse.childId":
+		return x.ChildId != ""
+	case "oan.oanagent.MsgSpawnAgentResponse.dnaHash":
+		return x.DnaHash != ""
+	case "oan.oanagent.MsgSpawnAgentResponse.generation":
+		return x.Generation != int32(0)
+	case "oan.oanagent.MsgSpawnAgentResponse.genomeScore":
+		return x.GenomeScore != int32(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgentResponse"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgentResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Clear clears the field such that a subsequent Has call reports false.
+//
+// Clearing an extension field clears both the extension type and value
+// associated with the given field number.
+//
+// Clear is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgentResponse) Clear(fd protoreflect.FieldDescriptor) {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgentResponse.childId":
+		x.ChildId = ""
+	case "oan.oanagent.MsgSpawnAgentResponse.dnaHash":
+		x.DnaHash = ""
+	case "oan.oanagent.MsgSpawnAgentResponse.generation":
+		x.Generation = int32(0)
+	case "oan.oanagent.MsgSpawnAgentResponse.genomeScore":
+		x.GenomeScore = int32(0)
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgentResponse"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgentResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Get retrieves the value for a field.
+//
+// For unpopulated scalars, it returns the default value, where
+// the default value of a bytes scalar is guaranteed to be a copy.
+// For unpopulated composite types, it returns an empty, read-only view
+// of the value; to obtain a mutable reference, use Mutable.
+func (x *fastReflection_MsgSpawnAgentResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+	switch descriptor.FullName() {
+	case "oan.oanagent.MsgSpawnAgentResponse.childId":
+		value := x.ChildId
+		return protoreflect.ValueOfString(value)
+	case "oan.oanagent.MsgSpawnAgentResponse.dnaHash":
+		value := x.DnaHash
+		return protoreflect.ValueOfString(value)
+	case "oan.oanagent.MsgSpawnAgentResponse.generation":
+		value := x.Generation
+		return protoreflect.ValueOfInt32(value)
+	case "oan.oanagent.MsgSpawnAgentResponse.genomeScore":
+		value := x.GenomeScore
+		return protoreflect.ValueOfInt32(value)
+	default:
+		if descriptor.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgentResponse"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgentResponse does not contain field %s", descriptor.FullName()))
+	}
+}
+
+// Set stores the value for a field.
+//
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType.
+// When setting a composite type, it is unspecified whether the stored value
+// aliases the source's memory in any way. If the composite value is an
+// empty, read-only value, then it panics.
+//
+// Set is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgentResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgentResponse.childId":
+		x.ChildId = value.Interface().(string)
+	case "oan.oanagent.MsgSpawnAgentResponse.dnaHash":
+		x.DnaHash = value.Interface().(string)
+	case "oan.oanagent.MsgSpawnAgentResponse.generation":
+		x.Generation = int32(value.Int())
+	case "oan.oanagent.MsgSpawnAgentResponse.genomeScore":
+		x.GenomeScore = int32(value.Int())
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgentResponse"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgentResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// Mutable returns a mutable reference to a composite type.
+//
+// If the field is unpopulated, it may allocate a composite value.
+// For a field belonging to a oneof, it implicitly clears any other field
+// that may be currently set within the same oneof.
+// For extension fields, it implicitly stores the provided ExtensionType
+// if not already stored.
+// It panics if the field does not contain a composite type.
+//
+// Mutable is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgentResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgentResponse.childId":
+		panic(fmt.Errorf("field childId of message oan.oanagent.MsgSpawnAgentResponse is not mutable"))
+	case "oan.oanagent.MsgSpawnAgentResponse.dnaHash":
+		panic(fmt.Errorf("field dnaHash of message oan.oanagent.MsgSpawnAgentResponse is not mutable"))
+	case "oan.oanagent.MsgSpawnAgentResponse.generation":
+		panic(fmt.Errorf("field generation of message oan.oanagent.MsgSpawnAgentResponse is not mutable"))
+	case "oan.oanagent.MsgSpawnAgentResponse.genomeScore":
+		panic(fmt.Errorf("field genomeScore of message oan.oanagent.MsgSpawnAgentResponse is not mutable"))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgentResponse"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgentResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// NewField returns a new value that is assignable to the field
+// for the given descriptor. For scalars, this returns the default value.
+// For lists, maps, and messages, this returns a new, empty, mutable value.
+func (x *fastReflection_MsgSpawnAgentResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+	switch fd.FullName() {
+	case "oan.oanagent.MsgSpawnAgentResponse.childId":
+		return protoreflect.ValueOfString("")
+	case "oan.oanagent.MsgSpawnAgentResponse.dnaHash":
+		return protoreflect.ValueOfString("")
+	case "oan.oanagent.MsgSpawnAgentResponse.generation":
+		return protoreflect.ValueOfInt32(int32(0))
+	case "oan.oanagent.MsgSpawnAgentResponse.genomeScore":
+		return protoreflect.ValueOfInt32(int32(0))
+	default:
+		if fd.IsExtension() {
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: oan.oanagent.MsgSpawnAgentResponse"))
+		}
+		panic(fmt.Errorf("message oan.oanagent.MsgSpawnAgentResponse does not contain field %s", fd.FullName()))
+	}
+}
+
+// WhichOneof reports which field within the oneof is populated,
+// returning nil if none are populated.
+// It panics if the oneof descriptor does not belong to this message.
+func (x *fastReflection_MsgSpawnAgentResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+	switch d.FullName() {
+	default:
+		panic(fmt.Errorf("%s is not a oneof field in oan.oanagent.MsgSpawnAgentResponse", d.FullName()))
+	}
+	panic("unreachable")
+}
+
+// GetUnknown retrieves the entire list of unknown fields.
+// The caller may only mutate the contents of the RawFields
+// if the mutated bytes are stored back into the message with SetUnknown.
+func (x *fastReflection_MsgSpawnAgentResponse) GetUnknown() protoreflect.RawFields {
+	return x.unknownFields
+}
+
+// SetUnknown stores an entire list of unknown fields.
+// The raw fields must be syntactically valid according to the wire format.
+// An implementation may panic if this is not the case.
+// Once stored, the caller must not mutate the content of the RawFields.
+// An empty RawFields may be passed to clear the fields.
+//
+// SetUnknown is a mutating operation and unsafe for concurrent use.
+func (x *fastReflection_MsgSpawnAgentResponse) SetUnknown(fields protoreflect.RawFields) {
+	x.unknownFields = fields
+}
+
+// IsValid reports whether the message is valid.
+//
+// An invalid message is an empty, read-only value.
+//
+// An invalid message often corresponds to a nil pointer of the concrete
+// message type, but the details are implementation dependent.
+// Validity is not part of the protobuf data model, and may not
+// be preserved in marshaling or other operations.
+func (x *fastReflection_MsgSpawnAgentResponse) IsValid() bool {
+	return x != nil
+}
+
+// ProtoMethods returns optional fastReflectionFeature-path implementations of various operations.
+// This method may return nil.
+//
+// The returned methods type is identical to
+// "google.golang.org/protobuf/runtime/protoiface".Methods.
+// Consult the protoiface package documentation for details.
+func (x *fastReflection_MsgSpawnAgentResponse) ProtoMethods() *protoiface.Methods {
+	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
+		x := input.Message.Interface().(*MsgSpawnAgentResponse)
+		if x == nil {
+			return protoiface.SizeOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Size:              0,
+			}
+		}
+		options := runtime.SizeInputToOptions(input)
+		_ = options
+		var n int
+		var l int
+		_ = l
+		l = len(x.ChildId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.DnaHash)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.Generation != 0 {
+			n += 1 + runtime.Sov(uint64(x.Generation))
+		}
+		if x.GenomeScore != 0 {
+			n += 1 + runtime.Sov(uint64(x.GenomeScore))
+		}
+		if x.unknownFields != nil {
+			n += len(x.unknownFields)
+		}
+		return protoiface.SizeOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Size:              n,
+		}
+	}
+
+	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
+		x := input.Message.Interface().(*MsgSpawnAgentResponse)
+		if x == nil {
+			return protoiface.MarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Buf:               input.Buf,
+			}, nil
+		}
+		options := runtime.MarshalInputToOptions(input)
+		_ = options
+		size := options.Size(x)
+		dAtA := make([]byte, size)
+		i := len(dAtA)
+		_ = i
+		var l int
+		_ = l
+		if x.unknownFields != nil {
+			i -= len(x.unknownFields)
+			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.GenomeScore != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.GenomeScore))
+			i--
+			dAtA[i] = 0x20
+		}
+		if x.Generation != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Generation))
+			i--
+			dAtA[i] = 0x18
+		}
+		if len(x.DnaHash) > 0 {
+			i -= len(x.DnaHash)
+			copy(dAtA[i:], x.DnaHash)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.DnaHash)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.ChildId) > 0 {
+			i -= len(x.ChildId)
+			copy(dAtA[i:], x.ChildId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ChildId)))
+			i--
+			dAtA[i] = 0xa
+		}
+		if input.Buf != nil {
+			input.Buf = append(input.Buf, dAtA...)
+		} else {
+			input.Buf = dAtA
+		}
+		return protoiface.MarshalOutput{
+			NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+			Buf:               input.Buf,
+		}, nil
+	}
+	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
+		x := input.Message.Interface().(*MsgSpawnAgentResponse)
+		if x == nil {
+			return protoiface.UnmarshalOutput{
+				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+				Flags:             input.Flags,
+			}, nil
+		}
+		options := runtime.UnmarshalInputToOptions(input)
+		_ = options
+		dAtA := input.Buf
+		l := len(dAtA)
+		iNdEx := 0
+		for iNdEx < l {
+			preIndex := iNdEx
+			var wire uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				wire |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			fieldNum := int32(wire >> 3)
+			wireType := int(wire & 0x7)
+			if wireType == 4 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSpawnAgentResponse: wiretype end group for non-group")
+			}
+			if fieldNum <= 0 {
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgSpawnAgentResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			}
+			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChildId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ChildId = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field DnaHash", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.DnaHash = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 3:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Generation", wireType)
+				}
+				x.Generation = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Generation |= int32(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 4:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenomeScore", wireType)
+				}
+				x.GenomeScore = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.GenomeScore |= int32(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			default:
+				iNdEx = preIndex
+				skippy, err := runtime.Skip(dAtA[iNdEx:])
+				if err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				if (skippy < 0) || (iNdEx+skippy) < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if (iNdEx + skippy) > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if !options.DiscardUnknown {
+					x.unknownFields = append(x.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+				}
+				iNdEx += skippy
+			}
+		}
+
+		if iNdEx > l {
+			return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+		}
+		return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, nil
+	}
+	return &protoiface.Methods{
+		NoUnkeyedLiterals: struct{}{},
+		Flags:             protoiface.SupportMarshalDeterministic | protoiface.SupportUnmarshalDiscardUnknown,
+		Size:              size,
+		Marshal:           marshal,
+		Unmarshal:         unmarshal,
+		Merge:             nil,
+		CheckInitialized:  nil,
+	}
+}
+
 // Code generated by protoc-gen-go. DO NOT EDIT.
 // versions:
 // 	protoc-gen-go v1.27.0
@@ -6976,6 +8232,132 @@ func (x *MsgRetireAgentResponse) GetFinalScore() int32 {
 	return 0
 }
 
+type MsgSpawnAgent struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Creator   string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ParentId  string `protobuf:"bytes,2,opt,name=parentId,proto3" json:"parentId,omitempty"`
+	ChildId   string `protobuf:"bytes,3,opt,name=childId,proto3" json:"childId,omitempty"`
+	ChildName string `protobuf:"bytes,4,opt,name=childName,proto3" json:"childName,omitempty"`
+	ChildType string `protobuf:"bytes,5,opt,name=childType,proto3" json:"childType,omitempty"`
+}
+
+func (x *MsgSpawnAgent) Reset() {
+	*x = MsgSpawnAgent{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_oan_oanagent_tx_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgSpawnAgent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgSpawnAgent) ProtoMessage() {}
+
+// Deprecated: Use MsgSpawnAgent.ProtoReflect.Descriptor instead.
+func (*MsgSpawnAgent) Descriptor() ([]byte, []int) {
+	return file_oan_oanagent_tx_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *MsgSpawnAgent) GetCreator() string {
+	if x != nil {
+		return x.Creator
+	}
+	return ""
+}
+
+func (x *MsgSpawnAgent) GetParentId() string {
+	if x != nil {
+		return x.ParentId
+	}
+	return ""
+}
+
+func (x *MsgSpawnAgent) GetChildId() string {
+	if x != nil {
+		return x.ChildId
+	}
+	return ""
+}
+
+func (x *MsgSpawnAgent) GetChildName() string {
+	if x != nil {
+		return x.ChildName
+	}
+	return ""
+}
+
+func (x *MsgSpawnAgent) GetChildType() string {
+	if x != nil {
+		return x.ChildType
+	}
+	return ""
+}
+
+type MsgSpawnAgentResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ChildId     string `protobuf:"bytes,1,opt,name=childId,proto3" json:"childId,omitempty"`
+	DnaHash     string `protobuf:"bytes,2,opt,name=dnaHash,proto3" json:"dnaHash,omitempty"`
+	Generation  int32  `protobuf:"varint,3,opt,name=generation,proto3" json:"generation,omitempty"`
+	GenomeScore int32  `protobuf:"varint,4,opt,name=genomeScore,proto3" json:"genomeScore,omitempty"`
+}
+
+func (x *MsgSpawnAgentResponse) Reset() {
+	*x = MsgSpawnAgentResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_oan_oanagent_tx_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgSpawnAgentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgSpawnAgentResponse) ProtoMessage() {}
+
+// Deprecated: Use MsgSpawnAgentResponse.ProtoReflect.Descriptor instead.
+func (*MsgSpawnAgentResponse) Descriptor() ([]byte, []int) {
+	return file_oan_oanagent_tx_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *MsgSpawnAgentResponse) GetChildId() string {
+	if x != nil {
+		return x.ChildId
+	}
+	return ""
+}
+
+func (x *MsgSpawnAgentResponse) GetDnaHash() string {
+	if x != nil {
+		return x.DnaHash
+	}
+	return ""
+}
+
+func (x *MsgSpawnAgentResponse) GetGeneration() int32 {
+	if x != nil {
+		return x.Generation
+	}
+	return 0
+}
+
+func (x *MsgSpawnAgentResponse) GetGenomeScore() int32 {
+	if x != nil {
+		return x.GenomeScore
+	}
+	return 0
+}
+
 var File_oan_oanagent_tx_proto protoreflect.FileDescriptor
 
 var file_oan_oanagent_tx_proto_rawDesc = []byte{
@@ -7074,48 +8456,73 @@ var file_oan_oanagent_tx_proto_rawDesc = []byte{
 	0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
 	0x73, 0x12, 0x1e, 0x0a, 0x0a, 0x66, 0x69, 0x6e, 0x61, 0x6c, 0x53, 0x63, 0x6f, 0x72, 0x65, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x66, 0x69, 0x6e, 0x61, 0x6c, 0x53, 0x63, 0x6f, 0x72,
-	0x65, 0x32, 0x8d, 0x04, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x54, 0x0a, 0x0c, 0x55, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1d, 0x2e, 0x6f, 0x61, 0x6e, 0x2e,
-	0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61,
-	0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x25, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f,
-	0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x57, 0x0a, 0x0d, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x41, 0x67, 0x65, 0x6e, 0x74,
-	0x12, 0x1e, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
-	0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x41, 0x67, 0x65, 0x6e, 0x74,
-	0x1a, 0x26, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
-	0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x41, 0x67, 0x65, 0x6e, 0x74,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x0b, 0x52, 0x65, 0x63, 0x6f,
-	0x72, 0x64, 0x54, 0x72, 0x61, 0x64, 0x65, 0x12, 0x1c, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61,
-	0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64,
-	0x54, 0x72, 0x61, 0x64, 0x65, 0x1a, 0x24, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61,
-	0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x54, 0x72,
-	0x61, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0a, 0x42,
-	0x72, 0x65, 0x65, 0x64, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x1b, 0x2e, 0x6f, 0x61, 0x6e, 0x2e,
-	0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x42, 0x72, 0x65, 0x65,
-	0x64, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x1a, 0x23, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e,
-	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x42, 0x72, 0x65, 0x65, 0x64, 0x41, 0x67,
-	0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5a, 0x0a, 0x0e, 0x43,
-	0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x1f, 0x2e,
-	0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67,
-	0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x1a, 0x27,
-	0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73,
-	0x67, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x0b, 0x52, 0x65, 0x74, 0x69, 0x72,
-	0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x1c, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e,
-	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x74, 0x69, 0x72, 0x65, 0x41,
-	0x67, 0x65, 0x6e, 0x74, 0x1a, 0x24, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67,
-	0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x74, 0x69, 0x72, 0x65, 0x41, 0x67, 0x65,
-	0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a,
-	0x01, 0x42, 0x82, 0x01, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61,
-	0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
-	0x01, 0x5a, 0x14, 0x6f, 0x61, 0x6e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x61, 0x6e, 0x2f, 0x6f,
-	0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0xa2, 0x02, 0x03, 0x4f, 0x4f, 0x58, 0xaa, 0x02, 0x0c,
-	0x4f, 0x61, 0x6e, 0x2e, 0x4f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0xca, 0x02, 0x0c, 0x4f,
-	0x61, 0x6e, 0x5c, 0x4f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0xe2, 0x02, 0x18, 0x4f, 0x61,
-	0x6e, 0x5c, 0x4f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0d, 0x4f, 0x61, 0x6e, 0x3a, 0x3a, 0x4f, 0x61,
-	0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x22, 0xa9, 0x01, 0x0a, 0x0d, 0x4d, 0x73, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x41, 0x67,
+	0x65, 0x6e, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1a, 0x0a,
+	0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x68, 0x69,
+	0x6c, 0x64, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x69, 0x6c,
+	0x64, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x4e, 0x61, 0x6d, 0x65,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x54, 0x79, 0x70, 0x65, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x54, 0x79, 0x70, 0x65, 0x3a,
+	0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x8d, 0x01,
+	0x0a, 0x15, 0x4d, 0x73, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x68, 0x69, 0x6c, 0x64,
+	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x69, 0x6c, 0x64, 0x49,
+	0x64, 0x12, 0x18, 0x0a, 0x07, 0x64, 0x6e, 0x61, 0x48, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x64, 0x6e, 0x61, 0x48, 0x61, 0x73, 0x68, 0x12, 0x1e, 0x0a, 0x0a, 0x67,
+	0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x0a, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x20, 0x0a, 0x0b, 0x67,
+	0x65, 0x6e, 0x6f, 0x6d, 0x65, 0x53, 0x63, 0x6f, 0x72, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x0b, 0x67, 0x65, 0x6e, 0x6f, 0x6d, 0x65, 0x53, 0x63, 0x6f, 0x72, 0x65, 0x32, 0xdd, 0x04,
+	0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x54, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x1d, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61,
+	0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x1a, 0x25, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67,
+	0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x0d, 0x52,
+	0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x1e, 0x2e, 0x6f,
+	0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52,
+	0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x1a, 0x26, 0x2e, 0x6f,
+	0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52,
+	0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x0b, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x54, 0x72,
+	0x61, 0x64, 0x65, 0x12, 0x1c, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x54, 0x72, 0x61, 0x64,
+	0x65, 0x1a, 0x24, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74,
+	0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x54, 0x72, 0x61, 0x64, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0a, 0x42, 0x72, 0x65, 0x65, 0x64,
+	0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x1b, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61,
+	0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x42, 0x72, 0x65, 0x65, 0x64, 0x41, 0x67, 0x65,
+	0x6e, 0x74, 0x1a, 0x23, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e,
+	0x74, 0x2e, 0x4d, 0x73, 0x67, 0x42, 0x72, 0x65, 0x65, 0x64, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5a, 0x0a, 0x0e, 0x43, 0x68, 0x61, 0x6c, 0x6c,
+	0x65, 0x6e, 0x67, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x1f, 0x2e, 0x6f, 0x61, 0x6e, 0x2e,
+	0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x68, 0x61, 0x6c,
+	0x6c, 0x65, 0x6e, 0x67, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x1a, 0x27, 0x2e, 0x6f, 0x61, 0x6e,
+	0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x68, 0x61,
+	0x6c, 0x6c, 0x65, 0x6e, 0x67, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x0b, 0x52, 0x65, 0x74, 0x69, 0x72, 0x65, 0x41, 0x67, 0x65,
+	0x6e, 0x74, 0x12, 0x1c, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e,
+	0x74, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x74, 0x69, 0x72, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74,
+	0x1a, 0x24, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
+	0x4d, 0x73, 0x67, 0x52, 0x65, 0x74, 0x69, 0x72, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0a, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x41,
+	0x67, 0x65, 0x6e, 0x74, 0x12, 0x1b, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67,
+	0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x41, 0x67, 0x65, 0x6e,
+	0x74, 0x1a, 0x23, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74,
+	0x2e, 0x4d, 0x73, 0x67, 0x53, 0x70, 0x61, 0x77, 0x6e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0x82, 0x01,
+	0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x2e, 0x6f, 0x61, 0x6e, 0x2e, 0x6f, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x6e, 0x74, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x14, 0x6f,
+	0x61, 0x6e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6f, 0x61, 0x6e, 0x2f, 0x6f, 0x61, 0x6e, 0x61, 0x67,
+	0x65, 0x6e, 0x74, 0xa2, 0x02, 0x03, 0x4f, 0x4f, 0x58, 0xaa, 0x02, 0x0c, 0x4f, 0x61, 0x6e, 0x2e,
+	0x4f, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0xca, 0x02, 0x0c, 0x4f, 0x61, 0x6e, 0x5c, 0x4f,
+	0x61, 0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0xe2, 0x02, 0x18, 0x4f, 0x61, 0x6e, 0x5c, 0x4f, 0x61,
+	0x6e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
+	0x74, 0x61, 0xea, 0x02, 0x0d, 0x4f, 0x61, 0x6e, 0x3a, 0x3a, 0x4f, 0x61, 0x6e, 0x61, 0x67, 0x65,
+	0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -7130,7 +8537,7 @@ func file_oan_oanagent_tx_proto_rawDescGZIP() []byte {
 	return file_oan_oanagent_tx_proto_rawDescData
 }
 
-var file_oan_oanagent_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_oan_oanagent_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_oan_oanagent_tx_proto_goTypes = []interface{}{
 	(*MsgUpdateParams)(nil),           // 0: oan.oanagent.MsgUpdateParams
 	(*MsgUpdateParamsResponse)(nil),   // 1: oan.oanagent.MsgUpdateParamsResponse
@@ -7144,24 +8551,28 @@ var file_oan_oanagent_tx_proto_goTypes = []interface{}{
 	(*MsgChallengeAgentResponse)(nil), // 9: oan.oanagent.MsgChallengeAgentResponse
 	(*MsgRetireAgent)(nil),            // 10: oan.oanagent.MsgRetireAgent
 	(*MsgRetireAgentResponse)(nil),    // 11: oan.oanagent.MsgRetireAgentResponse
-	(*Params)(nil),                    // 12: oan.oanagent.Params
+	(*MsgSpawnAgent)(nil),             // 12: oan.oanagent.MsgSpawnAgent
+	(*MsgSpawnAgentResponse)(nil),     // 13: oan.oanagent.MsgSpawnAgentResponse
+	(*Params)(nil),                    // 14: oan.oanagent.Params
 }
 var file_oan_oanagent_tx_proto_depIdxs = []int32{
-	12, // 0: oan.oanagent.MsgUpdateParams.params:type_name -> oan.oanagent.Params
+	14, // 0: oan.oanagent.MsgUpdateParams.params:type_name -> oan.oanagent.Params
 	0,  // 1: oan.oanagent.Msg.UpdateParams:input_type -> oan.oanagent.MsgUpdateParams
 	2,  // 2: oan.oanagent.Msg.RegisterAgent:input_type -> oan.oanagent.MsgRegisterAgent
 	4,  // 3: oan.oanagent.Msg.RecordTrade:input_type -> oan.oanagent.MsgRecordTrade
 	6,  // 4: oan.oanagent.Msg.BreedAgent:input_type -> oan.oanagent.MsgBreedAgent
 	8,  // 5: oan.oanagent.Msg.ChallengeAgent:input_type -> oan.oanagent.MsgChallengeAgent
 	10, // 6: oan.oanagent.Msg.RetireAgent:input_type -> oan.oanagent.MsgRetireAgent
-	1,  // 7: oan.oanagent.Msg.UpdateParams:output_type -> oan.oanagent.MsgUpdateParamsResponse
-	3,  // 8: oan.oanagent.Msg.RegisterAgent:output_type -> oan.oanagent.MsgRegisterAgentResponse
-	5,  // 9: oan.oanagent.Msg.RecordTrade:output_type -> oan.oanagent.MsgRecordTradeResponse
-	7,  // 10: oan.oanagent.Msg.BreedAgent:output_type -> oan.oanagent.MsgBreedAgentResponse
-	9,  // 11: oan.oanagent.Msg.ChallengeAgent:output_type -> oan.oanagent.MsgChallengeAgentResponse
-	11, // 12: oan.oanagent.Msg.RetireAgent:output_type -> oan.oanagent.MsgRetireAgentResponse
-	7,  // [7:13] is the sub-list for method output_type
-	1,  // [1:7] is the sub-list for method input_type
+	12, // 7: oan.oanagent.Msg.SpawnAgent:input_type -> oan.oanagent.MsgSpawnAgent
+	1,  // 8: oan.oanagent.Msg.UpdateParams:output_type -> oan.oanagent.MsgUpdateParamsResponse
+	3,  // 9: oan.oanagent.Msg.RegisterAgent:output_type -> oan.oanagent.MsgRegisterAgentResponse
+	5,  // 10: oan.oanagent.Msg.RecordTrade:output_type -> oan.oanagent.MsgRecordTradeResponse
+	7,  // 11: oan.oanagent.Msg.BreedAgent:output_type -> oan.oanagent.MsgBreedAgentResponse
+	9,  // 12: oan.oanagent.Msg.ChallengeAgent:output_type -> oan.oanagent.MsgChallengeAgentResponse
+	11, // 13: oan.oanagent.Msg.RetireAgent:output_type -> oan.oanagent.MsgRetireAgentResponse
+	13, // 14: oan.oanagent.Msg.SpawnAgent:output_type -> oan.oanagent.MsgSpawnAgentResponse
+	8,  // [8:15] is the sub-list for method output_type
+	1,  // [1:8] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
 	1,  // [1:1] is the sub-list for extension extendee
 	0,  // [0:1] is the sub-list for field type_name
@@ -7318,6 +8729,30 @@ func file_oan_oanagent_tx_proto_init() {
 				return nil
 			}
 		}
+		file_oan_oanagent_tx_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgSpawnAgent); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_oan_oanagent_tx_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgSpawnAgentResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -7325,7 +8760,7 @@ func file_oan_oanagent_tx_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_oan_oanagent_tx_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

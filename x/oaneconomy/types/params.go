@@ -6,9 +6,9 @@ var _ paramtypes.ParamSet = (*Params)(nil)
 
 func NewParams() Params {
 	return Params{
-		TaskFee:  1000000,  // 1 OANT to create a task
-		UbiRate:  100000,   // 0.1 OANT per UBI claim
-		MaxTasks: 10000,    // max 10,000 open tasks
+		TaskFee:  1000000, // 1 OANT to create a task
+		UbiRate:  100000,  // 0.1 OANT per UBI claim
+		MaxTasks: 10000,   // max 10,000 open tasks
 	}
 }
 

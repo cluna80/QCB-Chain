@@ -6,10 +6,10 @@ var _ paramtypes.ParamSet = (*Params)(nil)
 
 func NewParams() Params {
 	return Params{
-		MinGuardians:  3,      // minimum 3 guardians at all times
-		MaxGuardians:  9,      // maximum 9 guardians on council
-		VetoThreshold: 2,      // 2-of-N required for emergency pause
-		PauseDuration: 86400,  // 24 hour default pause duration
+		MinGuardians:  3,     // minimum 3 guardians at all times
+		MaxGuardians:  9,     // maximum 9 guardians on council
+		VetoThreshold: 2,     // 2-of-N required for emergency pause
+		PauseDuration: 86400, // 24 hour default pause duration
 	}
 }
 

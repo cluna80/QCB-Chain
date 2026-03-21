@@ -6,9 +6,9 @@ var _ paramtypes.ParamSet = (*Params)(nil)
 
 func NewParams() Params {
 	return Params{
-		MaxAgents:            25,    // genesis tier max agents
-		CircuitBreakerMaxTx:  1000,  // max tx per window
-		CircuitBreakerWindow: 100,   // blocks per window
+		MaxAgents:            25,   // genesis tier max agents
+		CircuitBreakerMaxTx:  1000, // max tx per window
+		CircuitBreakerWindow: 100,  // blocks per window
 	}
 }
 

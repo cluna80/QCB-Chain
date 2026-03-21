@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oannode/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RegisterNode(goCtx context.Context, msg *types.MsgRegisterNode) (*types.MsgRegisterNodeResponse, error) {
@@ -75,7 +76,9 @@ func (k msgServer) RegisterNode(goCtx context.Context, msg *types.MsgRegisterNod
 		fmt.Sscanf(string(totalStakeBytes), "%d", &totalStake)
 	}
 	maxPct := params.MaxWalletStakePct
-	if maxPct == 0 { maxPct = 5 }
+	if maxPct == 0 {
+		maxPct = 5
+	}
 	newTotal := totalStake + declaredStake
 	if newTotal > declaredStake {
 		walletPct := (declaredStake * 100) / newTotal

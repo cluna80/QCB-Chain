@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oannode/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) UpdateNode(goCtx context.Context, msg *types.MsgUpdateNode) (*types.MsgUpdateNodeResponse, error) {

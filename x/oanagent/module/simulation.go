@@ -43,6 +43,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgRetireAgent int = 100
 
+	opWeightMsgSpawnAgent = "op_weight_msg_spawn_agent"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgSpawnAgent int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -121,6 +125,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		oanagentsimulation.SimulateMsgRetireAgent(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgSpawnAgent int
+	simState.AppParams.GetOrGenerate(opWeightMsgSpawnAgent, &weightMsgSpawnAgent, nil,
+		func(_ *rand.Rand) {
+			weightMsgSpawnAgent = defaultWeightMsgSpawnAgent
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgSpawnAgent,
+		oanagentsimulation.SimulateMsgSpawnAgent(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -166,6 +181,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgRetireAgent,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				oanagentsimulation.SimulateMsgRetireAgent(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgSpawnAgent,
+			defaultWeightMsgSpawnAgent,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				oanagentsimulation.SimulateMsgSpawnAgent(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

@@ -6,13 +6,13 @@ var _ paramtypes.ParamSet = (*Params)(nil)
 
 func NewParams() Params {
 	return Params{
-		MinValidatorStake: 10000000000,  // 10,000 OANT in uoan
-		MinInferenceStake: 6000000000,   // 6,000 OANT in uoan
-		MinBridgeStake:    1600000000,   // 1,600 OANT in uoan
-		MinLightStake:     400000000,    // 400 OANT in uoan
-		UnbondingBlocks:   302400,       // 21 days at 6s blocks
-		MaxWalletStakePct: 5,            // 5% whale cap
-		EpochLength:       14400,        // 1 day at 6s blocks
+		MinValidatorStake: 10000000000, // 10,000 OANT in uoan
+		MinInferenceStake: 6000000000,  // 6,000 OANT in uoan
+		MinBridgeStake:    1600000000,  // 1,600 OANT in uoan
+		MinLightStake:     400000000,   // 400 OANT in uoan
+		UnbondingBlocks:   302400,      // 21 days at 6s blocks
+		MaxWalletStakePct: 5,           // 5% whale cap
+		EpochLength:       14400,       // 1 day at 6s blocks
 	}
 }
 

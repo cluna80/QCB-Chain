@@ -69,6 +69,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a retire-agent tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "nodeId"}, {ProtoField: "reason"}},
 				},
+				{
+					RpcMethod:      "SpawnAgent",
+					Use:            "spawn-agent [parent-id] [child-id] [child-name] [child-type]",
+					Short:          "Send a spawn-agent tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "parentId"}, {ProtoField: "childId"}, {ProtoField: "childName"}, {ProtoField: "childType"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

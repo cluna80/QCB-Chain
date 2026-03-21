@@ -25,6 +25,7 @@ const (
 	Msg_BreedAgent_FullMethodName     = "/oan.oanagent.Msg/BreedAgent"
 	Msg_ChallengeAgent_FullMethodName = "/oan.oanagent.Msg/ChallengeAgent"
 	Msg_RetireAgent_FullMethodName    = "/oan.oanagent.Msg/RetireAgent"
+	Msg_SpawnAgent_FullMethodName     = "/oan.oanagent.Msg/SpawnAgent"
 )
 
 // MsgClient is the client API for Msg service.
@@ -39,6 +40,7 @@ type MsgClient interface {
 	BreedAgent(ctx context.Context, in *MsgBreedAgent, opts ...grpc.CallOption) (*MsgBreedAgentResponse, error)
 	ChallengeAgent(ctx context.Context, in *MsgChallengeAgent, opts ...grpc.CallOption) (*MsgChallengeAgentResponse, error)
 	RetireAgent(ctx context.Context, in *MsgRetireAgent, opts ...grpc.CallOption) (*MsgRetireAgentResponse, error)
+	SpawnAgent(ctx context.Context, in *MsgSpawnAgent, opts ...grpc.CallOption) (*MsgSpawnAgentResponse, error)
 }
 
 type msgClient struct {
@@ -103,6 +105,15 @@ func (c *msgClient) RetireAgent(ctx context.Context, in *MsgRetireAgent, opts ..
 	return out, nil
 }
 
+func (c *msgClient) SpawnAgent(ctx context.Context, in *MsgSpawnAgent, opts ...grpc.CallOption) (*MsgSpawnAgentResponse, error) {
+	out := new(MsgSpawnAgentResponse)
+	err := c.cc.Invoke(ctx, Msg_SpawnAgent_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -115,6 +126,7 @@ type MsgServer interface {
 	BreedAgent(context.Context, *MsgBreedAgent) (*MsgBreedAgentResponse, error)
 	ChallengeAgent(context.Context, *MsgChallengeAgent) (*MsgChallengeAgentResponse, error)
 	RetireAgent(context.Context, *MsgRetireAgent) (*MsgRetireAgentResponse, error)
+	SpawnAgent(context.Context, *MsgSpawnAgent) (*MsgSpawnAgentResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -139,6 +151,9 @@ func (UnimplementedMsgServer) ChallengeAgent(context.Context, *MsgChallengeAgent
 }
 func (UnimplementedMsgServer) RetireAgent(context.Context, *MsgRetireAgent) (*MsgRetireAgentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RetireAgent not implemented")
+}
+func (UnimplementedMsgServer) SpawnAgent(context.Context, *MsgSpawnAgent) (*MsgSpawnAgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SpawnAgent not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -261,6 +276,24 @@ func _Msg_RetireAgent_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_SpawnAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgSpawnAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).SpawnAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_SpawnAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).SpawnAgent(ctx, req.(*MsgSpawnAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -291,6 +324,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RetireAgent",
 			Handler:    _Msg_RetireAgent_Handler,
+		},
+		{
+			MethodName: "SpawnAgent",
+			Handler:    _Msg_SpawnAgent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
