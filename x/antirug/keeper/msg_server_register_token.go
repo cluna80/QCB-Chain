@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/antirug/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RegisterToken(goCtx context.Context, msg *types.MsgRegisterToken) (*types.MsgRegisterTokenResponse, error) {
@@ -25,7 +26,9 @@ func (k msgServer) RegisterToken(goCtx context.Context, msg *types.MsgRegisterTo
 	}
 
 	minLock := params.MinLiquidityLockBlocks
-	if minLock == 0 { minLock = 201600 } // 14 days default
+	if minLock == 0 {
+		minLock = 201600
+	} // 14 days default
 	if msg.LiquidityLockBlocks < minLock {
 		return nil, fmt.Errorf("liquidity must be locked for at least %d blocks (~14 days) — got %d", minLock, msg.LiquidityLockBlocks)
 	}
@@ -39,10 +42,18 @@ func (k msgServer) RegisterToken(goCtx context.Context, msg *types.MsgRegisterTo
 
 	// Calculate safety score
 	safetyScore := uint64(50) // base score
-	if msg.LiquidityLockBlocks >= 403200 { safetyScore += 20 } // 28+ days
-	if msg.LiquidityLockBlocks >= 864000 { safetyScore += 10 } // 60+ days
-	if msg.MaxSupply <= 1000000000       { safetyScore += 10 } // reasonable supply
-	if msg.MaxSupply <= 100000000        { safetyScore += 10 } // tight supply
+	if msg.LiquidityLockBlocks >= 403200 {
+		safetyScore += 20
+	} // 28+ days
+	if msg.LiquidityLockBlocks >= 864000 {
+		safetyScore += 10
+	} // 60+ days
+	if msg.MaxSupply <= 1000000000 {
+		safetyScore += 10
+	} // reasonable supply
+	if msg.MaxSupply <= 100000000 {
+		safetyScore += 10
+	} // tight supply
 
 	tokenData := fmt.Sprintf("%s|%s|%s|%d|%d|%d|pending|%d",
 		msg.TokenId, msg.TokenName, msg.Symbol,

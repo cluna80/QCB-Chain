@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package oan.oancomms;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "oan/oancomms/params.proto";
+
+option go_package = "oan/x/oancomms/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams   (MsgUpdateParams  ) returns (MsgUpdateParamsResponse  );
+  rpc RegisterMsgKey (MsgRegisterMsgKey) returns (MsgRegisterMsgKeyResponse);
+  rpc SendMsgHeader  (MsgSendMsgHeader ) returns (MsgSendMsgHeaderResponse );
+  rpc AckMsg         (MsgAckMsg        ) returns (MsgAckMsgResponse        );
+  rpc RevokeMsgKey   (MsgRevokeMsgKey  ) returns (MsgRevokeMsgKeyResponse  );
+  rpc SetMsgPolicy   (MsgSetMsgPolicy  ) returns (MsgSetMsgPolicyResponse  );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                      "authority";
+  option           (amino.name) = "oan/x/oancomms/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterMsgKey {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string keyId         = 2;
+  string keyType       = 3;
+  string publicKeyHash = 4;
+  string algorithm     = 5;
+}
+
+message MsgRegisterMsgKeyResponse {
+  string keyId      = 1;
+  bool   registered = 2;
+}
+
+message MsgSendMsgHeader {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string toAddr      = 2;
+  string msgId       = 3;
+  string encKeyId    = 4;
+  string payloadHash = 5;
+  string msgType     = 6;
+}
+
+message MsgSendMsgHeaderResponse {
+  string msgId     = 1;
+  bool   routed    = 2;
+  string relayHint = 3;
+}
+
+message MsgAckMsg {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string msgId   = 2;
+  string ackType = 3;
+}
+
+message MsgAckMsgResponse {
+  string msgId = 1;
+  bool   acked = 2;
+}
+
+message MsgRevokeMsgKey {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string keyId   = 2;
+  string reason  = 3;
+}
+
+message MsgRevokeMsgKeyResponse {
+  string keyId   = 1;
+  bool   revoked = 2;
+}
+
+message MsgSetMsgPolicy {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string allowList    = 2;
+  string denyList     = 3;
+  uint64 maxInbound   = 4;
+  bool   requirePqSig = 5;
+}
+
+message MsgSetMsgPolicyResponse {
+  string policyId = 1;
+  bool   active   = 2;
+}
+

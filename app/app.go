@@ -94,6 +94,11 @@ import (
 	oannodemodulekeeper "oan/x/oannode/keeper"
 
 	antirugmodulekeeper "oan/x/antirug/keeper"
+	oancommsmodulekeeper "oan/x/oancomms/keeper"
+
+	oanrelaymodulekeeper "oan/x/oanrelay/keeper"
+	oanwalletprotomodulekeeper "oan/x/oanwalletproto/keeper"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"oan/docs"
@@ -159,20 +164,23 @@ type App struct {
 	ScopedICAHostKeeper       capabilitykeeper.ScopedKeeper
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
-	AgentKeeper       agentmodulekeeper.Keeper
-	OanagentKeeper    oanagentmodulekeeper.Keeper
-	OanidentityKeeper oanidentitymodulekeeper.Keeper
-	OandaoKeeper      oandaomodulekeeper.Keeper
-	OaneconomyKeeper  oaneconomymodulekeeper.Keeper
-	OancomputeKeeper  oancomputemodulekeeper.Keeper
-	OanmarketKeeper   oanmarketmodulekeeper.Keeper
-	OanguardianKeeper oanguardianmodulekeeper.Keeper
-	OanqsecKeeper     oanqsecmodulekeeper.Keeper
-	OanmediaKeeper    oanmediamodulekeeper.Keeper
-	OansportsKeeper   oansportsmodulekeeper.Keeper
-	OanbridgeKeeper   oanbridgemodulekeeper.Keeper
-	OannodeKeeper     oannodemodulekeeper.Keeper
-	AntirugKeeper     antirugmodulekeeper.Keeper
+	AgentKeeper          agentmodulekeeper.Keeper
+	OanagentKeeper       oanagentmodulekeeper.Keeper
+	OanidentityKeeper    oanidentitymodulekeeper.Keeper
+	OandaoKeeper         oandaomodulekeeper.Keeper
+	OaneconomyKeeper     oaneconomymodulekeeper.Keeper
+	OancomputeKeeper     oancomputemodulekeeper.Keeper
+	OanmarketKeeper      oanmarketmodulekeeper.Keeper
+	OanguardianKeeper    oanguardianmodulekeeper.Keeper
+	OanqsecKeeper        oanqsecmodulekeeper.Keeper
+	OanmediaKeeper       oanmediamodulekeeper.Keeper
+	OansportsKeeper      oansportsmodulekeeper.Keeper
+	OanbridgeKeeper      oanbridgemodulekeeper.Keeper
+	OannodeKeeper        oannodemodulekeeper.Keeper
+	AntirugKeeper        antirugmodulekeeper.Keeper
+	OancommsKeeper       oancommsmodulekeeper.Keeper
+	OanrelayKeeper       oanrelaymodulekeeper.Keeper
+	OanwalletprotoKeeper oanwalletprotomodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -290,6 +298,9 @@ func New(
 		&app.OanbridgeKeeper,
 		&app.OannodeKeeper,
 		&app.AntirugKeeper,
+		&app.OancommsKeeper,
+		&app.OanrelayKeeper,
+		&app.OanwalletprotoKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

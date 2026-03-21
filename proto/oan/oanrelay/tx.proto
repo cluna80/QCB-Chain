@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package oan.oanrelay;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "oan/oanrelay/params.proto";
+
+option go_package = "oan/x/oanrelay/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams      (MsgUpdateParams     ) returns (MsgUpdateParamsResponse     );
+  rpc RegisterRelay     (MsgRegisterRelay    ) returns (MsgRegisterRelayResponse    );
+  rpc RelayHeartbeat    (MsgRelayHeartbeat   ) returns (MsgRelayHeartbeatResponse   );
+  rpc RouteMsg          (MsgRouteMsg         ) returns (MsgRouteMsgResponse         );
+  rpc SlashRelay        (MsgSlashRelay       ) returns (MsgSlashRelayResponse       );
+  rpc RemoveRelay       (MsgRemoveRelay      ) returns (MsgRemoveRelayResponse      );
+  rpc UpdateRelayRegion (MsgUpdateRelayRegion) returns (MsgUpdateRelayRegionResponse);
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                      "authority";
+  option           (amino.name) = "oan/x/oanrelay/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterRelay {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string relayId    = 2;
+  string endpoint   = 3;
+  string region     = 4;
+  string pubKeyHash = 5;
+}
+
+message MsgRegisterRelayResponse {
+  string relayId    = 1;
+  bool   registered = 2;
+}
+
+message MsgRelayHeartbeat {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string relayId      = 2;
+  string proofHash    = 3;
+  int32  blocksOnline = 4;
+}
+
+message MsgRelayHeartbeatResponse {
+  string relayId = 1;
+  uint64 score   = 2;
+}
+
+message MsgRouteMsg {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string msgId      = 2;
+  string fromAddr   = 3;
+  string toAddr     = 4;
+  string relayId    = 5;
+  string payloadRef = 6;
+}
+
+message MsgRouteMsgResponse {
+  string routeId = 1;
+  string relayId = 2;
+  string status  = 3;
+}
+
+message MsgSlashRelay {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string relayId   = 2;
+  string evidence  = 3;
+  string slashType = 4;
+}
+
+message MsgSlashRelayResponse {
+  string relayId = 1;
+  uint64 slashed = 2;
+}
+
+message MsgRemoveRelay {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string relayId = 2;
+  string reason  = 3;
+}
+
+message MsgRemoveRelayResponse {
+  string relayId = 1;
+  bool   removed = 2;
+}
+
+message MsgUpdateRelayRegion {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string relayId   = 2;
+  string newRegion = 3;
+  string endpoint  = 4;
+}
+
+message MsgUpdateRelayRegionResponse {
+  string relayId = 1;
+  bool   updated = 2;
+}
+

@@ -1,0 +1,17 @@
+syntax = "proto3";
+package oan.oanrelay;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "oan/oanrelay/params.proto";
+
+option go_package = "oan/x/oanrelay/types";
+
+// GenesisState defines the oanrelay module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

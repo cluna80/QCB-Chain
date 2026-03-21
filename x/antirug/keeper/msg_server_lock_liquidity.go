@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/antirug/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) LockLiquidity(goCtx context.Context, msg *types.MsgLockLiquidity) (*types.MsgLockLiquidityResponse, error) {
@@ -21,7 +22,9 @@ func (k msgServer) LockLiquidity(goCtx context.Context, msg *types.MsgLockLiquid
 		return nil, fmt.Errorf("lock amount must be greater than 0")
 	}
 	minLock := params.MinLiquidityLockBlocks
-	if minLock == 0 { minLock = 201600 }
+	if minLock == 0 {
+		minLock = 201600
+	}
 	if msg.LockBlocks < minLock {
 		return nil, fmt.Errorf("minimum lock period is %d blocks (~14 days)", minLock)
 	}

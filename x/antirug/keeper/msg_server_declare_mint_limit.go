@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/antirug/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) DeclareMintLimit(goCtx context.Context, msg *types.MsgDeclareMintLimit) (*types.MsgDeclareMintLimitResponse, error) {
@@ -22,7 +23,9 @@ func (k msgServer) DeclareMintLimit(goCtx context.Context, msg *types.MsgDeclare
 	}
 
 	maxPerBlock := params.MaxMintPerBlock
-	if maxPerBlock == 0 { maxPerBlock = 1000000 }
+	if maxPerBlock == 0 {
+		maxPerBlock = 1000000
+	}
 	if msg.MaxPerBlock > maxPerBlock {
 		return nil, fmt.Errorf("maxPerBlock exceeds protocol limit of %d — prevents flash minting attacks", maxPerBlock)
 	}

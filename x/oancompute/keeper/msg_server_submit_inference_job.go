@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oancompute/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SubmitInferenceJob(goCtx context.Context, msg *types.MsgSubmitInferenceJob) (*types.MsgSubmitInferenceJobResponse, error) {

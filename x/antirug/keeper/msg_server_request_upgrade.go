@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/antirug/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RequestUpgrade(goCtx context.Context, msg *types.MsgRequestUpgrade) (*types.MsgRequestUpgradeResponse, error) {
@@ -33,7 +34,9 @@ func (k msgServer) RequestUpgrade(goCtx context.Context, msg *types.MsgRequestUp
 	}
 
 	timelockBlocks := int64(params.TimelockBlocks)
-	if timelockBlocks == 0 { timelockBlocks = 14400 } // 24h default
+	if timelockBlocks == 0 {
+		timelockBlocks = 14400
+	} // 24h default
 	timelockEndsAt := int32(ctx.BlockHeight()) + int32(timelockBlocks)
 
 	requestId := fmt.Sprintf("upgrade-%d-%s", ctx.BlockHeight(), msg.TokenId)

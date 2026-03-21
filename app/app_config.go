@@ -57,6 +57,7 @@ import (
 	antirugmodulev1 "oan/api/oan/antirug/module"
 	oanagentmodulev1 "oan/api/oan/oanagent/module"
 	oanbridgemodulev1 "oan/api/oan/oanbridge/module"
+	oancommsmodulev1 "oan/api/oan/oancomms/module"
 	oancomputemodulev1 "oan/api/oan/oancompute/module"
 	oandaomodulev1 "oan/api/oan/oandao/module"
 	oaneconomymodulev1 "oan/api/oan/oaneconomy/module"
@@ -66,7 +67,9 @@ import (
 	oanmediamodulev1 "oan/api/oan/oanmedia/module"
 	oannodemodulev1 "oan/api/oan/oannode/module"
 	oanqsecmodulev1 "oan/api/oan/oanqsec/module"
+	oanrelaymodulev1 "oan/api/oan/oanrelay/module"
 	oansportsmodulev1 "oan/api/oan/oansports/module"
+	oanwalletprotomodulev1 "oan/api/oan/oanwalletproto/module"
 	_ "oan/x/agent/module" // import for side-effects
 	agentmoduletypes "oan/x/agent/types"
 	_ "oan/x/antirug/module" // import for side-effects
@@ -75,6 +78,8 @@ import (
 	oanagentmoduletypes "oan/x/oanagent/types"
 	_ "oan/x/oanbridge/module" // import for side-effects
 	oanbridgemoduletypes "oan/x/oanbridge/types"
+	_ "oan/x/oancomms/module" // import for side-effects
+	oancommsmoduletypes "oan/x/oancomms/types"
 	_ "oan/x/oancompute/module" // import for side-effects
 	oancomputemoduletypes "oan/x/oancompute/types"
 	_ "oan/x/oandao/module" // import for side-effects
@@ -93,8 +98,12 @@ import (
 	oannodemoduletypes "oan/x/oannode/types"
 	_ "oan/x/oanqsec/module" // import for side-effects
 	oanqsecmoduletypes "oan/x/oanqsec/types"
+	_ "oan/x/oanrelay/module" // import for side-effects
+	oanrelaymoduletypes "oan/x/oanrelay/types"
 	_ "oan/x/oansports/module" // import for side-effects
 	oansportsmoduletypes "oan/x/oansports/types"
+	_ "oan/x/oanwalletproto/module" // import for side-effects
+	oanwalletprotomoduletypes "oan/x/oanwalletproto/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -146,6 +155,9 @@ var (
 		oanbridgemoduletypes.ModuleName,
 		oannodemoduletypes.ModuleName,
 		antirugmoduletypes.ModuleName,
+		oancommsmoduletypes.ModuleName,
+		oanrelaymoduletypes.ModuleName,
+		oanwalletprotomoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -184,6 +196,9 @@ var (
 		oanbridgemoduletypes.ModuleName,
 		oannodemoduletypes.ModuleName,
 		antirugmoduletypes.ModuleName,
+		oancommsmoduletypes.ModuleName,
+		oanrelaymoduletypes.ModuleName,
+		oanwalletprotomoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -216,6 +231,9 @@ var (
 		oanbridgemoduletypes.ModuleName,
 		oannodemoduletypes.ModuleName,
 		antirugmoduletypes.ModuleName,
+		oancommsmoduletypes.ModuleName,
+		oanrelaymoduletypes.ModuleName,
+		oanwalletprotomoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -426,6 +444,18 @@ var (
 			{
 				Name:   antirugmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&antirugmodulev1.Module{}),
+			},
+			{
+				Name:   oancommsmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oancommsmodulev1.Module{}),
+			},
+			{
+				Name:   oanrelaymoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oanrelaymodulev1.Module{}),
+			},
+			{
+				Name:   oanwalletprotomoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oanwalletprotomodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

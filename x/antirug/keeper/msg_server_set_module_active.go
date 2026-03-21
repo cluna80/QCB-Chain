@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/antirug/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SetModuleActive(goCtx context.Context, msg *types.MsgSetModuleActive) (*types.MsgSetModuleActiveResponse, error) {
@@ -39,6 +40,8 @@ func (k msgServer) SetModuleActive(goCtx context.Context, msg *types.MsgSetModul
 	))
 
 	responseActive := false
-	if msg.Active == "true" { responseActive = true }
+	if msg.Active == "true" {
+		responseActive = true
+	}
 	return &types.MsgSetModuleActiveResponse{Active: responseActive, ActivatedAt: activatedAt}, nil
 }

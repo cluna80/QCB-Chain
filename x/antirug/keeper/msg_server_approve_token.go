@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/antirug/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) ApproveToken(goCtx context.Context, msg *types.MsgApproveToken) (*types.MsgApproveTokenResponse, error) {
@@ -34,7 +35,9 @@ func (k msgServer) ApproveToken(goCtx context.Context, msg *types.MsgApproveToke
 
 	approved := msg.Verdict == "approved"
 	safetyScore := uint64(0)
-	if approved { safetyScore = 100 }
+	if approved {
+		safetyScore = 100
+	}
 
 	tokenKey := fmt.Sprintf("antirug-token-%s", msg.TokenId)
 	store.Set([]byte(tokenKey+"-verdict"),

@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package oan.oanwalletproto;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "oan/oanwalletproto/params.proto";
+
+option go_package = "oan/x/oanwalletproto/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams          (MsgUpdateParams         ) returns (MsgUpdateParamsResponse         );
+  rpc RegisterWalletProfile (MsgRegisterWalletProfile) returns (MsgRegisterWalletProfileResponse);
+  rpc SetEncryptionKey      (MsgSetEncryptionKey     ) returns (MsgSetEncryptionKeyResponse     );
+  rpc SetPqKey              (MsgSetPqKey             ) returns (MsgSetPqKeyResponse             );
+  rpc UpdateWalletProfile   (MsgUpdateWalletProfile  ) returns (MsgUpdateWalletProfileResponse  );
+  rpc SetWalletPermissions  (MsgSetWalletPermissions ) returns (MsgSetWalletPermissionsResponse );
+  rpc LockWallet            (MsgLockWallet           ) returns (MsgLockWalletResponse           );
+  rpc UnlockWallet          (MsgUnlockWallet         ) returns (MsgUnlockWalletResponse         );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                            "authority";
+  option           (amino.name) = "oan/x/oanwalletproto/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterWalletProfile {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string walletId    = 2;
+  string did         = 3;
+  string displayName = 4;
+  string avatarHash  = 5;
+}
+
+message MsgRegisterWalletProfileResponse {
+  string walletId   = 1;
+  bool   registered = 2;
+}
+
+message MsgSetEncryptionKey {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string walletId   = 2;
+  string encKeyHash = 3;
+  string keyType    = 4;
+}
+
+message MsgSetEncryptionKeyResponse {
+  string walletId = 1;
+  bool   keySet   = 2;
+}
+
+message MsgSetPqKey {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string walletId  = 2;
+  string pqKeyHash = 3;
+  string algorithm = 4;
+}
+
+message MsgSetPqKeyResponse {
+  string walletId = 1;
+  bool   pqKeySet = 2;
+}
+
+message MsgUpdateWalletProfile {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string walletId    = 2;
+  string displayName = 3;
+  string avatarHash  = 4;
+}
+
+message MsgUpdateWalletProfileResponse {
+  string walletId = 1;
+  bool   updated  = 2;
+}
+
+message MsgSetWalletPermissions {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string walletId     = 2;
+  bool   allowMsgs    = 3;
+  bool   allowAiAgent = 4;
+  bool   allowBridge  = 5;
+}
+
+message MsgSetWalletPermissionsResponse {
+  string walletId       = 1;
+  bool   permissionsSet = 2;
+}
+
+message MsgLockWallet {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator  = 1;
+  string walletId = 2;
+  string reason   = 3;
+}
+
+message MsgLockWalletResponse {
+  string walletId = 1;
+  bool   locked   = 2;
+}
+
+message MsgUnlockWallet {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator  = 1;
+  string walletId = 2;
+  string proof    = 3;
+}
+
+message MsgUnlockWalletResponse {
+  string walletId = 1;
+  bool   unlocked = 2;
+}
+
