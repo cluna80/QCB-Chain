@@ -3,9 +3,8 @@ package keeper
 import (
 	"context"
 	"fmt"
-	"oan/x/oannode/types"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"oan/x/oannode/types"
 )
 
 func (k msgServer) ClaimNodeReward(goCtx context.Context, msg *types.MsgClaimNodeReward) (*types.MsgClaimNodeRewardResponse, error) {
@@ -21,12 +20,10 @@ func (k msgServer) ClaimNodeReward(goCtx context.Context, msg *types.MsgClaimNod
 		return nil, fmt.Errorf("only the node operator can claim rewards")
 	}
 
-	// FAILSAFE — epoch cooldown — one claim per epoch only
+	// SECURITY — epoch cooldown written FIRST
 	params := k.GetParams(ctx)
 	epochLength := int64(params.EpochLength)
-	if epochLength == 0 {
-		epochLength = 1000
-	}
+	if epochLength == 0 { epochLength = 1000 }
 	lastClaimKey := fmt.Sprintf("node-reward-claimed-%s", msg.NodeId)
 	lastClaimBytes, _ := store.Get([]byte(lastClaimKey))
 	if lastClaimBytes != nil {
@@ -38,7 +35,7 @@ func (k msgServer) ClaimNodeReward(goCtx context.Context, msg *types.MsgClaimNod
 		}
 	}
 
-	// FAILSAFE — must have uptime proof — check heartbeat
+	// SECURITY — must have recent heartbeat
 	heartbeatKey := fmt.Sprintf("node-heartbeat-%s", msg.NodeId)
 	heartbeat, _ := store.Get([]byte(heartbeatKey))
 	if heartbeat == nil {
@@ -47,30 +44,37 @@ func (k msgServer) ClaimNodeReward(goCtx context.Context, msg *types.MsgClaimNod
 	lastBeat := int64(0)
 	fmt.Sscanf(string(heartbeat), "%d", &lastBeat)
 	if ctx.BlockHeight()-lastBeat > 500 {
-		return nil, fmt.Errorf("node has been offline too long — submit uptime proof before claiming rewards")
+		return nil, fmt.Errorf("node offline too long — submit heartbeat first")
 	}
 
-	// Calculate reward based on node type
-	uptimeKey := fmt.Sprintf("node-uptime-%s", msg.NodeId)
-	uptimeBytes, _ := store.Get([]byte(uptimeKey))
-	uptime := uint64(0)
-	if uptimeBytes != nil {
-		fmt.Sscanf(string(uptimeBytes), "%d", &uptime)
-	}
+	reward := uint64(100)
 
-	// Base rewards per node type
-	nodeDataKey := fmt.Sprintf("nodeid-%s", msg.NodeId)
-	_ = nodeDataKey
-	reward := uint64(100) // base light node reward
-	// Higher rewards for higher commitment nodes handled by node type lookup
-
+	// SECURITY — write cooldown BEFORE transfer
 	store.Set([]byte(lastClaimKey), []byte(fmt.Sprintf("%d", ctx.BlockHeight())))
+
+	// REAL TOKEN TRANSFER
+	operator, err := sdk.AccAddressFromBech32(msg.Creator)
+	if err != nil {
+		return nil, fmt.Errorf("invalid operator address: %s", err)
+	}
+	moduleAddr := sdk.AccAddress([]byte(types.ModuleName))
+	balance := k.bankKeeper.GetBalance(ctx, moduleAddr, "uoan")
+	if !balance.Amount.IsZero() {
+		coins := sdk.NewCoins(sdk.NewInt64Coin("uoan", int64(reward)))
+		if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, operator, coins); err != nil {
+			store.Delete([]byte(lastClaimKey))
+			return nil, fmt.Errorf("reward transfer failed: %s", err)
+		}
+	}
 
 	ctx.EventManager().EmitEvent(sdk.NewEvent("node_reward_claimed",
 		sdk.NewAttribute("node_id", msg.NodeId),
 		sdk.NewAttribute("epoch", fmt.Sprintf("%d", msg.Epoch)),
 		sdk.NewAttribute("reward", fmt.Sprintf("%d", reward)),
+		sdk.NewAttribute("denom", "uoan"),
 		sdk.NewAttribute("operator", msg.Creator),
 	))
-	return &types.MsgClaimNodeRewardResponse{NodeId: msg.NodeId, Reward: reward, Epoch: msg.Epoch}, nil
+	return &types.MsgClaimNodeRewardResponse{
+		NodeId: msg.NodeId, Reward: reward, Epoch: msg.Epoch,
+	}, nil
 }

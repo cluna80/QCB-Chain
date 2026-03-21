@@ -254,6 +254,12 @@ var (
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: ibcfeetypes.ModuleName},
 		{Account: icatypes.ModuleName},
+		{Account: "oaneconomy", Permissions: []string{authtypes.Burner, authtypes.Minter}},
+		{Account: "oanagent", Permissions: []string{authtypes.Burner}},
+		{Account: "oannode", Permissions: []string{authtypes.Burner, authtypes.Minter}},
+		{Account: "oanmarket", Permissions: []string{authtypes.Burner}},
+		{Account: "oancompute", Permissions: []string{authtypes.Burner, authtypes.Minter}},
+		{Account: "oanbridge", Permissions: []string{authtypes.Burner}},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 
