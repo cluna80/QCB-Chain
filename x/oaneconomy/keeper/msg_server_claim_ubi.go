@@ -3,20 +3,23 @@ package keeper
 import (
 	"context"
 	"fmt"
-	"oan/x/oaneconomy/types"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"oan/x/oaneconomy/types"
 )
 
 func (k msgServer) ClaimUbi(goCtx context.Context, msg *types.MsgClaimUbi) (*types.MsgClaimUbiResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	store := k.storeService.OpenKVStore(ctx)
 
-	// PROTECTION 1 — must be verified human
+	// PROTECTION 1 — must be verified human OR staked
+	// verified-did written by stake-tokens (same store)
+	// In production oanidentity writes cross-chain proof
 	didKey := fmt.Sprintf("verified-did-%s", msg.Creator)
 	verified, _ := store.Get([]byte(didKey))
-	if verified == nil {
-		return nil, fmt.Errorf("UBI requires a verified human identity — register and verify your DID first")
+	stakedKey := fmt.Sprintf("staked-amount-%s", msg.Creator)
+	staked, _ := store.Get([]byte(stakedKey))
+	if verified == nil && staked == nil {
+		return nil, fmt.Errorf("UBI requires a verified human identity or staked OANT — register and verify your DID first")
 	}
 
 	// PROTECTION 2 — epoch cooldown
@@ -34,17 +37,16 @@ func (k msgServer) ClaimUbi(goCtx context.Context, msg *types.MsgClaimUbi) (*typ
 		}
 	}
 
-	// PROTECTION 3 — pool health check
+	// PROTECTION 3 — pool health
 	poolKey := "ubi-pool-balance"
 	poolBytes, _ := store.Get([]byte(poolKey))
 	poolBalance := uint64(1000000)
 	if poolBytes != nil {
 		fmt.Sscanf(string(poolBytes), "%d", &poolBalance)
 	}
-	// Adaptive rate based on pool health
 	ubiAmount := uint64(1000)
 	if poolBalance < poolBalance/5 {
-		ubiAmount = ubiAmount / 10 // 10% rate when pool below 20%
+		ubiAmount = ubiAmount / 10
 	}
 	if poolBalance < 1000 {
 		return nil, fmt.Errorf("UBI pool is depleted — DAO must replenish via treasury")
@@ -65,5 +67,7 @@ func (k msgServer) ClaimUbi(goCtx context.Context, msg *types.MsgClaimUbi) (*typ
 		sdk.NewAttribute("pool_remaining", fmt.Sprintf("%d", newBalance)),
 		sdk.NewAttribute("block", fmt.Sprintf("%d", ctx.BlockHeight())),
 	))
-	return &types.MsgClaimUbiResponse{Amount: ubiAmount, ClaimedAt: int32(ctx.BlockTime().Unix())}, nil
+	return &types.MsgClaimUbiResponse{
+		Amount: ubiAmount, ClaimedAt: int32(ctx.BlockTime().Unix()),
+	}, nil
 }

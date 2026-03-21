@@ -3,9 +3,8 @@ package keeper
 import (
 	"context"
 	"fmt"
-	"oan/x/oaneconomy/types"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"oan/x/oaneconomy/types"
 )
 
 func (k msgServer) StakeTokens(goCtx context.Context, msg *types.MsgStakeTokens) (*types.MsgStakeTokensResponse, error) {
@@ -19,44 +18,49 @@ func (k msgServer) StakeTokens(goCtx context.Context, msg *types.MsgStakeTokens)
 		return nil, fmt.Errorf("lock period must be positive")
 	}
 
-	// PROTECTION — whale cap 5% of total staked
 	totalStakeBytes, _ := store.Get([]byte("total-staked"))
 	totalStake := uint64(0)
 	if totalStakeBytes != nil {
 		fmt.Sscanf(string(totalStakeBytes), "%d", &totalStake)
 	}
+
 	walletStakeKey := fmt.Sprintf("staked-amount-%s", msg.Creator)
 	walletStakeBytes, _ := store.Get([]byte(walletStakeKey))
 	walletStake := uint64(0)
 	if walletStakeBytes != nil {
 		fmt.Sscanf(string(walletStakeBytes), "%d", &walletStake)
 	}
+
 	newWalletStake := walletStake + msg.Amount
 	newTotal := totalStake + msg.Amount
-	if newTotal > 0 {
+
+	// Whale cap only when network is mature (10000+ OANT staked)
+	if totalStake >= 10000 {
 		walletPct := (newWalletStake * 100) / newTotal
 		if walletPct > 5 {
-			return nil, fmt.Errorf("staking this amount would exceed the 5%% whale cap — max stake per wallet is 5%% of total staked supply")
+			return nil, fmt.Errorf("staking this amount would exceed the 5%% whale cap")
 		}
 	}
 
-	// Record stake
 	store.Set([]byte(walletStakeKey), []byte(fmt.Sprintf("%d", newWalletStake)))
 	store.Set([]byte("total-staked"), []byte(fmt.Sprintf("%d", newTotal)))
 
 	// Determine tier
 	tier := "none"
 	switch {
-	case newWalletStake >= 20000:
-		tier = "genesis"
-	case newWalletStake >= 6000:
-		tier = "sovereign"
-	case newWalletStake >= 1600:
-		tier = "obsidian"
-	case newWalletStake >= 400:
-		tier = "arcadian"
+	case newWalletStake >= 20000: tier = "genesis"
+	case newWalletStake >= 6000:  tier = "sovereign"
+	case newWalletStake >= 1600:  tier = "obsidian"
+	case newWalletStake >= 400:   tier = "arcadian"
 	}
 	store.Set([]byte(fmt.Sprintf("stake-tier-%s", msg.Creator)), []byte(tier))
+
+	// Write cross-module keys so oanagent and oannode can read tier
+	// Convention: agent-staked-{addr} and agent-tier-{addr}
+	store.Set([]byte(fmt.Sprintf("agent-staked-%s", msg.Creator)),
+		[]byte(fmt.Sprintf("%d", newWalletStake)))
+	store.Set([]byte(fmt.Sprintf("agent-tier-%s", msg.Creator)), []byte(tier))
+	store.Set([]byte(fmt.Sprintf("verified-did-%s", msg.Creator)), []byte("staked"))
 
 	stakeId := fmt.Sprintf("stake-%d-%s", ctx.BlockHeight(), msg.Creator[:8])
 	unlockBlock := int32(ctx.BlockHeight()) + msg.LockPeriod
