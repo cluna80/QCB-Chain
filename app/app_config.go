@@ -54,6 +54,7 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	agentmodulev1 "oan/api/oan/agent/module"
+	antirugmodulev1 "oan/api/oan/antirug/module"
 	oanagentmodulev1 "oan/api/oan/oanagent/module"
 	oanbridgemodulev1 "oan/api/oan/oanbridge/module"
 	oancomputemodulev1 "oan/api/oan/oancompute/module"
@@ -68,6 +69,8 @@ import (
 	oansportsmodulev1 "oan/api/oan/oansports/module"
 	_ "oan/x/agent/module" // import for side-effects
 	agentmoduletypes "oan/x/agent/types"
+	_ "oan/x/antirug/module" // import for side-effects
+	antirugmoduletypes "oan/x/antirug/types"
 	_ "oan/x/oanagent/module" // import for side-effects
 	oanagentmoduletypes "oan/x/oanagent/types"
 	_ "oan/x/oanbridge/module" // import for side-effects
@@ -142,6 +145,7 @@ var (
 		oansportsmoduletypes.ModuleName,
 		oanbridgemoduletypes.ModuleName,
 		oannodemoduletypes.ModuleName,
+		antirugmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -179,6 +183,7 @@ var (
 		oansportsmoduletypes.ModuleName,
 		oanbridgemoduletypes.ModuleName,
 		oannodemoduletypes.ModuleName,
+		antirugmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -210,6 +215,7 @@ var (
 		oansportsmoduletypes.ModuleName,
 		oanbridgemoduletypes.ModuleName,
 		oannodemoduletypes.ModuleName,
+		antirugmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -416,6 +422,10 @@ var (
 			{
 				Name:   oannodemoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&oannodemodulev1.Module{}),
+			},
+			{
+				Name:   antirugmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&antirugmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

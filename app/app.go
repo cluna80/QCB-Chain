@@ -93,6 +93,7 @@ import (
 	oanbridgemodulekeeper "oan/x/oanbridge/keeper"
 	oannodemodulekeeper "oan/x/oannode/keeper"
 
+	antirugmodulekeeper "oan/x/antirug/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"oan/docs"
@@ -171,6 +172,7 @@ type App struct {
 	OansportsKeeper   oansportsmodulekeeper.Keeper
 	OanbridgeKeeper   oanbridgemodulekeeper.Keeper
 	OannodeKeeper     oannodemodulekeeper.Keeper
+	AntirugKeeper     antirugmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -287,6 +289,7 @@ func New(
 		&app.OansportsKeeper,
 		&app.OanbridgeKeeper,
 		&app.OannodeKeeper,
+		&app.AntirugKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

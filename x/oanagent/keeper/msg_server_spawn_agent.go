@@ -6,8 +6,9 @@ import (
 	"encoding/hex"
 	"fmt"
 	"math/rand"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanagent/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SpawnAgent(goCtx context.Context, msg *types.MsgSpawnAgent) (*types.MsgSpawnAgentResponse, error) {
@@ -88,7 +89,9 @@ func (k msgServer) SpawnAgent(goCtx context.Context, msg *types.MsgSpawnAgent) (
 		"none": 1, "arcadian": 3, "obsidian": 8, "sovereign": 15, "genesis": 25,
 	}
 	cap := maxAgents[tier]
-	if cap == 0 { cap = 1 }
+	if cap == 0 {
+		cap = 1
+	}
 	if agentCount >= cap {
 		return nil, fmt.Errorf(
 			"agent cap reached (%s tier = max %d) — stake more OANT to spawn more agents",
@@ -111,29 +114,45 @@ func (k msgServer) SpawnAgent(goCtx context.Context, msg *types.MsgSpawnAgent) (
 		mutation := int64(base) / 20
 		d := rng.Int63n(mutation*2+1) - mutation
 		result := int64(base) + d
-		if result < 1   { result = 1 }
-		if result > 100 { result = 100 }
+		if result < 1 {
+			result = 1
+		}
+		if result > 100 {
+			result = 100
+		}
 		return uint64(result)
 	}
 
 	// Elite parent bonus — high win rate agents pass stronger traits
 	winRateBonus := uint64(0)
-	if parent.WinRateBps >= 9000 { winRateBonus = 5 } // 90%+ = +5 to all stats
-	if parent.WinRateBps >= 9500 { winRateBonus = 10 } // 95%+ = +10 to all stats
+	if parent.WinRateBps >= 9000 {
+		winRateBonus = 5
+	} // 90%+ = +5 to all stats
+	if parent.WinRateBps >= 9500 {
+		winRateBonus = 10
+	} // 95%+ = +10 to all stats
 
-	s  := inherit(parent.Strength + winRateBonus)
-	a  := inherit(parent.Agility  + winRateBonus)
-	st := inherit(parent.Stamina  + winRateBonus)
-	sk := inherit(parent.Skill    + winRateBonus)
+	s := inherit(parent.Strength + winRateBonus)
+	a := inherit(parent.Agility + winRateBonus)
+	st := inherit(parent.Stamina + winRateBonus)
+	sk := inherit(parent.Skill + winRateBonus)
 
 	// Cap at 100
-	if s  > 100 { s  = 100 }
-	if a  > 100 { a  = 100 }
-	if st > 100 { st = 100 }
-	if sk > 100 { sk = 100 }
+	if s > 100 {
+		s = 100
+	}
+	if a > 100 {
+		a = 100
+	}
+	if st > 100 {
+		st = 100
+	}
+	if sk > 100 {
+		sk = 100
+	}
 
 	genomeScore := int32((s + a + st + sk) / 4)
-	generation  := parent.Generation + 1
+	generation := parent.Generation + 1
 	generation32 := int32(generation)
 
 	// ── DNA HASH includes parent cognitive history ────────────────────────────
@@ -146,7 +165,7 @@ func (k msgServer) SpawnAgent(goCtx context.Context, msg *types.MsgSpawnAgent) (
 		parent.WinRateBps,
 		parent.TotalTrades,
 	)
-	hash   := sha256.Sum256([]byte(raw))
+	hash := sha256.Sum256([]byte(raw))
 	dnaHash := hex.EncodeToString(hash[:])
 
 	// ── CREATE THE CHILD AGENT ────────────────────────────────────────────────
@@ -165,7 +184,7 @@ func (k msgServer) SpawnAgent(goCtx context.Context, msg *types.MsgSpawnAgent) (
 		Active:       true,
 		GenesisBlock: int32(ctx.BlockHeight()),
 		ParentA:      msg.ParentId,
-		ParentB:      "",          // spawn has one parent only
+		ParentB:      "", // spawn has one parent only
 	}
 	k.SetAgent(ctx, child)
 
@@ -186,17 +205,17 @@ func (k msgServer) SpawnAgent(goCtx context.Context, msg *types.MsgSpawnAgent) (
 
 	// ── EMIT EVENT ────────────────────────────────────────────────────────────
 	ctx.EventManager().EmitEvent(sdk.NewEvent("agent_spawned",
-		sdk.NewAttribute("child_id",        msg.ChildId),
-		sdk.NewAttribute("child_name",      msg.ChildName),
-		sdk.NewAttribute("parent_id",       msg.ParentId),
-		sdk.NewAttribute("parent_trades",   fmt.Sprintf("%d", parent.TotalTrades)),
+		sdk.NewAttribute("child_id", msg.ChildId),
+		sdk.NewAttribute("child_name", msg.ChildName),
+		sdk.NewAttribute("parent_id", msg.ParentId),
+		sdk.NewAttribute("parent_trades", fmt.Sprintf("%d", parent.TotalTrades)),
 		sdk.NewAttribute("parent_win_rate", fmt.Sprintf("%.2f%%", float64(parent.WinRateBps)/100.0)),
-		sdk.NewAttribute("generation",      fmt.Sprintf("%d", generation)),
-		sdk.NewAttribute("genome_score",    fmt.Sprintf("%d", genomeScore)),
-		sdk.NewAttribute("dna_hash",        dnaHash),
-		sdk.NewAttribute("win_rate_bonus",  fmt.Sprintf("%d", winRateBonus)),
-		sdk.NewAttribute("spawn_fee_uoan",  "20000000"),
-		sdk.NewAttribute("block",           fmt.Sprintf("%d", ctx.BlockHeight())),
+		sdk.NewAttribute("generation", fmt.Sprintf("%d", generation)),
+		sdk.NewAttribute("genome_score", fmt.Sprintf("%d", genomeScore)),
+		sdk.NewAttribute("dna_hash", dnaHash),
+		sdk.NewAttribute("win_rate_bonus", fmt.Sprintf("%d", winRateBonus)),
+		sdk.NewAttribute("spawn_fee_uoan", "20000000"),
+		sdk.NewAttribute("block", fmt.Sprintf("%d", ctx.BlockHeight())),
 	))
 
 	return &types.MsgSpawnAgentResponse{
