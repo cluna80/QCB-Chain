@@ -20,9 +20,9 @@ import (
 
 	// this line is used by starport scaffolding # 1
 
-	modulev1 "oan/api/oan/agent/module"
-	"oan/x/agent/keeper"
-	"oan/x/agent/types"
+	modulev1 "qcb/api/qcb/agent/module"
+	"qcb/x/agent/keeper"
+	"qcb/x/agent/types"
 )
 
 var (

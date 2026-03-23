@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+package qcb.qcbsports;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbsports/params.proto";
+
+option go_package = "qcb/x/qcbsports/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams          (MsgUpdateParams         ) returns (MsgUpdateParamsResponse         );
+  rpc RegisterAthlete       (MsgRegisterAthlete      ) returns (MsgRegisterAthleteResponse      );
+  rpc CreateStadium         (MsgCreateStadium        ) returns (MsgCreateStadiumResponse        );
+  rpc ScheduleMatch         (MsgScheduleMatch        ) returns (MsgScheduleMatchResponse        );
+  rpc RecordMatchResult     (MsgRecordMatchResult    ) returns (MsgRecordMatchResultResponse    );
+  rpc PlacePrediction       (MsgPlacePrediction      ) returns (MsgPlacePredictionResponse      );
+  rpc ClaimPredictionReward (MsgClaimPredictionReward) returns (MsgClaimPredictionRewardResponse);
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                       "authority";
+  option           (amino.name) = "qcb/x/qcbsports/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterAthlete {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string athleteId = 2;
+  string agentId   = 3;
+  string sport     = 4;
+  string position  = 5;
+}
+
+message MsgRegisterAthleteResponse {
+  string athleteId  = 1;
+  bool   registered = 2;
+}
+
+message MsgCreateStadium {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string stadiumId = 2;
+  string name      = 3;
+  uint64 capacity  = 4;
+  string location  = 5;
+}
+
+message MsgCreateStadiumResponse {
+  string stadiumId = 1;
+  uint64 capacity  = 2;
+}
+
+message MsgScheduleMatch {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string matchId     = 2;
+  string athleteA    = 3;
+  string athleteB    = 4;
+  string stadiumId   = 5;
+  int32  scheduledAt = 6;
+}
+
+message MsgScheduleMatchResponse {
+  string matchId     = 1;
+  int32  scheduledAt = 2;
+}
+
+message MsgRecordMatchResult {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string matchId   = 2;
+  string winner    = 3;
+  string loser     = 4;
+  uint64 scoreA    = 5;
+  uint64 scoreB    = 6;
+  string statsHash = 7;
+}
+
+message MsgRecordMatchResultResponse {
+  string matchId  = 1;
+  string winner   = 2;
+  bool   recorded = 3;
+}
+
+message MsgPlacePrediction {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string matchId    = 2;
+  string prediction = 3;
+  uint64 stake      = 4;
+}
+
+message MsgPlacePredictionResponse {
+  string predictionId = 1;
+  uint64 stake        = 2;
+  uint64 odds         = 3;
+}
+
+message MsgClaimPredictionReward {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string predictionId = 2;
+}
+
+message MsgClaimPredictionRewardResponse {
+  bool   success = 1;
+  uint64 reward  = 2;
+}
+

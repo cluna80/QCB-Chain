@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "oan/testutil/keeper"
-	"oan/x/antirug/keeper"
-	"oan/x/antirug/types"
+	keepertest "qcb/testutil/keeper"
+	"qcb/x/antirug/keeper"
+	"qcb/x/antirug/types"
 )
 
 func setupMsgServer(t testing.TB) (keeper.Keeper, types.MsgServer, context.Context) {

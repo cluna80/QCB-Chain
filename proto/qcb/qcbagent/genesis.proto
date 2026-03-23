@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package qcb.qcbagent;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbagent/params.proto";
+import "qcb/qcbagent/agent.proto";
+
+option go_package = "qcb/x/qcbagent/types";
+
+// GenesisState defines the qcbagent module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params params    = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Agent  agentList = 2 [(gogoproto.nullable) = false] ;
+}
+

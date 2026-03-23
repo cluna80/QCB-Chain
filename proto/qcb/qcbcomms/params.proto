@@ -1,0 +1,18 @@
+syntax = "proto3";
+package qcb.qcbcomms;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "qcb/x/qcbcomms/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "qcb/x/qcbcomms/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 maxMsgSize = 1 [(gogoproto.moretags) = "yaml:\"max_msg_size\""];
+  uint64 msgTtlBlocks = 2 [(gogoproto.moretags) = "yaml:\"msg_ttl_blocks\""];
+  bool encryptionRequired = 3 [(gogoproto.moretags) = "yaml:\"encryption_required\""];
+}

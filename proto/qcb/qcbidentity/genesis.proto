@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package qcb.qcbidentity;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbidentity/params.proto";
+import "qcb/qcbidentity/identity.proto";
+
+option go_package = "qcb/x/qcbidentity/types";
+
+// GenesisState defines the qcbidentity module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params   params       = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Identity identityList = 2 [(gogoproto.nullable) = false] ;
+}
+

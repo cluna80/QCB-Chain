@@ -8,7 +8,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"oan/x/antirug/types"
+	"qcb/x/antirug/types"
 )
 
 type (

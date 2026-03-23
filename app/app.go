@@ -75,38 +75,38 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
-	agentmodulekeeper "oan/x/agent/keeper"
-	oanagentmodulekeeper "oan/x/oanagent/keeper"
-	oandaomodulekeeper "oan/x/oandao/keeper"
-	oaneconomymodulekeeper "oan/x/oaneconomy/keeper"
-	oanidentitymodulekeeper "oan/x/oanidentity/keeper"
+	agentmodulekeeper "qcb/x/agent/keeper"
+	qcbagentmodulekeeper "qcb/x/qcbagent/keeper"
+	qcbdaomodulekeeper "qcb/x/qcbdao/keeper"
+	qcbeconomymodulekeeper "qcb/x/qcbeconomy/keeper"
+	qcbidentitymodulekeeper "qcb/x/qcbidentity/keeper"
 
-	oancomputemodulekeeper "oan/x/oancompute/keeper"
-	oanmarketmodulekeeper "oan/x/oanmarket/keeper"
+	qcbcomputemodulekeeper "qcb/x/qcbcompute/keeper"
+	qcbmarketmodulekeeper "qcb/x/qcbmarket/keeper"
 
-	oanguardianmodulekeeper "oan/x/oanguardian/keeper"
-	oanqsecmodulekeeper "oan/x/oanqsec/keeper"
+	qcbguardianmodulekeeper "qcb/x/qcbguardian/keeper"
+	qcbqsecmodulekeeper "qcb/x/qcbqsec/keeper"
 
-	oanmediamodulekeeper "oan/x/oanmedia/keeper"
-	oansportsmodulekeeper "oan/x/oansports/keeper"
+	qcbmediamodulekeeper "qcb/x/qcbmedia/keeper"
+	qcbsportsmodulekeeper "qcb/x/qcbsports/keeper"
 
-	oanbridgemodulekeeper "oan/x/oanbridge/keeper"
-	oannodemodulekeeper "oan/x/oannode/keeper"
+	qcbbridgemodulekeeper "qcb/x/qcbbridge/keeper"
+	qcbnodemodulekeeper "qcb/x/qcbnode/keeper"
 
-	antirugmodulekeeper "oan/x/antirug/keeper"
-	oancommsmodulekeeper "oan/x/oancomms/keeper"
+	antirugmodulekeeper "qcb/x/antirug/keeper"
+	qcbcommsmodulekeeper "qcb/x/qcbcomms/keeper"
 
-	oanrelaymodulekeeper "oan/x/oanrelay/keeper"
-	oanwalletprotomodulekeeper "oan/x/oanwalletproto/keeper"
+	qcbrelaymodulekeeper "qcb/x/qcbrelay/keeper"
+	qcbwalletprotomodulekeeper "qcb/x/qcbwalletproto/keeper"
 
-	oanprotocolmodulekeeper "oan/x/oanprotocol/keeper"
+	qcbprotocolmodulekeeper "qcb/x/qcbprotocol/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
-	"oan/docs"
+	"qcb/docs"
 )
 
 const (
-	AccountAddressPrefix = "oan"
+	AccountAddressPrefix = "qcb"
 	Name                 = "oan"
 )
 
@@ -166,23 +166,23 @@ type App struct {
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
 	AgentKeeper          agentmodulekeeper.Keeper
-	OanagentKeeper       oanagentmodulekeeper.Keeper
-	OanidentityKeeper    oanidentitymodulekeeper.Keeper
-	OandaoKeeper         oandaomodulekeeper.Keeper
-	OaneconomyKeeper     oaneconomymodulekeeper.Keeper
-	OancomputeKeeper     oancomputemodulekeeper.Keeper
-	OanmarketKeeper      oanmarketmodulekeeper.Keeper
-	OanguardianKeeper    oanguardianmodulekeeper.Keeper
-	OanqsecKeeper        oanqsecmodulekeeper.Keeper
-	OanmediaKeeper       oanmediamodulekeeper.Keeper
-	OansportsKeeper      oansportsmodulekeeper.Keeper
-	OanbridgeKeeper      oanbridgemodulekeeper.Keeper
-	OannodeKeeper        oannodemodulekeeper.Keeper
+	OanagentKeeper       qcbagentmodulekeeper.Keeper
+	OanidentityKeeper    qcbidentitymodulekeeper.Keeper
+	OandaoKeeper         qcbdaomodulekeeper.Keeper
+	OaneconomyKeeper     qcbeconomymodulekeeper.Keeper
+	OancomputeKeeper     qcbcomputemodulekeeper.Keeper
+	OanmarketKeeper      qcbmarketmodulekeeper.Keeper
+	OanguardianKeeper    qcbguardianmodulekeeper.Keeper
+	OanqsecKeeper        qcbqsecmodulekeeper.Keeper
+	OanmediaKeeper       qcbmediamodulekeeper.Keeper
+	OansportsKeeper      qcbsportsmodulekeeper.Keeper
+	OanbridgeKeeper      qcbbridgemodulekeeper.Keeper
+	OannodeKeeper        qcbnodemodulekeeper.Keeper
 	AntirugKeeper        antirugmodulekeeper.Keeper
-	OancommsKeeper       oancommsmodulekeeper.Keeper
-	OanrelayKeeper       oanrelaymodulekeeper.Keeper
-	OanwalletprotoKeeper oanwalletprotomodulekeeper.Keeper
-	OanprotocolKeeper    oanprotocolmodulekeeper.Keeper
+	OancommsKeeper       qcbcommsmodulekeeper.Keeper
+	OanrelayKeeper       qcbrelaymodulekeeper.Keeper
+	OanwalletprotoKeeper qcbwalletprotomodulekeeper.Keeper
+	OanprotocolKeeper    qcbprotocolmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager

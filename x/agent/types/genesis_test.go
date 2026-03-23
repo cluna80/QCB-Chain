@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"oan/x/agent/types"
+	"qcb/x/agent/types"
 
 	"github.com/stretchr/testify/require"
 )

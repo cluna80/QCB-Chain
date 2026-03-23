@@ -3,8 +3,8 @@ package simulation
 import (
 	"math/rand"
 
-	"oan/x/antirug/keeper"
-	"oan/x/antirug/types"
+	"qcb/x/antirug/keeper"
+	"qcb/x/antirug/types"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"

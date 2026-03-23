@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/oansports/keeper"
-	"oan/x/oansports/types"
+	"qcb/x/qcbsports/keeper"
+	"qcb/x/qcbsports/types"
 )
 
 func OansportsKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

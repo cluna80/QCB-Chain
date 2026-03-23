@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/oanbridge/keeper"
-	"oan/x/oanbridge/types"
+	"qcb/x/qcbbridge/keeper"
+	"qcb/x/qcbbridge/types"
 )
 
 func OanbridgeKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

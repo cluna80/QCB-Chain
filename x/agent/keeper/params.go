@@ -5,7 +5,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/runtime"
 
-	"oan/x/agent/types"
+	"qcb/x/agent/types"
 )
 
 // GetParams get all parameters as types.Params

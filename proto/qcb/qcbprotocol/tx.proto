@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package qcb.qcbprotocol;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbprotocol/params.proto";
+
+option go_package = "qcb/x/qcbprotocol/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams         (MsgUpdateParams        ) returns (MsgUpdateParamsResponse        );
+  rpc SetAddressTier       (MsgSetAddressTier      ) returns (MsgSetAddressTierResponse      );
+  rpc UpdateLaunchPhase    (MsgUpdateLaunchPhase   ) returns (MsgUpdateLaunchPhaseResponse   );
+  rpc UpdateProtocolParams (MsgUpdateProtocolParams) returns (MsgUpdateProtocolParamsResponse);
+  rpc ExemptAddress        (MsgExemptAddress       ) returns (MsgExemptAddressResponse       );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                         "authority";
+  option           (amino.name) = "qcb/x/qcbprotocol/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgSetAddressTier {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string address = 2;
+  string tier    = 3;
+}
+
+message MsgSetAddressTierResponse {}
+
+message MsgUpdateLaunchPhase {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string phase   = 2;
+}
+
+message MsgUpdateLaunchPhaseResponse {}
+
+message MsgUpdateProtocolParams {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+}
+
+message MsgUpdateProtocolParamsResponse {}
+
+message MsgExemptAddress {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string address = 2;
+  string reason  = 3;
+}
+
+message MsgExemptAddressResponse {}
+

@@ -1,0 +1,18 @@
+syntax = "proto3";
+package qcb.qcbrelay;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "qcb/x/qcbrelay/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "qcb/x/qcbrelay/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 minRelayStake = 1 [(gogoproto.moretags) = "yaml:\"min_relay_stake\""];
+  uint64 maxRelaysPerRegion = 2 [(gogoproto.moretags) = "yaml:\"max_relays_per_region\""];
+  uint64 slashRate = 3 [(gogoproto.moretags) = "yaml:\"slash_rate\""];
+}

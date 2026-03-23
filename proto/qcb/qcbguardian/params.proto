@@ -1,0 +1,19 @@
+syntax = "proto3";
+package qcb.qcbguardian;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "qcb/x/qcbguardian/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "qcb/x/qcbguardian/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 minGuardians = 1 [(gogoproto.moretags) = "yaml:\"min_guardians\""];
+  uint64 maxGuardians = 2 [(gogoproto.moretags) = "yaml:\"max_guardians\""];
+  uint64 vetoThreshold = 3 [(gogoproto.moretags) = "yaml:\"veto_threshold\""];
+  uint64 pauseDuration = 4 [(gogoproto.moretags) = "yaml:\"pause_duration\""];
+}

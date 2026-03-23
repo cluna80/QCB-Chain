@@ -3,10 +3,10 @@ package antirug_test
 import (
 	"testing"
 
-	keepertest "oan/testutil/keeper"
-	"oan/testutil/nullify"
-	antirug "oan/x/antirug/module"
-	"oan/x/antirug/types"
+	keepertest "qcb/testutil/keeper"
+	"qcb/testutil/nullify"
+	antirug "qcb/x/antirug/module"
+	"qcb/x/antirug/types"
 
 	"github.com/stretchr/testify/require"
 )

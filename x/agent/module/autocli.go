@@ -3,7 +3,7 @@ package agent
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "oan/api/oan/agent"
+	modulev1 "qcb/api/qcb/agent"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

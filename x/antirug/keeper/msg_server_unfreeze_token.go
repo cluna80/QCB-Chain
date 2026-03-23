@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 	"fmt"
-	"oan/x/antirug/types"
+	"qcb/x/antirug/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

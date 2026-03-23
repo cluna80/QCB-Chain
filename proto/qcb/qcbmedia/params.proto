@@ -1,0 +1,18 @@
+syntax = "proto3";
+package qcb.qcbmedia;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "qcb/x/qcbmedia/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "qcb/x/qcbmedia/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 royaltyRate = 1 [(gogoproto.moretags) = "yaml:\"royalty_rate\""];
+  uint64 mintFee = 2 [(gogoproto.moretags) = "yaml:\"mint_fee\""];
+  uint64 maxRoyaltyChain = 3 [(gogoproto.moretags) = "yaml:\"max_royalty_chain\""];
+}

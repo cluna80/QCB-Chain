@@ -1,0 +1,22 @@
+syntax = "proto3";
+package qcb.qcbnode;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "qcb/x/qcbnode/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "qcb/x/qcbnode/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 minValidatorStake = 1 [(gogoproto.moretags) = "yaml:\"min_validator_stake\""];
+  uint64 minInferenceStake = 2 [(gogoproto.moretags) = "yaml:\"min_inference_stake\""];
+  uint64 minBridgeStake = 3 [(gogoproto.moretags) = "yaml:\"min_bridge_stake\""];
+  uint64 minLightStake = 4 [(gogoproto.moretags) = "yaml:\"min_light_stake\""];
+  uint64 unbondingBlocks = 5 [(gogoproto.moretags) = "yaml:\"unbonding_blocks\""];
+  uint64 maxWalletStakePct = 6 [(gogoproto.moretags) = "yaml:\"max_wallet_stake_pct\""];
+  uint64 epochLength = 7 [(gogoproto.moretags) = "yaml:\"epoch_length\""];
+}

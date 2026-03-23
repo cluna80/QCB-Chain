@@ -5,7 +5,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/runtime"
 
-	"oan/x/antirug/types"
+	"qcb/x/antirug/types"
 )
 
 // GetParams get all parameters as types.Params

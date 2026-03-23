@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/antirug/types"
+	"qcb/x/antirug/types"
 )
 
 func TestMsgUpdateParams(t *testing.T) {

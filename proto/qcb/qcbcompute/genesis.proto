@@ -1,0 +1,17 @@
+syntax = "proto3";
+package qcb.qcbcompute;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbcompute/params.proto";
+
+option go_package = "qcb/x/qcbcompute/types";
+
+// GenesisState defines the qcbcompute module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

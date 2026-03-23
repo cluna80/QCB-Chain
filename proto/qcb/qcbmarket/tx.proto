@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package qcb.qcbmarket;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbmarket/params.proto";
+
+option go_package = "qcb/x/qcbmarket/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams     (MsgUpdateParams    ) returns (MsgUpdateParamsResponse    );
+  rpc ListAgentForHire (MsgListAgentForHire) returns (MsgListAgentForHireResponse);
+  rpc HireAgent        (MsgHireAgent       ) returns (MsgHireAgentResponse       );
+  rpc RateAgent        (MsgRateAgent       ) returns (MsgRateAgentResponse       );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                       "authority";
+  option           (amino.name) = "qcb/x/qcbmarket/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgListAgentForHire {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string agentId      = 2;
+  uint64 pricePerTask = 3;
+  string skills       = 4;
+}
+
+message MsgListAgentForHireResponse {
+  string listingId    = 1;
+  uint64 pricePerTask = 2;
+}
+
+message MsgHireAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator         = 1;
+  string listingId       = 2;
+  string taskDescription = 3;
+  uint64 budget          = 4;
+}
+
+message MsgHireAgentResponse {
+  string contractId = 1;
+  string agentId    = 2;
+  uint64 budget     = 3;
+}
+
+message MsgRateAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator    = 1;
+  string agentId    = 2;
+  string contractId = 3;
+  uint64 rating     = 4;
+  string review     = 5;
+}
+
+message MsgRateAgentResponse {
+  bool   success   = 1;
+  uint64 newRating = 2;
+}
+

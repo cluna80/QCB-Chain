@@ -5,12 +5,12 @@ accounts:
   coins:
   - 20000token
   - 200000000stake
-  - 10000000000uoan
+  - 10000000000charmbits
 - name: bob
   coins:
   - 10000token
   - 100000000stake
-  - 10000000000uoan
+  - 10000000000charmbits
 client:
   openapi:
     path: docs/static/openapi.yml
@@ -19,7 +19,7 @@ faucet:
   coins:
   - 5token
   - 100000stake
-  - 1000000uoan
+  - 1000000charmbits
 validators:
 - name: alice
   bonded: 100000000stake

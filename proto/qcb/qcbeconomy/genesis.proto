@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package qcb.qcbeconomy;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbeconomy/params.proto";
+import "qcb/qcbeconomy/task.proto";
+
+option go_package = "qcb/x/qcbeconomy/types";
+
+// GenesisState defines the qcbeconomy module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params params   = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Task   taskList = 2 [(gogoproto.nullable) = false] ;
+}
+

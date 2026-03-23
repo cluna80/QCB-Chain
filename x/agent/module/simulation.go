@@ -8,9 +8,9 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"oan/testutil/sample"
-	agentsimulation "oan/x/agent/simulation"
-	"oan/x/agent/types"
+	"qcb/testutil/sample"
+	agentsimulation "qcb/x/agent/simulation"
+	"qcb/x/agent/types"
 )
 
 // avoid unused import issue

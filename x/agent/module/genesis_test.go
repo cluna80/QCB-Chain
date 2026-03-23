@@ -3,10 +3,10 @@ package agent_test
 import (
 	"testing"
 
-	keepertest "oan/testutil/keeper"
-	"oan/testutil/nullify"
-	agent "oan/x/agent/module"
-	"oan/x/agent/types"
+	keepertest "qcb/testutil/keeper"
+	"qcb/testutil/nullify"
+	agent "qcb/x/agent/module"
+	"qcb/x/agent/types"
 
 	"github.com/stretchr/testify/require"
 )

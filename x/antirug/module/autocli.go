@@ -3,7 +3,7 @@ package antirug
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "oan/api/oan/antirug"
+	modulev1 "qcb/api/qcb/antirug"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

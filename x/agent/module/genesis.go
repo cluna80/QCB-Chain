@@ -3,8 +3,8 @@ package agent
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"oan/x/agent/keeper"
-	"oan/x/agent/types"
+	"qcb/x/agent/keeper"
+	"qcb/x/agent/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

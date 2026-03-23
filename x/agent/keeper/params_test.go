@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "oan/testutil/keeper"
-	"oan/x/agent/types"
+	keepertest "qcb/testutil/keeper"
+	"qcb/x/agent/types"
 )
 
 func TestGetParams(t *testing.T) {

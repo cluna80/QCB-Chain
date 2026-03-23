@@ -53,60 +53,60 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	agentmodulev1 "oan/api/oan/agent/module"
-	antirugmodulev1 "oan/api/oan/antirug/module"
-	oanagentmodulev1 "oan/api/oan/oanagent/module"
-	oanbridgemodulev1 "oan/api/oan/oanbridge/module"
-	oancommsmodulev1 "oan/api/oan/oancomms/module"
-	oancomputemodulev1 "oan/api/oan/oancompute/module"
-	oandaomodulev1 "oan/api/oan/oandao/module"
-	oaneconomymodulev1 "oan/api/oan/oaneconomy/module"
-	oanguardianmodulev1 "oan/api/oan/oanguardian/module"
-	oanidentitymodulev1 "oan/api/oan/oanidentity/module"
-	oanmarketmodulev1 "oan/api/oan/oanmarket/module"
-	oanmediamodulev1 "oan/api/oan/oanmedia/module"
-	oannodemodulev1 "oan/api/oan/oannode/module"
-	oanprotocolmodulev1 "oan/api/oan/oanprotocol/module"
-	oanqsecmodulev1 "oan/api/oan/oanqsec/module"
-	oanrelaymodulev1 "oan/api/oan/oanrelay/module"
-	oansportsmodulev1 "oan/api/oan/oansports/module"
-	oanwalletprotomodulev1 "oan/api/oan/oanwalletproto/module"
-	_ "oan/x/agent/module" // import for side-effects
-	agentmoduletypes "oan/x/agent/types"
-	_ "oan/x/antirug/module" // import for side-effects
-	antirugmoduletypes "oan/x/antirug/types"
-	_ "oan/x/oanagent/module" // import for side-effects
-	oanagentmoduletypes "oan/x/oanagent/types"
-	_ "oan/x/oanbridge/module" // import for side-effects
-	oanbridgemoduletypes "oan/x/oanbridge/types"
-	_ "oan/x/oancomms/module" // import for side-effects
-	oancommsmoduletypes "oan/x/oancomms/types"
-	_ "oan/x/oancompute/module" // import for side-effects
-	oancomputemoduletypes "oan/x/oancompute/types"
-	_ "oan/x/oandao/module" // import for side-effects
-	oandaomoduletypes "oan/x/oandao/types"
-	_ "oan/x/oaneconomy/module" // import for side-effects
-	oaneconomymoduletypes "oan/x/oaneconomy/types"
-	_ "oan/x/oanguardian/module" // import for side-effects
-	oanguardianmoduletypes "oan/x/oanguardian/types"
-	_ "oan/x/oanidentity/module" // import for side-effects
-	oanidentitymoduletypes "oan/x/oanidentity/types"
-	_ "oan/x/oanmarket/module" // import for side-effects
-	oanmarketmoduletypes "oan/x/oanmarket/types"
-	_ "oan/x/oanmedia/module" // import for side-effects
-	oanmediamoduletypes "oan/x/oanmedia/types"
-	_ "oan/x/oannode/module" // import for side-effects
-	oannodemoduletypes "oan/x/oannode/types"
-	_ "oan/x/oanprotocol/module" // import for side-effects
-	oanprotocolmoduletypes "oan/x/oanprotocol/types"
-	_ "oan/x/oanqsec/module" // import for side-effects
-	oanqsecmoduletypes "oan/x/oanqsec/types"
-	_ "oan/x/oanrelay/module" // import for side-effects
-	oanrelaymoduletypes "oan/x/oanrelay/types"
-	_ "oan/x/oansports/module" // import for side-effects
-	oansportsmoduletypes "oan/x/oansports/types"
-	_ "oan/x/oanwalletproto/module" // import for side-effects
-	oanwalletprotomoduletypes "oan/x/oanwalletproto/types"
+	agentmodulev1 "qcb/api/qcb/agent/module"
+	antirugmodulev1 "qcb/api/qcb/antirug/module"
+	qcbagentmodulev1 "qcb/api/qcb/qcbagent/module"
+	qcbbridgemodulev1 "qcb/api/qcb/qcbbridge/module"
+	qcbcommsmodulev1 "qcb/api/qcb/qcbcomms/module"
+	qcbcomputemodulev1 "qcb/api/qcb/qcbcompute/module"
+	qcbdaomodulev1 "qcb/api/qcb/qcbdao/module"
+	qcbeconomymodulev1 "qcb/api/qcb/qcbeconomy/module"
+	qcbguardianmodulev1 "qcb/api/qcb/qcbguardian/module"
+	qcbidentitymodulev1 "qcb/api/qcb/qcbidentity/module"
+	qcbmarketmodulev1 "qcb/api/qcb/qcbmarket/module"
+	qcbmediamodulev1 "qcb/api/qcb/qcbmedia/module"
+	qcbnodemodulev1 "qcb/api/qcb/qcbnode/module"
+	qcbprotocolmodulev1 "qcb/api/qcb/qcbprotocol/module"
+	qcbqsecmodulev1 "qcb/api/qcb/qcbqsec/module"
+	qcbrelaymodulev1 "qcb/api/qcb/qcbrelay/module"
+	qcbsportsmodulev1 "qcb/api/qcb/qcbsports/module"
+	qcbwalletprotomodulev1 "qcb/api/qcb/qcbwalletproto/module"
+	_ "qcb/x/agent/module" // import for side-effects
+	agentmoduletypes "qcb/x/agent/types"
+	_ "qcb/x/antirug/module" // import for side-effects
+	antirugmoduletypes "qcb/x/antirug/types"
+	_ "qcb/x/qcbagent/module" // import for side-effects
+	qcbagentmoduletypes "qcb/x/qcbagent/types"
+	_ "qcb/x/qcbbridge/module" // import for side-effects
+	qcbbridgemoduletypes "qcb/x/qcbbridge/types"
+	_ "qcb/x/qcbcomms/module" // import for side-effects
+	qcbcommsmoduletypes "qcb/x/qcbcomms/types"
+	_ "qcb/x/qcbcompute/module" // import for side-effects
+	qcbcomputemoduletypes "qcb/x/qcbcompute/types"
+	_ "qcb/x/qcbdao/module" // import for side-effects
+	qcbdaomoduletypes "qcb/x/qcbdao/types"
+	_ "qcb/x/qcbeconomy/module" // import for side-effects
+	qcbeconomymoduletypes "qcb/x/qcbeconomy/types"
+	_ "qcb/x/qcbguardian/module" // import for side-effects
+	qcbguardianmoduletypes "qcb/x/qcbguardian/types"
+	_ "qcb/x/qcbidentity/module" // import for side-effects
+	qcbidentitymoduletypes "qcb/x/qcbidentity/types"
+	_ "qcb/x/qcbmarket/module" // import for side-effects
+	qcbmarketmoduletypes "qcb/x/qcbmarket/types"
+	_ "qcb/x/qcbmedia/module" // import for side-effects
+	qcbmediamoduletypes "qcb/x/qcbmedia/types"
+	_ "qcb/x/qcbnode/module" // import for side-effects
+	qcbnodemoduletypes "qcb/x/qcbnode/types"
+	_ "qcb/x/qcbprotocol/module" // import for side-effects
+	qcbprotocolmoduletypes "qcb/x/qcbprotocol/types"
+	_ "qcb/x/qcbqsec/module" // import for side-effects
+	qcbqsecmoduletypes "qcb/x/qcbqsec/types"
+	_ "qcb/x/qcbrelay/module" // import for side-effects
+	qcbrelaymoduletypes "qcb/x/qcbrelay/types"
+	_ "qcb/x/qcbsports/module" // import for side-effects
+	qcbsportsmoduletypes "qcb/x/qcbsports/types"
+	_ "qcb/x/qcbwalletproto/module" // import for side-effects
+	qcbwalletprotomoduletypes "qcb/x/qcbwalletproto/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -145,23 +145,23 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		agentmoduletypes.ModuleName,
-		oanagentmoduletypes.ModuleName,
-		oanidentitymoduletypes.ModuleName,
-		oandaomoduletypes.ModuleName,
-		oaneconomymoduletypes.ModuleName,
-		oancomputemoduletypes.ModuleName,
-		oanmarketmoduletypes.ModuleName,
-		oanguardianmoduletypes.ModuleName,
-		oanqsecmoduletypes.ModuleName,
-		oanmediamoduletypes.ModuleName,
-		oansportsmoduletypes.ModuleName,
-		oanbridgemoduletypes.ModuleName,
-		oannodemoduletypes.ModuleName,
+		qcbagentmoduletypes.ModuleName,
+		qcbidentitymoduletypes.ModuleName,
+		qcbdaomoduletypes.ModuleName,
+		qcbeconomymoduletypes.ModuleName,
+		qcbcomputemoduletypes.ModuleName,
+		qcbmarketmoduletypes.ModuleName,
+		qcbguardianmoduletypes.ModuleName,
+		qcbqsecmoduletypes.ModuleName,
+		qcbmediamoduletypes.ModuleName,
+		qcbsportsmoduletypes.ModuleName,
+		qcbbridgemoduletypes.ModuleName,
+		qcbnodemoduletypes.ModuleName,
 		antirugmoduletypes.ModuleName,
-		oancommsmoduletypes.ModuleName,
-		oanrelaymoduletypes.ModuleName,
-		oanwalletprotomoduletypes.ModuleName,
-		oanprotocolmoduletypes.ModuleName,
+		qcbcommsmoduletypes.ModuleName,
+		qcbrelaymoduletypes.ModuleName,
+		qcbwalletprotomoduletypes.ModuleName,
+		qcbprotocolmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -187,23 +187,23 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		agentmoduletypes.ModuleName,
-		oanagentmoduletypes.ModuleName,
-		oanidentitymoduletypes.ModuleName,
-		oandaomoduletypes.ModuleName,
-		oaneconomymoduletypes.ModuleName,
-		oancomputemoduletypes.ModuleName,
-		oanmarketmoduletypes.ModuleName,
-		oanguardianmoduletypes.ModuleName,
-		oanqsecmoduletypes.ModuleName,
-		oanmediamoduletypes.ModuleName,
-		oansportsmoduletypes.ModuleName,
-		oanbridgemoduletypes.ModuleName,
-		oannodemoduletypes.ModuleName,
+		qcbagentmoduletypes.ModuleName,
+		qcbidentitymoduletypes.ModuleName,
+		qcbdaomoduletypes.ModuleName,
+		qcbeconomymoduletypes.ModuleName,
+		qcbcomputemoduletypes.ModuleName,
+		qcbmarketmoduletypes.ModuleName,
+		qcbguardianmoduletypes.ModuleName,
+		qcbqsecmoduletypes.ModuleName,
+		qcbmediamoduletypes.ModuleName,
+		qcbsportsmoduletypes.ModuleName,
+		qcbbridgemoduletypes.ModuleName,
+		qcbnodemoduletypes.ModuleName,
 		antirugmoduletypes.ModuleName,
-		oancommsmoduletypes.ModuleName,
-		oanrelaymoduletypes.ModuleName,
-		oanwalletprotomoduletypes.ModuleName,
-		oanprotocolmoduletypes.ModuleName,
+		qcbcommsmoduletypes.ModuleName,
+		qcbrelaymoduletypes.ModuleName,
+		qcbwalletprotomoduletypes.ModuleName,
+		qcbprotocolmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -223,23 +223,23 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		agentmoduletypes.ModuleName,
-		oanagentmoduletypes.ModuleName,
-		oanidentitymoduletypes.ModuleName,
-		oandaomoduletypes.ModuleName,
-		oaneconomymoduletypes.ModuleName,
-		oancomputemoduletypes.ModuleName,
-		oanmarketmoduletypes.ModuleName,
-		oanguardianmoduletypes.ModuleName,
-		oanqsecmoduletypes.ModuleName,
-		oanmediamoduletypes.ModuleName,
-		oansportsmoduletypes.ModuleName,
-		oanbridgemoduletypes.ModuleName,
-		oannodemoduletypes.ModuleName,
+		qcbagentmoduletypes.ModuleName,
+		qcbidentitymoduletypes.ModuleName,
+		qcbdaomoduletypes.ModuleName,
+		qcbeconomymoduletypes.ModuleName,
+		qcbcomputemoduletypes.ModuleName,
+		qcbmarketmoduletypes.ModuleName,
+		qcbguardianmoduletypes.ModuleName,
+		qcbqsecmoduletypes.ModuleName,
+		qcbmediamoduletypes.ModuleName,
+		qcbsportsmoduletypes.ModuleName,
+		qcbbridgemoduletypes.ModuleName,
+		qcbnodemoduletypes.ModuleName,
 		antirugmoduletypes.ModuleName,
-		oancommsmoduletypes.ModuleName,
-		oanrelaymoduletypes.ModuleName,
-		oanwalletprotomoduletypes.ModuleName,
-		oanprotocolmoduletypes.ModuleName,
+		qcbcommsmoduletypes.ModuleName,
+		qcbrelaymoduletypes.ModuleName,
+		qcbwalletprotomoduletypes.ModuleName,
+		qcbprotocolmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -260,13 +260,13 @@ var (
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: ibcfeetypes.ModuleName},
 		{Account: icatypes.ModuleName},
-		{Account: "oaneconomy", Permissions: []string{authtypes.Burner, authtypes.Minter}},
-		{Account: "oanagent", Permissions: []string{authtypes.Burner}},
-		{Account: "oannode", Permissions: []string{authtypes.Burner, authtypes.Minter}},
-		{Account: "oanmarket", Permissions: []string{authtypes.Burner}},
-		{Account: "oancompute", Permissions: []string{authtypes.Burner, authtypes.Minter}},
-		{Account: "oanbridge", Permissions: []string{authtypes.Burner}},
-		{Account: oanprotocolmoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner, authtypes.Staking}},
+		{Account: "qcbeconomy", Permissions: []string{authtypes.Burner, authtypes.Minter}},
+		{Account: "qcbagent", Permissions: []string{authtypes.Burner}},
+		{Account: "qcbnode", Permissions: []string{authtypes.Burner, authtypes.Minter}},
+		{Account: "qcbmarket", Permissions: []string{authtypes.Burner}},
+		{Account: "qcbcompute", Permissions: []string{authtypes.Burner, authtypes.Minter}},
+		{Account: "qcbbridge", Permissions: []string{authtypes.Burner}},
+		{Account: qcbprotocolmoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner, authtypes.Staking}},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 
@@ -407,72 +407,72 @@ var (
 				Config: appconfig.WrapAny(&agentmodulev1.Module{}),
 			},
 			{
-				Name:   oanagentmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanagentmodulev1.Module{}),
+				Name:   qcbagentmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbagentmodulev1.Module{}),
 			},
 			{
-				Name:   oanidentitymoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanidentitymodulev1.Module{}),
+				Name:   qcbidentitymoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbidentitymodulev1.Module{}),
 			},
 			{
-				Name:   oandaomoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oandaomodulev1.Module{}),
+				Name:   qcbdaomoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbdaomodulev1.Module{}),
 			},
 			{
-				Name:   oaneconomymoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oaneconomymodulev1.Module{}),
+				Name:   qcbeconomymoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbeconomymodulev1.Module{}),
 			},
 			{
-				Name:   oancomputemoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oancomputemodulev1.Module{}),
+				Name:   qcbcomputemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbcomputemodulev1.Module{}),
 			},
 			{
-				Name:   oanmarketmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanmarketmodulev1.Module{}),
+				Name:   qcbmarketmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbmarketmodulev1.Module{}),
 			},
 			{
-				Name:   oanguardianmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanguardianmodulev1.Module{}),
+				Name:   qcbguardianmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbguardianmodulev1.Module{}),
 			},
 			{
-				Name:   oanqsecmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanqsecmodulev1.Module{}),
+				Name:   qcbqsecmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbqsecmodulev1.Module{}),
 			},
 			{
-				Name:   oanmediamoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanmediamodulev1.Module{}),
+				Name:   qcbmediamoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbmediamodulev1.Module{}),
 			},
 			{
-				Name:   oansportsmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oansportsmodulev1.Module{}),
+				Name:   qcbsportsmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbsportsmodulev1.Module{}),
 			},
 			{
-				Name:   oanbridgemoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanbridgemodulev1.Module{}),
+				Name:   qcbbridgemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbbridgemodulev1.Module{}),
 			},
 			{
-				Name:   oannodemoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oannodemodulev1.Module{}),
+				Name:   qcbnodemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbnodemodulev1.Module{}),
 			},
 			{
 				Name:   antirugmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&antirugmodulev1.Module{}),
 			},
 			{
-				Name:   oancommsmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oancommsmodulev1.Module{}),
+				Name:   qcbcommsmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbcommsmodulev1.Module{}),
 			},
 			{
-				Name:   oanrelaymoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanrelaymodulev1.Module{}),
+				Name:   qcbrelaymoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbrelaymodulev1.Module{}),
 			},
 			{
-				Name:   oanwalletprotomoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanwalletprotomodulev1.Module{}),
+				Name:   qcbwalletprotomoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbwalletprotomodulev1.Module{}),
 			},
 			{
-				Name:   oanprotocolmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&oanprotocolmodulev1.Module{}),
+				Name:   qcbprotocolmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&qcbprotocolmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

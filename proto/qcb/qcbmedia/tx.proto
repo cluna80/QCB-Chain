@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package qcb.qcbmedia;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbmedia/params.proto";
+
+option go_package = "qcb/x/qcbmedia/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams   (MsgUpdateParams  ) returns (MsgUpdateParamsResponse  );
+  rpc CreateMediaNft (MsgCreateMediaNft) returns (MsgCreateMediaNftResponse);
+  rpc ClaimRoyalty   (MsgClaimRoyalty  ) returns (MsgClaimRoyaltyResponse  );
+  rpc LicenseContent (MsgLicenseContent) returns (MsgLicenseContentResponse);
+  rpc RecordView     (MsgRecordView    ) returns (MsgRecordViewResponse    );
+  rpc MintMusicNft   (MsgMintMusicNft  ) returns (MsgMintMusicNftResponse  );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                      "authority";
+  option           (amino.name) = "qcb/x/qcbmedia/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgCreateMediaNft {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string title        = 2;
+  string mediaType    = 3;
+  string contentHash  = 4;
+  uint64 creatorShare = 5;
+}
+
+message MsgCreateMediaNftResponse {
+  string nftId       = 1;
+  string contentHash = 2;
+  uint64 royaltyRate = 3;
+}
+
+message MsgClaimRoyalty {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string nftId       = 2;
+  int32  periodStart = 3;
+  int32  periodEnd   = 4;
+}
+
+message MsgClaimRoyaltyResponse {
+  uint64 amount = 1;
+  string nftId  = 2;
+}
+
+message MsgLicenseContent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string nftId        = 2;
+  string licenseeAddr = 3;
+  string licenseType  = 4;
+  int32  duration     = 5;
+  uint64 fee          = 6;
+}
+
+message MsgLicenseContentResponse {
+  string licenseId = 1;
+  int32  expiresAt = 2;
+}
+
+message MsgRecordView {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string nftId         = 2;
+  string viewerAddr    = 3;
+  uint64 paymentAmount = 4;
+}
+
+message MsgRecordViewResponse {
+  bool   success       = 1;
+  uint64 creatorEarned = 2;
+}
+
+message MsgMintMusicNft {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string title     = 2;
+  string audioHash = 3;
+  string agentId   = 4;
+  uint64 bpm       = 5;
+  string genre     = 6;
+}
+
+message MsgMintMusicNftResponse {
+  string nftId     = 1;
+  string audioHash = 2;
+}
+

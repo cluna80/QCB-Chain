@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/oanmedia/keeper"
-	"oan/x/oanmedia/types"
+	"qcb/x/qcbmedia/keeper"
+	"qcb/x/qcbmedia/types"
 )
 
 func OanmediaKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

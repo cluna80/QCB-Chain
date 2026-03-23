@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/oannode/keeper"
-	"oan/x/oannode/types"
+	"qcb/x/qcbnode/keeper"
+	"qcb/x/qcbnode/types"
 )
 
 func OannodeKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

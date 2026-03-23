@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"oan/x/agent/types"
+	"qcb/x/agent/types"
 )
 
 type msgServer struct {

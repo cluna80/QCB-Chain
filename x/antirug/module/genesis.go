@@ -3,8 +3,8 @@ package antirug
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"oan/x/antirug/keeper"
-	"oan/x/antirug/types"
+	"qcb/x/antirug/keeper"
+	"qcb/x/antirug/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

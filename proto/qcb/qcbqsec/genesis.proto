@@ -1,0 +1,17 @@
+syntax = "proto3";
+package qcb.qcbqsec;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbqsec/params.proto";
+
+option go_package = "qcb/x/qcbqsec/types";
+
+// GenesisState defines the qcbqsec module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+package qcb.qcbmedia;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbmedia/params.proto";
+
+option go_package = "qcb/x/qcbmedia/types";
+
+// GenesisState defines the qcbmedia module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

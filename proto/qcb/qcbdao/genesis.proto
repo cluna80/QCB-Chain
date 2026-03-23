@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package qcb.qcbdao;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbdao/params.proto";
+import "qcb/qcbdao/proposal.proto";
+
+option go_package = "qcb/x/qcbdao/types";
+
+// GenesisState defines the qcbdao module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params   params       = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Proposal proposalList = 2 [(gogoproto.nullable) = false] ;
+}
+

@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package qcb.qcbnode;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbnode/params.proto";
+
+option go_package = "qcb/x/qcbnode/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams    (MsgUpdateParams   ) returns (MsgUpdateParamsResponse   );
+  rpc RegisterNode    (MsgRegisterNode   ) returns (MsgRegisterNodeResponse   );
+  rpc UpdateNode      (MsgUpdateNode     ) returns (MsgUpdateNodeResponse     );
+  rpc ClaimNodeReward (MsgClaimNodeReward) returns (MsgClaimNodeRewardResponse);
+  rpc SlashNode       (MsgSlashNode      ) returns (MsgSlashNodeResponse      );
+  rpc DeregisterNode  (MsgDeregisterNode ) returns (MsgDeregisterNodeResponse );
+  rpc SetNodeConfig   (MsgSetNodeConfig  ) returns (MsgSetNodeConfigResponse  );
+  rpc ReportNode      (MsgReportNode     ) returns (MsgReportNodeResponse     );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                     "authority";
+  option           (amino.name) = "qcb/x/qcbnode/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterNode {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator  = 1;
+  string nodeType = 2;
+  string endpoint = 3;
+  string nodeId   = 4;
+}
+
+message MsgRegisterNodeResponse {
+  string nodeId   = 1;
+  string nodeType = 2;
+  string status   = 3;
+}
+
+message MsgUpdateNode {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator     = 1;
+  string nodeId      = 2;
+  string uptimeProof = 3;
+  int32  blockHeight = 4;
+}
+
+message MsgUpdateNodeResponse {
+  string nodeId   = 1;
+  bool   verified = 2;
+}
+
+message MsgClaimNodeReward {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string nodeId  = 2;
+  int32  epoch   = 3;
+}
+
+message MsgClaimNodeRewardResponse {
+  string nodeId = 1;
+  uint64 reward = 2;
+  int32  epoch  = 3;
+}
+
+message MsgSlashNode {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string nodeId    = 2;
+  string evidence  = 3;
+  string slashType = 4;
+}
+
+message MsgSlashNodeResponse {
+  string nodeId  = 1;
+  uint64 slashed = 2;
+  string reason  = 3;
+}
+
+message MsgDeregisterNode {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string nodeId  = 2;
+  string reason  = 3;
+}
+
+message MsgDeregisterNodeResponse {
+  string nodeId          = 1;
+  int32  unbondingEndsAt = 2;
+}
+
+message MsgSetNodeConfig {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator      = 1;
+  string nodeId       = 2;
+  string endpoint     = 3;
+  string capabilities = 4;
+}
+
+message MsgSetNodeConfigResponse {
+  string nodeId  = 1;
+  bool   updated = 2;
+}
+
+message MsgReportNode {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator       = 1;
+  string nodeId        = 2;
+  string evidence      = 3;
+  string violationType = 4;
+}
+
+message MsgReportNodeResponse {
+  string reportId = 1;
+  string status   = 2;
+}
+

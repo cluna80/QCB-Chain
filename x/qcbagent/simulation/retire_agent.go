@@ -1,0 +1,30 @@
+package simulation
+
+import (
+	"math/rand"
+
+	"qcb/x/qcbagent/keeper"
+	"qcb/x/qcbagent/types"
+
+	"github.com/cosmos/cosmos-sdk/baseapp"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
+)
+
+func SimulateMsgRetireAgent(
+	ak types.AccountKeeper,
+	bk types.BankKeeper,
+	k keeper.Keeper,
+) simtypes.Operation {
+	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
+	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
+		simAccount, _ := simtypes.RandomAcc(r, accs)
+		msg := &types.MsgRetireAgent{
+			Creator: simAccount.Address.String(),
+		}
+
+		// TODO: Handling the RetireAgent simulation
+
+		return simtypes.NoOpMsg(types.ModuleName, sdk.MsgTypeURL(msg), "RetireAgent simulation not implemented"), nil, nil
+	}
+}

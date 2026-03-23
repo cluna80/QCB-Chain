@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/oanrelay/keeper"
-	"oan/x/oanrelay/types"
+	"qcb/x/qcbrelay/keeper"
+	"qcb/x/qcbrelay/types"
 )
 
 func OanrelayKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

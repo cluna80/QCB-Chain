@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/agent/keeper"
-	"oan/x/agent/types"
+	"qcb/x/agent/keeper"
+	"qcb/x/agent/types"
 )
 
 func AgentKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

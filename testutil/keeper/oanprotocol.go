@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/oanprotocol/keeper"
-	"oan/x/oanprotocol/types"
+	"qcb/x/qcbprotocol/keeper"
+	"qcb/x/qcbprotocol/types"
 )
 
 func OanprotocolKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

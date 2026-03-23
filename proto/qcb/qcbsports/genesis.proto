@@ -1,0 +1,17 @@
+syntax = "proto3";
+package qcb.qcbsports;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbsports/params.proto";
+
+option go_package = "qcb/x/qcbsports/types";
+
+// GenesisState defines the qcbsports module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

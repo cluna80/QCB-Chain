@@ -1,0 +1,18 @@
+syntax = "proto3";
+package qcb.qcbsports;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "qcb/x/qcbsports/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "qcb/x/qcbsports/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 matchFee = 1 [(gogoproto.moretags) = "yaml:\"match_fee\""];
+  uint64 stadiumMintFee = 2 [(gogoproto.moretags) = "yaml:\"stadium_mint_fee\""];
+  uint64 predictionCut = 3 [(gogoproto.moretags) = "yaml:\"prediction_cut\""];
+}

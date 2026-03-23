@@ -8,9 +8,9 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"oan/testutil/sample"
-	antirugsimulation "oan/x/antirug/simulation"
-	"oan/x/antirug/types"
+	"qcb/testutil/sample"
+	antirugsimulation "qcb/x/antirug/simulation"
+	"qcb/x/antirug/types"
 )
 
 // avoid unused import issue

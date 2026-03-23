@@ -1,0 +1,19 @@
+syntax = "proto3";
+package qcb.qcbeconomy;
+
+option go_package = "qcb/x/qcbeconomy/types";
+
+message Task {
+  string index = 1; 
+  string title = 2; 
+  string description = 3; 
+  string creator = 4; 
+  string assignee = 5; 
+  uint64 reward = 6; 
+  string status = 7; 
+  int32 deadline = 8; 
+  bool completed = 9; 
+  string resultHash = 10; 
+  
+}
+

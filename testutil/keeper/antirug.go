@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/antirug/keeper"
-	"oan/x/antirug/types"
+	"qcb/x/antirug/keeper"
+	"qcb/x/antirug/types"
 )
 
 func AntirugKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

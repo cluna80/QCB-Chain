@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"oan/x/oanwalletproto/keeper"
-	"oan/x/oanwalletproto/types"
+	"qcb/x/qcbwalletproto/keeper"
+	"qcb/x/qcbwalletproto/types"
 )
 
 func OanwalletprotoKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {

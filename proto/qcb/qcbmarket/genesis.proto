@@ -1,0 +1,17 @@
+syntax = "proto3";
+package qcb.qcbmarket;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbmarket/params.proto";
+
+option go_package = "qcb/x/qcbmarket/types";
+
+// GenesisState defines the qcbmarket module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

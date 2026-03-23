@@ -1,0 +1,18 @@
+syntax = "proto3";
+package qcb.qcbwalletproto;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "qcb/x/qcbwalletproto/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "qcb/x/qcbwalletproto/Params";
+  option (gogoproto.equal) = true;
+
+  
+  uint64 maxWalletsPerDid = 1 [(gogoproto.moretags) = "yaml:\"max_wallets_per_did\""];
+  uint64 keyRotationBlocks = 2 [(gogoproto.moretags) = "yaml:\"key_rotation_blocks\""];
+  bool pqRequired = 3 [(gogoproto.moretags) = "yaml:\"pq_required\""];
+}

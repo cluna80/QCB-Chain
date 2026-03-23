@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"oan/x/antirug/types"
+	"qcb/x/antirug/types"
 
 	"github.com/stretchr/testify/require"
 )

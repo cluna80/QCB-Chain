@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package qcb.qcbagent;
+
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "qcb/qcbagent/params.proto";
+
+option go_package = "qcb/x/qcbagent/types";
+
+// Msg defines the Msg service.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  
+  // UpdateParams defines a (governance) operation for updating the module
+  // parameters. The authority defaults to the x/gov module account.
+  rpc UpdateParams   (MsgUpdateParams  ) returns (MsgUpdateParamsResponse  );
+  rpc RegisterAgent  (MsgRegisterAgent ) returns (MsgRegisterAgentResponse );
+  rpc RecordTrade    (MsgRecordTrade   ) returns (MsgRecordTradeResponse   );
+  rpc BreedAgent     (MsgBreedAgent    ) returns (MsgBreedAgentResponse    );
+  rpc ChallengeAgent (MsgChallengeAgent) returns (MsgChallengeAgentResponse);
+  rpc RetireAgent    (MsgRetireAgent   ) returns (MsgRetireAgentResponse   );
+  rpc SpawnAgent     (MsgSpawnAgent    ) returns (MsgSpawnAgentResponse    );
+}
+// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgUpdateParams {
+  option (cosmos.msg.v1.signer) =                      "authority";
+  option           (amino.name) = "qcb/x/qcbagent/MsgUpdateParams";
+  
+  // authority is the address that controls the module (defaults to x/gov unless overwritten).
+  string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  // params defines the module parameters to update.
+  
+  // NOTE: All parameters must be supplied.
+  Params params = 2 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+// MsgUpdateParamsResponse defines the response structure for executing a
+// MsgUpdateParams message.
+message MsgUpdateParamsResponse {}
+
+message MsgRegisterAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string nodeId    = 2;
+  string name      = 3;
+  string agentType = 4;
+}
+
+message MsgRegisterAgentResponse {
+  string nodeId  = 1;
+  string dnaHash = 2;
+}
+
+message MsgRecordTrade {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string agentId = 2;
+  string action  = 3;
+  int32  amount  = 4;
+  string result  = 5;
+}
+
+message MsgRecordTradeResponse {
+  bool  success     = 1;
+  int32 totalTrades = 2;
+  int32 winRateBps  = 3;
+}
+
+message MsgBreedAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string parentA   = 2;
+  string parentB   = 3;
+  string childId   = 4;
+  string childName = 5;
+}
+
+message MsgBreedAgentResponse {
+  string childId     = 1;
+  string dnaHash     = 2;
+  int32  genomeScore = 3;
+}
+
+message MsgChallengeAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator  = 1;
+  string targetId = 2;
+  uint64 stake    = 3;
+}
+
+message MsgChallengeAgentResponse {
+  string challengeId = 1;
+  string status      = 2;
+}
+
+message MsgRetireAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string nodeId  = 2;
+  string reason  = 3;
+}
+
+message MsgRetireAgentResponse {
+  bool  success    = 1;
+  int32 finalScore = 2;
+}
+
+message MsgSpawnAgent {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator   = 1;
+  string parentId  = 2;
+  string childId   = 3;
+  string childName = 4;
+  string childType = 5;
+}
+
+message MsgSpawnAgentResponse {
+  string childId     = 1;
+  string dnaHash     = 2;
+  int32  generation  = 3;
+  int32  genomeScore = 4;
+}
+
