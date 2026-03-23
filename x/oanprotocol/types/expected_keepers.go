@@ -12,6 +12,7 @@ type AccountKeeper interface {
 type BankKeeper interface {
 	SpendableCoins(context.Context, sdk.AccAddress) sdk.Coins
 	GetBalance(context.Context, sdk.AccAddress, string) sdk.Coin
+	GetSupply(context.Context, string) sdk.Coin
 }
 
 type ParamSubspace interface {

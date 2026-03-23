@@ -1,3 +1,38 @@
+#!/bin/bash
+# Fix hard cap enforcement in oanprotocol
+cd ~/oan
+
+echo "Fixing hard cap enforcement..."
+
+# ── Fix expected_keepers.go — add GetSupply ────────────────
+cat > ~/oan/x/oanprotocol/types/expected_keepers.go << 'GOEOF'
+package types
+
+import (
+	"context"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+)
+
+type AccountKeeper interface {
+	GetAccount(context.Context, sdk.AccAddress) sdk.AccountI
+}
+
+type BankKeeper interface {
+	SpendableCoins(context.Context, sdk.AccAddress) sdk.Coins
+	GetBalance(context.Context, sdk.AccAddress, string) sdk.Coin
+	GetSupply(context.Context, string) sdk.Coin
+}
+
+type ParamSubspace interface {
+	Get(context.Context, []byte, interface{})
+	Set(context.Context, []byte, interface{})
+}
+GOEOF
+
+echo "✅ expected_keepers.go — added GetSupply"
+
+# ── Fix keeper.go — fix hard cap check ────────────────────
+cat > ~/oan/x/oanprotocol/keeper/keeper.go << 'GOEOF'
 package keeper
 
 import (
@@ -244,3 +279,12 @@ func (k Keeper) GetSupplyInfo(ctx sdk.Context) map[string]uint64 {
 		"remaining_oan":       remaining / 1_000_000,
 	}
 }
+GOEOF
+
+echo "✅ keeper.go — fixed hard cap with real GetSupply"
+
+# ── Build ──────────────────────────────────────────────────
+echo ""
+echo "Building..."
+cd ~/oan
+ignite chain build 2>&1 | tail -20
