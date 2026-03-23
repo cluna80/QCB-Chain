@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oancomms/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SendMsgHeader(goCtx context.Context, msg *types.MsgSendMsgHeader) (*types.MsgSendMsgHeaderResponse, error) {
@@ -48,7 +49,9 @@ func (k msgServer) SendMsgHeader(goCtx context.Context, msg *types.MsgSendMsgHea
 	}
 
 	ttl := params.MsgTtlBlocks
-	if ttl == 0 { ttl = 1000 }
+	if ttl == 0 {
+		ttl = 1000
+	}
 	expiresAt := int64(ctx.BlockHeight()) + int64(ttl)
 
 	// Check policy — is sender blocked by recipient?

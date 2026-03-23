@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oaneconomy/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) ClaimUbi(goCtx context.Context, msg *types.MsgClaimUbi) (*types.MsgClaimUbiResponse, error) {
@@ -44,7 +45,9 @@ func (k msgServer) ClaimUbi(goCtx context.Context, msg *types.MsgClaimUbi) (*typ
 	}
 	params := k.GetParams(ctx)
 	ubiAmount := params.UbiRate
-	if ubiAmount == 0 { ubiAmount = 100000 }
+	if ubiAmount == 0 {
+		ubiAmount = 100000
+	}
 
 	// SECURITY 4 — minimum amount check (anti-dust)
 	if ubiAmount < 100 {

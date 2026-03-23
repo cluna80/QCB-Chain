@@ -66,6 +66,7 @@ import (
 	oanmarketmodulev1 "oan/api/oan/oanmarket/module"
 	oanmediamodulev1 "oan/api/oan/oanmedia/module"
 	oannodemodulev1 "oan/api/oan/oannode/module"
+	oanprotocolmodulev1 "oan/api/oan/oanprotocol/module"
 	oanqsecmodulev1 "oan/api/oan/oanqsec/module"
 	oanrelaymodulev1 "oan/api/oan/oanrelay/module"
 	oansportsmodulev1 "oan/api/oan/oansports/module"
@@ -96,6 +97,8 @@ import (
 	oanmediamoduletypes "oan/x/oanmedia/types"
 	_ "oan/x/oannode/module" // import for side-effects
 	oannodemoduletypes "oan/x/oannode/types"
+	_ "oan/x/oanprotocol/module" // import for side-effects
+	oanprotocolmoduletypes "oan/x/oanprotocol/types"
 	_ "oan/x/oanqsec/module" // import for side-effects
 	oanqsecmoduletypes "oan/x/oanqsec/types"
 	_ "oan/x/oanrelay/module" // import for side-effects
@@ -158,6 +161,7 @@ var (
 		oancommsmoduletypes.ModuleName,
 		oanrelaymoduletypes.ModuleName,
 		oanwalletprotomoduletypes.ModuleName,
+		oanprotocolmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -199,6 +203,7 @@ var (
 		oancommsmoduletypes.ModuleName,
 		oanrelaymoduletypes.ModuleName,
 		oanwalletprotomoduletypes.ModuleName,
+		oanprotocolmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -234,6 +239,7 @@ var (
 		oancommsmoduletypes.ModuleName,
 		oanrelaymoduletypes.ModuleName,
 		oanwalletprotomoduletypes.ModuleName,
+		oanprotocolmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -260,6 +266,7 @@ var (
 		{Account: "oanmarket", Permissions: []string{authtypes.Burner}},
 		{Account: "oancompute", Permissions: []string{authtypes.Burner, authtypes.Minter}},
 		{Account: "oanbridge", Permissions: []string{authtypes.Burner}},
+		{Account: oanprotocolmoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner, authtypes.Staking}},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 
@@ -462,6 +469,10 @@ var (
 			{
 				Name:   oanwalletprotomoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&oanwalletprotomodulev1.Module{}),
+			},
+			{
+				Name:   oanprotocolmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&oanprotocolmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

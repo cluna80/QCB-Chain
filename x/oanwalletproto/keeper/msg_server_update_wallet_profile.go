@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanwalletproto/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) UpdateWalletProfile(goCtx context.Context, msg *types.MsgUpdateWalletProfile) (*types.MsgUpdateWalletProfileResponse, error) {

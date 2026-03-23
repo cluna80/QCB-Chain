@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanrelay/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SlashRelay(goCtx context.Context, msg *types.MsgSlashRelay) (*types.MsgSlashRelayResponse, error) {

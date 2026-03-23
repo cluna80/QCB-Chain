@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanwalletproto/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) SetEncryptionKey(goCtx context.Context, msg *types.MsgSetEncryptionKey) (*types.MsgSetEncryptionKeyResponse, error) {
@@ -30,7 +31,9 @@ func (k msgServer) SetEncryptionKey(goCtx context.Context, msg *types.MsgSetEncr
 	// Check rotation cooldown
 	params := k.GetParams(ctx)
 	rotationBlocks := int64(params.KeyRotationBlocks)
-	if rotationBlocks == 0 { rotationBlocks = 1000 }
+	if rotationBlocks == 0 {
+		rotationBlocks = 1000
+	}
 	lastRotKey := fmt.Sprintf("wallet-enc-key-rotated-%s", msg.Creator)
 	lastRotBytes, _ := store.Get([]byte(lastRotKey))
 	if lastRotBytes != nil {

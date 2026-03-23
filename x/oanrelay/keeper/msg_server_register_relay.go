@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanrelay/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RegisterRelay(goCtx context.Context, msg *types.MsgRegisterRelay) (*types.MsgRegisterRelayResponse, error) {
@@ -35,7 +36,9 @@ func (k msgServer) RegisterRelay(goCtx context.Context, msg *types.MsgRegisterRe
 	// Check region cap
 	params := k.GetParams(ctx)
 	maxPerRegion := params.MaxRelaysPerRegion
-	if maxPerRegion == 0 { maxPerRegion = 100 }
+	if maxPerRegion == 0 {
+		maxPerRegion = 100
+	}
 	regionCountKey := fmt.Sprintf("relay-region-count-%s", msg.Region)
 	countBytes, _ := store.Get([]byte(regionCountKey))
 	count := uint64(0)

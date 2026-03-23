@@ -1,0 +1,17 @@
+syntax = "proto3";
+package oan.oanprotocol;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "oan/oanprotocol/params.proto";
+
+option go_package = "oan/x/oanprotocol/types";
+
+// GenesisState defines the oanprotocol module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

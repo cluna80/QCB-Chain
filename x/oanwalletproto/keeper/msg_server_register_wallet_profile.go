@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanwalletproto/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RegisterWalletProfile(goCtx context.Context, msg *types.MsgRegisterWalletProfile) (*types.MsgRegisterWalletProfileResponse, error) {
@@ -31,7 +32,9 @@ func (k msgServer) RegisterWalletProfile(goCtx context.Context, msg *types.MsgRe
 	// Check max wallets per DID
 	params := k.GetParams(ctx)
 	maxPerDid := params.MaxWalletsPerDid
-	if maxPerDid == 0 { maxPerDid = 5 }
+	if maxPerDid == 0 {
+		maxPerDid = 5
+	}
 	didCountKey := fmt.Sprintf("wallet-did-count-%s", msg.Did)
 	countBytes, _ := store.Get([]byte(didCountKey))
 	count := uint64(0)

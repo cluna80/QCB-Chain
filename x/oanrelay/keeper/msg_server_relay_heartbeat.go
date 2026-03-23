@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanrelay/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RelayHeartbeat(goCtx context.Context, msg *types.MsgRelayHeartbeat) (*types.MsgRelayHeartbeatResponse, error) {
@@ -30,7 +31,9 @@ func (k msgServer) RelayHeartbeat(goCtx context.Context, msg *types.MsgRelayHear
 		fmt.Sscanf(string(scoreBytes), "%d", &score)
 	}
 	score += 1
-	if score > 1000 { score = 1000 }
+	if score > 1000 {
+		score = 1000
+	}
 	store.Set([]byte(scoreKey), []byte(fmt.Sprintf("%d", score)))
 	store.Set([]byte(fmt.Sprintf("relay-heartbeat-%s", msg.RelayId)),
 		[]byte(fmt.Sprintf("%d|%s", ctx.BlockHeight(), msg.ProofHash)))

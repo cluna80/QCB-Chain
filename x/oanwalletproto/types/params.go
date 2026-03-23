@@ -12,6 +12,6 @@ func NewParams() Params {
 	}
 }
 
-func DefaultParams() Params { return NewParams() }
+func DefaultParams() Params                               { return NewParams() }
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs { return paramtypes.ParamSetPairs{} }
-func (p Params) Validate() error { return nil }
+func (p Params) Validate() error                          { return nil }

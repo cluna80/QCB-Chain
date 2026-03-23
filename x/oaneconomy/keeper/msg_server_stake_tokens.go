@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oaneconomy/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) StakeTokens(goCtx context.Context, msg *types.MsgStakeTokens) (*types.MsgStakeTokensResponse, error) {
@@ -65,10 +66,14 @@ func (k msgServer) StakeTokens(goCtx context.Context, msg *types.MsgStakeTokens)
 
 	tier := "none"
 	switch {
-	case newWalletStake >= 20000: tier = "genesis"
-	case newWalletStake >= 6000:  tier = "sovereign"
-	case newWalletStake >= 1600:  tier = "obsidian"
-	case newWalletStake >= 400:   tier = "arcadian"
+	case newWalletStake >= 20000:
+		tier = "genesis"
+	case newWalletStake >= 6000:
+		tier = "sovereign"
+	case newWalletStake >= 1600:
+		tier = "obsidian"
+	case newWalletStake >= 400:
+		tier = "arcadian"
 	}
 	store.Set([]byte(fmt.Sprintf("stake-tier-%s", msg.Creator)), []byte(tier))
 	store.Set([]byte(fmt.Sprintf("agent-staked-%s", msg.Creator)), []byte(fmt.Sprintf("%d", newWalletStake)))

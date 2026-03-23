@@ -99,6 +99,7 @@ import (
 	oanrelaymodulekeeper "oan/x/oanrelay/keeper"
 	oanwalletprotomodulekeeper "oan/x/oanwalletproto/keeper"
 
+	oanprotocolmodulekeeper "oan/x/oanprotocol/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"oan/docs"
@@ -181,6 +182,7 @@ type App struct {
 	OancommsKeeper       oancommsmodulekeeper.Keeper
 	OanrelayKeeper       oanrelaymodulekeeper.Keeper
 	OanwalletprotoKeeper oanwalletprotomodulekeeper.Keeper
+	OanprotocolKeeper    oanprotocolmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -301,6 +303,7 @@ func New(
 		&app.OancommsKeeper,
 		&app.OanrelayKeeper,
 		&app.OanwalletprotoKeeper,
+		&app.OanprotocolKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

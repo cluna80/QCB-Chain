@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oancomms/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RevokeMsgKey(goCtx context.Context, msg *types.MsgRevokeMsgKey) (*types.MsgRevokeMsgKeyResponse, error) {

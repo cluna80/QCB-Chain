@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oannode/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) ClaimNodeReward(goCtx context.Context, msg *types.MsgClaimNodeReward) (*types.MsgClaimNodeRewardResponse, error) {
@@ -23,7 +24,9 @@ func (k msgServer) ClaimNodeReward(goCtx context.Context, msg *types.MsgClaimNod
 	// SECURITY — epoch cooldown written FIRST
 	params := k.GetParams(ctx)
 	epochLength := int64(params.EpochLength)
-	if epochLength == 0 { epochLength = 1000 }
+	if epochLength == 0 {
+		epochLength = 1000
+	}
 	lastClaimKey := fmt.Sprintf("node-reward-claimed-%s", msg.NodeId)
 	lastClaimBytes, _ := store.Get([]byte(lastClaimKey))
 	if lastClaimBytes != nil {

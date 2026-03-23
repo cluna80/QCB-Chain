@@ -1,0 +1,170 @@
+package keeper
+
+import (
+	"fmt"
+	"cosmossdk.io/core/store"
+	"cosmossdk.io/log"
+	"github.com/cosmos/cosmos-sdk/codec"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"oan/x/oanprotocol/types"
+)
+
+type (
+	Keeper struct {
+		cdc          codec.BinaryCodec
+		storeService store.KVStoreService
+		logger       log.Logger
+		authority    string
+		bankKeeper   types.BankKeeper
+	}
+)
+
+func NewKeeper(
+	cdc codec.BinaryCodec,
+	storeService store.KVStoreService,
+	logger log.Logger,
+	authority string,
+	bankKeeper types.BankKeeper,
+) Keeper {
+	if _, err := sdk.AccAddressFromBech32(authority); err != nil {
+		panic(fmt.Sprintf("invalid authority address: %s", authority))
+	}
+	return Keeper{
+		cdc:          cdc,
+		storeService: storeService,
+		authority:    authority,
+		logger:       logger,
+		bankKeeper:   bankKeeper,
+	}
+}
+
+func (k Keeper) GetAuthority() string { return k.authority }
+
+func (k Keeper) Logger() log.Logger {
+	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
+}
+
+func (k Keeper) GetAddressTier(ctx sdk.Context, address string) string {
+	store := k.storeService.OpenKVStore(ctx)
+	exemptKey := fmt.Sprintf("exempt-%s", address)
+	if v, _ := store.Get([]byte(exemptKey)); v != nil {
+		return "exempt"
+	}
+	daoKey := fmt.Sprintf("tier-%s", address)
+	if t, _ := store.Get([]byte(daoKey)); t != nil {
+		return string(t)
+	}
+	didKey := fmt.Sprintf("did-verified-%s", address)
+	if v, _ := store.Get([]byte(didKey)); v != nil {
+		return "verified"
+	}
+	return "unverified"
+}
+
+func (k Keeper) SetAddressTierStore(ctx sdk.Context, address string, tier string) {
+	store := k.storeService.OpenKVStore(ctx)
+	store.Set([]byte(fmt.Sprintf("tier-%s", address)), []byte(tier))
+}
+
+func (k Keeper) ExemptAddress(ctx sdk.Context, address string) {
+	store := k.storeService.OpenKVStore(ctx)
+	store.Set([]byte(fmt.Sprintf("exempt-%s", address)), []byte("1"))
+}
+
+func (k Keeper) GetEpochStart(ctx sdk.Context) int64 {
+	store := k.storeService.OpenKVStore(ctx)
+	b, _ := store.Get([]byte("epoch-start"))
+	if b == nil {
+		return 0
+	}
+	var h int64
+	fmt.Sscanf(string(b), "%d", &h)
+	return h
+}
+
+func (k Keeper) ResetEpoch(ctx sdk.Context) {
+	store := k.storeService.OpenKVStore(ctx)
+	store.Set([]byte("epoch-start"), []byte(fmt.Sprintf("%d", ctx.BlockHeight())))
+	k.Logger().Info("oanprotocol: epoch reset", "block", ctx.BlockHeight())
+}
+
+func (k Keeper) GetDailyReceived(ctx sdk.Context, address string) uint64 {
+	store := k.storeService.OpenKVStore(ctx)
+	params := k.GetParams(ctx)
+	epochStart := k.GetEpochStart(ctx)
+	if ctx.BlockHeight()-epochStart >= int64(params.EpochLength) {
+		k.ResetEpoch(ctx)
+		return 0
+	}
+	b, _ := store.Get([]byte(fmt.Sprintf("daily-recv-%s", address)))
+	if b == nil {
+		return 0
+	}
+	var amount uint64
+	fmt.Sscanf(string(b), "%d", &amount)
+	return amount
+}
+
+func (k Keeper) AddDailyReceived(ctx sdk.Context, address string, amount uint64) {
+	store := k.storeService.OpenKVStore(ctx)
+	current := k.GetDailyReceived(ctx, address)
+	store.Set(
+		[]byte(fmt.Sprintf("daily-recv-%s", address)),
+		[]byte(fmt.Sprintf("%d", current+amount)),
+	)
+}
+
+func (k Keeper) CheckTransferAllowed(ctx sdk.Context, toAddress string, amountUoan uint64) error {
+	params := k.GetParams(ctx)
+	if !params.ProtectionsEnabled {
+		return nil
+	}
+	tier := k.GetAddressTier(ctx, toAddress)
+	if tier == "exempt" {
+		return nil
+	}
+
+	// Daily limit
+	dailyReceived := k.GetDailyReceived(ctx, toAddress)
+	dailyLimit := params.MaxDailyReceive
+	if tier == "unverified" {
+		dailyLimit = params.UnverifiedDailyReceive
+	}
+	if dailyReceived+amountUoan > dailyLimit {
+		remaining := uint64(0)
+		if dailyLimit > dailyReceived {
+			remaining = dailyLimit - dailyReceived
+		}
+		return fmt.Errorf("daily receive limit exceeded: limit=%d uoan (%d OAN/day), received=%d uoan, remaining=%d uoan — resets every 14400 blocks",
+			dailyLimit, dailyLimit/1_000_000, dailyReceived, remaining)
+	}
+
+	// Wallet balance cap
+	addr, err := sdk.AccAddressFromBech32(toAddress)
+	if err != nil {
+		return nil
+	}
+	currentBalance := k.bankKeeper.GetBalance(ctx, addr, "uoan")
+	newBalance := currentBalance.Amount.Uint64() + amountUoan
+
+	switch tier {
+	case "unverified":
+		if newBalance > params.UnverifiedMaxBalance {
+			return fmt.Errorf("wallet cap exceeded: unverified max=%d OAN — register your DID to hold up to 400,000 OAN",
+				params.UnverifiedMaxBalance/1_000_000)
+		}
+	case "verified":
+		if newBalance > params.VerifiedMaxBalance {
+			return fmt.Errorf("wallet cap exceeded: verified max=%d OAN — apply for DAO approval to hold up to 800,000 OAN",
+				params.VerifiedMaxBalance/1_000_000)
+		}
+	case "dao":
+		if newBalance > params.MaxWalletBalance {
+			return fmt.Errorf("wallet cap exceeded: absolute max=%d OAN (2%% of supply)",
+				params.MaxWalletBalance/1_000_000)
+		}
+	}
+
+	k.AddDailyReceived(ctx, toAddress, amountUoan)
+	return nil
+}

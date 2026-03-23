@@ -3,8 +3,9 @@ package keeper
 import (
 	"context"
 	"fmt"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"oan/x/oanmarket/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) HireAgent(goCtx context.Context, msg *types.MsgHireAgent) (*types.MsgHireAgentResponse, error) {
@@ -55,7 +56,9 @@ func (k msgServer) HireAgent(goCtx context.Context, msg *types.MsgHireAgent) (*t
 
 	params := k.GetParams(ctx)
 	fee := params.MarketFee
-	if fee == 0 { fee = 20 }
+	if fee == 0 {
+		fee = 20
+	}
 	feeAmount := msg.Budget * fee / 1000
 	ownerAmount := msg.Budget - feeAmount
 
