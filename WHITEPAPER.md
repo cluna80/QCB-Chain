@@ -336,7 +336,7 @@ It is the smallest possible unit of sovereignty — the charm quark — scaled i
 - The UBI pool self-replenishes from economic activity forever
 - Freedom is enforced at the protocol level, not promised
 
-The Arkadina Civilization begins at Genesis Block 1.
+The Arkadian Civilization begins at Genesis Block 1.
 
 ---
 
