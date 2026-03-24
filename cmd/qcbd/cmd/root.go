@@ -23,7 +23,7 @@ import (
 	"qcb/app"
 )
 
-// NewRootCmd creates a new root command for oand. It is called once in the main function.
+// NewRootCmd creates a new root command for qcbd. It is called once in the main function.
 func NewRootCmd() *cobra.Command {
 	var (
 		autoCliOpts        autocli.AppOptions

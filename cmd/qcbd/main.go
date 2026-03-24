@@ -8,7 +8,7 @@ import (
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
 	"qcb/app"
-	"qcb/cmd/oand/cmd"
+	"qcb/cmd/qcbd/cmd"
 )
 
 func main() {
