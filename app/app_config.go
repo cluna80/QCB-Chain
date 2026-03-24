@@ -87,8 +87,6 @@ import (
 	qcbdaomoduletypes "qcb/x/qcbdao/types"
 	_ "qcb/x/qcbeconomy/module" // import for side-effects
 	qcbeconomymoduletypes "qcb/x/qcbeconomy/types"
-	_ "qcb/x/charm/module" // import for side-effects
-	charmtypes "qcb/x/charm/types"
 	_ "qcb/x/qcbguardian/module" // import for side-effects
 	qcbguardianmoduletypes "qcb/x/qcbguardian/types"
 	_ "qcb/x/qcbidentity/module" // import for side-effects
@@ -164,7 +162,6 @@ var (
 		qcbrelaymoduletypes.ModuleName,
 		qcbwalletprotomoduletypes.ModuleName,
 		qcbprotocolmoduletypes.ModuleName,
-		charmtypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -207,7 +204,6 @@ var (
 		qcbrelaymoduletypes.ModuleName,
 		qcbwalletprotomoduletypes.ModuleName,
 		qcbprotocolmoduletypes.ModuleName,
-		charmtypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -244,7 +240,6 @@ var (
 		qcbrelaymoduletypes.ModuleName,
 		qcbwalletprotomoduletypes.ModuleName,
 		qcbprotocolmoduletypes.ModuleName,
-		charmtypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -266,7 +261,6 @@ var (
 		{Account: ibcfeetypes.ModuleName},
 		{Account: icatypes.ModuleName},
 		{Account: "qcbeconomy", Permissions: []string{authtypes.Burner, authtypes.Minter}},
-				{Account: "charm", Permissions: []string{authtypes.Burner, authtypes.Minter}},
 		{Account: "qcbagent", Permissions: []string{authtypes.Burner}},
 		{Account: "qcbnode", Permissions: []string{authtypes.Burner, authtypes.Minter}},
 		{Account: "qcbmarket", Permissions: []string{authtypes.Burner}},

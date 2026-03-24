@@ -167,24 +167,24 @@ type App struct {
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
 	AgentKeeper          agentmodulekeeper.Keeper
-	OanagentKeeper       qcbagentmodulekeeper.Keeper
-	OanidentityKeeper    qcbidentitymodulekeeper.Keeper
-	OandaoKeeper         qcbdaomodulekeeper.Keeper
-	OaneconomyKeeper     qcbeconomymodulekeeper.Keeper
+	QcbagentKeeper       qcbagentmodulekeeper.Keeper
+	QcbidentityKeeper    qcbidentitymodulekeeper.Keeper
+	QcbdaoKeeper         qcbdaomodulekeeper.Keeper
+	QcbeconomyKeeper     qcbeconomymodulekeeper.Keeper
 	CharmKeeper          charmkeeper.Keeper
-	OancomputeKeeper     qcbcomputemodulekeeper.Keeper
-	OanmarketKeeper      qcbmarketmodulekeeper.Keeper
-	OanguardianKeeper    qcbguardianmodulekeeper.Keeper
-	OanqsecKeeper        qcbqsecmodulekeeper.Keeper
-	OanmediaKeeper       qcbmediamodulekeeper.Keeper
-	OansportsKeeper      qcbsportsmodulekeeper.Keeper
-	OanbridgeKeeper      qcbbridgemodulekeeper.Keeper
-	OannodeKeeper        qcbnodemodulekeeper.Keeper
+	QcbcomputeKeeper     qcbcomputemodulekeeper.Keeper
+	QcbmarketKeeper      qcbmarketmodulekeeper.Keeper
+	QcbguardianKeeper    qcbguardianmodulekeeper.Keeper
+	QcbqsecKeeper        qcbqsecmodulekeeper.Keeper
+	QcbmediaKeeper       qcbmediamodulekeeper.Keeper
+	QcbsportsKeeper      qcbsportsmodulekeeper.Keeper
+	QcbbridgeKeeper      qcbbridgemodulekeeper.Keeper
+	QcbnodeKeeper        qcbnodemodulekeeper.Keeper
 	AntirugKeeper        antirugmodulekeeper.Keeper
-	OancommsKeeper       qcbcommsmodulekeeper.Keeper
-	OanrelayKeeper       qcbrelaymodulekeeper.Keeper
-	OanwalletprotoKeeper qcbwalletprotomodulekeeper.Keeper
-	OanprotocolKeeper    qcbprotocolmodulekeeper.Keeper
+	QcbcommsKeeper       qcbcommsmodulekeeper.Keeper
+	QcbrelayKeeper       qcbrelaymodulekeeper.Keeper
+	QcbwalletprotoKeeper qcbwalletprotomodulekeeper.Keeper
+	QcbprotocolKeeper    qcbprotocolmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -289,23 +289,23 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.AgentKeeper,
-		&app.OanagentKeeper,
-		&app.OanidentityKeeper,
-		&app.OandaoKeeper,
-		&app.OaneconomyKeeper,
-		&app.OancomputeKeeper,
-		&app.OanmarketKeeper,
-		&app.OanguardianKeeper,
-		&app.OanqsecKeeper,
-		&app.OanmediaKeeper,
-		&app.OansportsKeeper,
-		&app.OanbridgeKeeper,
-		&app.OannodeKeeper,
+		&app.QcbagentKeeper,
+		&app.QcbidentityKeeper,
+		&app.QcbdaoKeeper,
+		&app.QcbeconomyKeeper,
+		&app.QcbcomputeKeeper,
+		&app.QcbmarketKeeper,
+		&app.QcbguardianKeeper,
+		&app.QcbqsecKeeper,
+		&app.QcbmediaKeeper,
+		&app.QcbsportsKeeper,
+		&app.QcbbridgeKeeper,
+		&app.QcbnodeKeeper,
 		&app.AntirugKeeper,
-		&app.OancommsKeeper,
-		&app.OanrelayKeeper,
-		&app.OanwalletprotoKeeper,
-		&app.OanprotocolKeeper,
+		&app.QcbcommsKeeper,
+		&app.QcbrelayKeeper,
+		&app.QcbwalletprotoKeeper,
+		&app.QcbprotocolKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)
