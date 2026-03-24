@@ -1,7 +1,7 @@
 # QuarkCharmBit (QCB) — Whitepaper
 
 **Freedom at the Charm Level**  
-**Powering the Arkadina Civilization**
+**Powering the Arkadian Civilization**
 
 *Chain ID: `qcb` | Genesis: Arkadina | March 22, 2026*  
 *Version 1.0.0*
