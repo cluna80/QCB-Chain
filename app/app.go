@@ -79,6 +79,7 @@ import (
 	qcbagentmodulekeeper "qcb/x/qcbagent/keeper"
 	qcbdaomodulekeeper "qcb/x/qcbdao/keeper"
 	qcbeconomymodulekeeper "qcb/x/qcbeconomy/keeper"
+	charmkeeper "qcb/x/charm/keeper"
 	qcbidentitymodulekeeper "qcb/x/qcbidentity/keeper"
 
 	qcbcomputemodulekeeper "qcb/x/qcbcompute/keeper"
@@ -170,6 +171,7 @@ type App struct {
 	OanidentityKeeper    qcbidentitymodulekeeper.Keeper
 	OandaoKeeper         qcbdaomodulekeeper.Keeper
 	OaneconomyKeeper     qcbeconomymodulekeeper.Keeper
+	CharmKeeper          charmkeeper.Keeper
 	OancomputeKeeper     qcbcomputemodulekeeper.Keeper
 	OanmarketKeeper      qcbmarketmodulekeeper.Keeper
 	OanguardianKeeper    qcbguardianmodulekeeper.Keeper
